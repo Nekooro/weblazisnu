@@ -10,26 +10,14 @@
     * { box-sizing: border-box; }
     body { font-family: 'Montserrat', sans-serif; margin: 0; background: var(--bg-body); color: var(--dark); overflow-x: hidden; }
     
+    /* NAVBAR CLEAN */
     .navbar { background: var(--dark); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; color: #fff; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
     .logo { font-weight: 700; font-size: 1.1rem; line-height: 1.2; text-transform: uppercase; }
+    .nav-menu { display: flex; align-items: center; gap: 20px; }
+    .nav-item { cursor: pointer; font-size: 0.85rem; font-weight: 600; color: #cbd5e1; text-transform: uppercase; transition: color 0.3s; }
+    .nav-item:hover, .nav-item.active { color: #fff; }
+    .btn-logout { background: var(--danger); color: #fff; padding: 8px 16px; border-radius: 20px; border: none; font-weight: 700; cursor: pointer; font-family: 'Montserrat'; }
     
-    .menu-toggle { display: block; background: none; border: none; cursor: pointer; padding: 5px; z-index: 1001; }
-    .menu-toggle span { display: block; width: 25px; height: 3px; background-color: #fff; margin-bottom: 5px; transition: all 0.3s; }
-    
-    .nav-menu { position: absolute; top: 100%; right: -100%; width: 100%; height: calc(100vh - 60px); background-color: var(--dark); display: flex; flex-direction: column; gap: 15px; padding: 30px; transition: right 0.3s ease-in-out; overflow-y: auto; }
-    .nav-menu.active { right: 0; }
-    .nav-menu .nav-item { width: 100%; text-align: left; cursor: pointer; padding: 12px 0; font-size: 0.95rem; font-weight: 600; color: #e2e8f0; transition: color 0.3s; border-bottom: 1px solid #475569; }
-    
-    @media (min-width: 992px) { 
-      .menu-toggle { display: none; }
-      .nav-menu { position: static; width: auto; height: auto; background: none; flex-direction: row; align-items: center; gap: 25px; padding: 0; overflow-y: visible; right: 0; }
-      .nav-menu .nav-item { padding: 0; width: auto; border-bottom: none; color: #cbd5e1; font-size: 0.9rem; }
-      .nav-menu .nav-item:hover, .nav-menu .nav-item.active { color: #fff; }
-      .nav-item#nav-login { background: var(--accent) !important; color: var(--dark) !important; padding: 8px 18px !important; border-radius: 6px; }
-      .nav-item#nav-logout { background: #ef4444 !important; color: #fff !important; padding: 8px 18px !important; border-radius: 6px; }
-      .nav-item#nav-logout:hover { background: #dc2626 !important; }
-    }
-
     .container { max-width: 850px; margin: 20px auto; padding: 0 15px; }
     .page { display: none; }
     .page.active { display: block; animation: fadeIn 0.3s ease; }
@@ -40,368 +28,271 @@
     
     .form-group { margin-bottom: 1.2rem; }
     .form-group label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 0.9rem; }
-    .form-group input, .form-group select { width: 100%; padding: 12px; border: 2px solid var(--accent); border-radius: 8px; box-sizing: border-box; font-family: 'Montserrat', sans-serif; transition: border 0.3s; font-size: 0.95rem; }
-    .form-group input[type="file"] { padding: 9px; }
-    .form-group input:focus, .form-group select:focus { border-color: var(--dark); outline: none; }
+    .form-group input, .form-group select { width: 100%; padding: 12px; border: 2px solid var(--accent); border-radius: 8px; font-size: 0.95rem; font-family: 'Montserrat'; }
     
-    .flex-gap { display: flex; gap: 15px; } .flex-gap > div { flex: 1; }
-    .btn-submit { width: 100%; padding: 14px; background: var(--dark); color: var(--bg-card); border: none; border-radius: 8px; font-weight: 700; font-family: 'Montserrat', sans-serif; cursor: pointer; transition: background 0.3s; margin-top: 10px; font-size: 1rem; }
-    .btn-submit:hover { background: #1a1e14; }
-    .btn-secondary { background: #64748b; } .btn-secondary:hover { background: #475569; }
-    .btn-danger { background: var(--danger); } .btn-danger:hover { background: #dc2626; }
+    .btn-submit { width: 100%; padding: 14px; background: var(--dark); color: #fff; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 1rem; margin-top: 10px; }
+    .btn-secondary { background: #64748b; }
     
     .grid-menu { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px;}
-    .menu-box { background: var(--bg-card); border: 2px solid var(--accent); padding: 20px; text-align: center; border-radius: 12px; cursor: pointer; font-weight: 700; color: var(--dark); box-shadow: 2px 2px 5px rgba(0,0,0,0.05); transition: all 0.3s;}
-    .menu-box:hover { background: var(--accent); color: var(--dark); transform: translateY(-3px); }
+    .menu-box { background: var(--bg-card); border: 2px solid var(--accent); padding: 20px; text-align: center; border-radius: 12px; cursor: pointer; font-weight: 700; transition: all 0.3s;}
+    .menu-box:hover { background: var(--accent); transform: translateY(-3px); }
     
     .list-item { background: var(--bg-card); padding: 18px; margin-bottom: 15px; border-radius: 8px; box-shadow: 2px 2px 8px rgba(0,0,0,0.06); position: relative;}
-    .prog-bar-bg { background: #e2e8f0; height: 14px; border-radius: 7px; overflow: hidden; margin-top: 10px; }
-    .prog-bar-fill { background: var(--accent); height: 100%; transition: width 0.5s ease; }
     
-    .badge { padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; display: inline-block; }
-    .badge-success { background: #dcfce7; color: var(--success); }
-    .badge-danger { background: #fee2e2; color: var(--danger); }
-    .badge-info { background: #e0f2fe; color: #0284c7; }
-    .badge-warning { background: #fef3c7; color: var(--warning); }
-
-    .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999; justify-content: center; align-items: center; overflow-y: auto; padding: 20px 0;}
-    .modal-box { background: var(--bg-card); padding: 35px; border-radius: 15px; max-width: 400px; text-align: left; width: 90%; margin: auto; }
-    .filter-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
-    @media (min-width: 768px) { .filter-grid { grid-template-columns: 1fr 1fr 1fr 1fr; } }
-
-    /* CSS RUNNING TEXT FULL WIDTH */
-    .running-text-container { width: 100vw; margin-left: calc(-50vw + 50%); background: #fef08a; color: #b45309; padding: 10px 0; overflow: hidden; white-space: nowrap; font-weight: 700; font-size: 0.95rem; display: none; border-bottom: 2px solid #fde047; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-    .running-text { display: inline-block; padding-left: 100%; animation: marquee 18s linear infinite; }
+    /* BADGE NEW KOTAK */
+    .badge-new { background: var(--success); color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 800; margin-right: 8px; display: inline-block; vertical-align: middle; }
+    .histori-text { font-size: 0.8rem; color: #d97706; font-weight: 600; margin-top: 4px; display: block; }
+    
+    /* RUNNING TEXT */
+    .rt-container { width: 100vw; margin-left: calc(-50vw + 50%); background: #fef08a; color: #b45309; padding: 10px 0; overflow: hidden; white-space: nowrap; font-weight: 700; display: none; border-bottom: 2px solid #fde047; margin-bottom: 20px; }
+    .rt-text { display: inline-block; padding-left: 100%; animation: marquee 15s linear infinite; }
     @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
+
+    .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999; justify-content: center; align-items: center; }
+    .modal-box { background: #fff; padding: 30px; border-radius: 15px; max-width: 400px; width: 90%; }
   </style>
 </head>
 <body>
 
   <nav class="navbar">
     <div class="logo">LAZISNU<br>SUMOKEMBANGSRI</div>
-    <button class="menu-toggle" id="menu-toggle"><span></span><span></span><span></span></button>
-    <div class="nav-menu" id="nav-menu">
+    <div class="nav-menu">
       <span class="nav-item" onclick="pindahHalaman('home')">HOME</span>
-      <span class="nav-item" onclick="pindahHalaman('dummy')">ABOUT US</span>
       <span class="nav-item" id="nav-dash" style="display:none;" onclick="pindahHalaman('dashboard')">DASHBOARD</span>
-      <span class="nav-item" id="nav-login" onclick="pindahHalaman('login')">LOGIN</span>
-      <span class="nav-item" id="nav-logout" style="display:none;" onclick="logout()">LOGOUT</span>
+      <button id="nav-logout" class="btn-logout" style="display:none;" onclick="logout()">LOGOUT</button>
     </div>
   </nav>
 
   <div class="container">
     <div id="page-home" class="page active">
       <div class="card" style="text-align: center; border-top: 6px solid var(--dark);">
-        <h2>SELAMAT DATANG DI PORTAL<br>LAZISNU SUMOKEMBANGSRI</h2>
-        <p style="color: #475569; font-weight: 600;">Aplikasi pengelolaan Zakat, Infaq, dan Sedekah Ranting Sumokembangsri.</p>
-      </div>
-      <div class="grid-menu" style="grid-template-columns: 1fr;">
-        <div class="card" style="margin-bottom:0; border-left: 6px solid var(--dark); padding: 20px;"><h3 style="margin:0 0 5px 0;">🌾 Zakat Fitrah</h3><p style="margin:0; font-size:0.9rem;">Penerimaan dan penyaluran Zakat Fitrah.</p></div>
-        <div class="card" style="margin-bottom:0; border-left: 6px solid var(--dark); padding: 20px;"><h3 style="margin:0 0 5px 0;">💰 Zakat Mal</h3><p style="margin:0; font-size:0.9rem;">Pengelolaan Zakat Harta (Mal) dari para Muzakki.</p></div>
-        <div class="card" style="margin-bottom:0; border-left: 6px solid var(--dark); padding: 20px;"><h3 style="margin:0 0 5px 0;">🤲 Infaq Kaleng</h3><p style="margin:0; font-size:0.9rem;">Penyaluran dana Infaq dan Sedekah.</p></div>
+        <h2>Portal LAZISNU</h2>
+        <button class="btn-submit" onclick="pindahHalaman('login')">Masuk ke Sistem</button>
       </div>
     </div>
 
-    <div id="page-dummy" class="page"><div class="card" style="text-align: center;"><h2>Mohon Maaf</h2><p>Halaman ini sedang dalam tahap pengembangan.</p><button class="btn-submit btn-secondary" style="width:auto; padding: 10px 20px;" onclick="pindahHalaman('home')">Kembali</button></div></div>
-
     <div id="page-login" class="page">
-      <div id="box-login" class="card" style="max-width: 400px; margin: auto;">
-        <h2>Login</h2>
+      <div class="card" style="max-width: 400px; margin: auto;">
+        <h2>Login Amil</h2>
         <div class="form-group"><label>Nickname</label><input type="text" id="l-nick"></div>
         <div class="form-group"><label>Password</label><input type="password" id="l-pass"></div>
-        <button class="btn-submit" onclick="prosesLoginWeb()">Login</button>
-        <p onclick="toggleAuth('reg')" style="text-align:center; cursor:pointer; font-weight:700; margin-top:20px; text-decoration: underline;">Daftar Akun Baru</p>
-      </div>
-      <div id="box-reg" class="card" style="max-width: 400px; margin: auto; display: none;">
-        <h2>Daftar Akun Baru</h2>
-        <div class="form-group"><label>Nama Lengkap</label><input type="text" id="r-nama"></div><div class="form-group"><label>Nickname</label><input type="text" id="r-nick"></div>
-        <div class="form-group"><label>Dusun</label><select id="r-dusun"><option value="KEMAMBANG">KEMAMBANG</option><option value="SUMOTUWO">SUMOTUWO</option><option value="LUWUNG">LUWUNG</option><option value="WATESROWO">WATESROWO</option><option value="WONOKITRI WETAN">WONOKITRI WETAN</option><option value="WONOKITRI KULON">WONOKITRI KULON</option></select></div>
-        <div class="form-group"><label>Jenis Akun</label><select id="r-jenis"><option value="Amil">Amil</option><option value="Pengurus">Pengurus</option></select></div>
-        <div class="form-group"><label>Kata Sandi</label><input type="password" id="r-pass"></div><div class="form-group"><label>Ulangi Kata Sandi</label><input type="password" id="r-pass2"></div>
-        <button class="btn-submit" onclick="prosesDaftar()">Daftar</button><p onclick="toggleAuth('log')" style="text-align:center; cursor:pointer; font-weight:700; margin-top:20px; text-decoration: underline;">Kembali ke Login</p>
+        <button class="btn-submit" onclick="prosesLoginWeb()">Masuk</button>
       </div>
     </div>
 
     <div id="page-dashboard" class="page">
-      <div class="card" style="border-top: 6px solid var(--dark);"><h2>Dashboard <span id="d-role">Amil</span></h2><p style="margin-bottom: 0;">Hai, <b id="d-nama">Nama</b>! (Dusun: <span id="d-dusun">Dusun</span>)</p></div>
-      
-      <div id="banner-pengumuman" class="running-text-container">
-        <div class="running-text" id="teks-pengumuman"></div>
-      </div>
-
+      <div class="card"><h2>Dashboard <span id="d-role"></span></h2><p>Selamat bertugas, <b id="d-nama"></b>!</p></div>
+      <div id="banner-pengumuman" class="rt-container"><div class="rt-text" id="teks-pengumuman"></div></div>
       <div class="grid-menu" id="menu-container"></div>
     </div>
 
-    <div id="page-muzakki" class="page"><div class="card"><h3>Input Zakat Mal</h3><div class="flex-gap"><div class="form-group"><label>Dusun</label><input type="text" id="muz-dusun" readonly style="background:#f1f5f9;"></div><div class="form-group"><label>Nama Amil</label><input type="text" id="muz-amil" readonly style="background:#f1f5f9;"></div></div><div class="flex-gap"><div class="form-group"><label>RW</label><select id="muz-rw"><option value="RW 1">RW 1</option><option value="RW 2">RW 2</option><option value="RW 3">RW 3</option><option value="RW 4">RW 4</option><option value="RW 5">RW 5</option><option value="RW 6">RW 6</option></select></div><div class="form-group"><label>RT</label><input type="text" id="muz-rt" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></div></div><div class="form-group"><label>Nama Muzakki</label><input type="text" id="muz-nama"></div><div class="form-group"><label>Nominal</label><input type="text" id="muz-nom" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></div><button class="btn-submit" onclick="saveMuz()">Simpan</button><button class="btn-submit btn-secondary" onclick="pindahHalaman('dashboard')">Kembali</button></div></div>
-    <div id="page-distribusi" class="page"><div class="card"><h3>Input Distribusi</h3><div class="flex-gap"><div class="form-group"><label>Dusun</label><input type="text" id="dist-dusun" readonly style="background:#f1f5f9;"></div><div class="form-group"><label>Nama Petugas</label><input type="text" id="dist-amil" readonly style="background:#f1f5f9;"></div></div><div class="flex-gap"><div class="form-group"><label>RW</label><select id="dist-rw"><option value="RW 1">RW 1</option><option value="RW 2">RW 2</option><option value="RW 3">RW 3</option><option value="RW 4">RW 4</option><option value="RW 5">RW 5</option><option value="RW 6">RW 6</option></select></div><div class="form-group"><label>RT</label><input type="text" id="dist-rt" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></div></div><div class="form-group"><label>Kategori Mustahiq</label><select id="dist-kategori"><option value="Fakir">Fakir</option><option value="Miskin">Miskin</option><option value="Sabilillah">Sabilillah</option><option value="Yatim">Yatim</option><option value="Ghorim">Ghorim</option><option value="Ibnu Sabil">Ibnu Sabil</option><option value="Muallaf">Muallaf</option><option value="Riqab">Riqab</option></select></div><div class="form-group"><label>Nama Penerima</label><input type="text" id="dist-nama"></div><div class="form-group"><label>Foto Bukti</label><input type="file" id="dist-foto" accept="image/*"></div><button class="btn-submit" onclick="saveDistribusi()">Simpan</button><button class="btn-submit btn-secondary" onclick="pindahHalaman('dashboard')">Kembali</button></div></div>
-
-    <div id="page-laporan" class="page"><div class="card"><h2>Data Muzakki</h2><button class="btn-submit btn-secondary" style="margin-bottom:15px; padding: 10px;" onclick="pindahHalaman('dashboard')">Kembali</button><div class="form-group"><input type="text" id="search-laporan" placeholder="Cari Nama / Dusun..." onkeyup="filterLaporan()"></div><div id="list-laporan"><i>Memuat data...</i></div></div></div>
-    <div id="page-progress" class="page"><div class="card"><h2>Progress Zakat Mal</h2><button class="btn-submit btn-secondary" style="margin-bottom:15px; padding: 10px;" onclick="pindahHalaman('dashboard')">Kembali</button><div id="list-progress"><i>Memuat progress...</i></div></div></div>
-    <div id="page-laporan-distribusi" class="page"><div class="card"><h2>Laporan Distribusi</h2><button class="btn-submit btn-secondary" style="margin-bottom:15px; padding: 10px;" onclick="pindahHalaman('dashboard')">Kembali</button><div id="progress-dist-container" style="margin-bottom: 20px;"><i>Memuat progress...</i></div><hr style="border:1px solid #e2e8f0; margin: 20px 0;"><h3>Daftar Mustahiq</h3><div class="filter-grid"><div class="form-group"><select id="f-dusun" onchange="filterDistribusi()"><option value="ALL">Semua Dusun</option><option value="KEMAMBANG">Kemambang</option><option value="SUMOTUWO">Sumotuwo</option><option value="LUWUNG">Luwung</option><option value="WATESROWO">Watesrowo</option><option value="WONOKITRI WETAN">WONOKITRI WETAN</option><option value="WONOKITRI KULON">WONOKITRI KULON</option></select></div><div class="form-group"><select id="f-status" onchange="filterDistribusi()"><option value="ALL">Semua Status</option><option value="Tersalurkan">Tersalurkan</option><option value="Belum">Belum Salur</option></select></div><div class="form-group"><select id="f-kat" onchange="filterDistribusi()"><option value="ALL">Semua Kategori</option><option value="Fakir">Fakir</option><option value="Miskin">Miskin</option><option value="Sabilillah">Sabilillah</option><option value="Yatim">Yatim</option></select></div></div><div class="form-group"><input type="text" id="f-search" placeholder="Cari Nama Penerima..." onkeyup="filterDistribusi()"></div><div id="list-distribusi"><i>Memuat data...</i></div></div></div>
-    <div id="page-kelola-mustahiq" class="page"><div class="card"><h2>Kelola Master Mustahiq</h2><button class="btn-submit btn-secondary" style="margin-bottom:15px; padding: 10px;" onclick="pindahHalaman('dashboard')">Kembali</button><button class="btn-submit" style="background:var(--success); margin-bottom: 20px;" onclick="openModalMustahiq('NEW')">+ Tambah Mustahiq Baru</button><div class="form-group"><input type="text" id="search-kelola" placeholder="Cari Nama / Dusun..." onkeyup="filterKelola()"></div><div id="list-kelola"><i>Memuat data...</i></div></div></div>
-    
-    <div id="page-kelola-akun" class="page">
+    <div id="page-ajukan" class="page">
       <div class="card">
-        <h2>Kelola Akun Pengguna</h2>
-        <button class="btn-submit btn-secondary" style="margin-bottom:15px; padding: 10px;" onclick="pindahHalaman('dashboard')">Kembali ke Dashboard</button>
-        <div class="form-group"><input type="text" id="search-akun" placeholder="Cari Nama / Dusun / Nickname..." onkeyup="filterKelolaAkun()"></div>
-        <div id="list-kelola-akun"><i>Memuat data...</i></div>
+        <h3>Ajukan Mustahiq</h3>
+        <div class="form-group">
+          <label>Tipe Pengajuan</label>
+          <select id="aju-tipe" onchange="toggleAjuMode()">
+            <option value="BARU">Usulan Warga Baru</option>
+            <option value="EDIT">Perubahan Data Lama</option>
+          </select>
+        </div>
+        
+        <div id="box-cari-mustahiq" class="form-group" style="display:none;">
+          <label>Cari Nama Mustahiq Lama</label>
+          <select id="aju-pilih-nama" onchange="isiDataOtomatis()"></select>
+        </div>
+
+        <div class="flex-gap">
+          <div class="form-group"><label>Dusun</label><input type="text" id="aju-dusun" readonly></div>
+          <div class="form-group"><label>RW</label><input type="text" id="aju-rw"></div>
+          <div class="form-group"><label>RT</label><input type="text" id="aju-rt"></div>
+        </div>
+        <div class="form-group"><label>Nama Lengkap</label><input type="text" id="aju-nama"></div>
+        <div class="form-group">
+          <label>Kategori</label>
+          <select id="aju-kat">
+            <option value="Fakir">Fakir</option><option value="Miskin">Miskin</option>
+            <option value="Yatim">Yatim</option><option value="Sabilillah">Sabilillah</option>
+          </select>
+        </div>
+        <button class="btn-submit" onclick="kirimAju()">Kirim Pengajuan</button>
+        <button class="btn-submit btn-secondary" onclick="pindahHalaman('dashboard')">Kembali</button>
       </div>
     </div>
 
-    <div id="page-ajukan-mustahiq" class="page"><div class="card"><h2>Ajukan Mustahiq Baru</h2><div class="flex-gap"><div class="form-group"><label>Dusun</label><input type="text" id="aju-dusun" readonly style="background:#f1f5f9;"></div><div class="form-group"><label>Amil Pengaju</label><input type="text" id="aju-amil" readonly style="background:#f1f5f9;"></div></div><div class="flex-gap"><div class="form-group"><label>RW</label><select id="aju-rw"><option value="RW 1">RW 1</option><option value="RW 2">RW 2</option><option value="RW 3">RW 3</option><option value="RW 4">RW 4</option><option value="RW 5">RW 5</option><option value="RW 6">RW 6</option></select></div><div class="form-group"><label>RT</label><input type="text" id="aju-rt" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></div></div><div class="form-group"><label>Kategori</label><select id="aju-kat"><option value="Fakir">Fakir</option><option value="Miskin">Miskin</option><option value="Sabilillah">Sabilillah</option><option value="Yatim">Yatim</option><option value="Ghorim">Ghorim</option><option value="Ibnu Sabil">Ibnu Sabil</option><option value="Muallaf">Muallaf</option><option value="Riqab">Riqab</option></select></div><div class="form-group"><label>Nama Penerima</label><input type="text" id="aju-nama"></div><button class="btn-submit" onclick="ajukanMustahiq()">Kirim Pengajuan</button><button class="btn-submit btn-secondary" onclick="pindahHalaman('dashboard')">Kembali</button></div></div>
-    <div id="page-kelola-pengajuan" class="page"><div class="card"><h2>Konfirmasi Pengajuan</h2><button class="btn-submit btn-secondary" style="margin-bottom:15px; padding: 10px;" onclick="pindahHalaman('dashboard')">Kembali</button><div id="list-pengajuan"><i>Memuat data...</i></div></div></div>
-    <div id="page-masalah" class="page"><div class="card"><h2>Laporan Masalah</h2><button class="btn-submit btn-secondary" style="margin-bottom:15px; padding: 10px;" onclick="pindahHalaman('dashboard')">Kembali</button><div id="list-masalah"><i>Memuat data...</i></div></div></div>
-  </div>
-
-  <div id="customModal" class="modal-overlay" style="z-index:99999;"><div class="modal-box" style="text-align:center;"><p id="modalMsg" style="white-space: pre-wrap; margin-bottom: 20px; font-size: 1.1rem; font-weight:bold;"></p><button class="btn-submit" id="btn-modal-ok" onclick="closeModal()">Selesai</button></div></div>
-  <div id="crudModal" class="modal-overlay"><div class="modal-box"><h3 id="crud-title">Mustahiq</h3><input type="hidden" id="crud-id"><div class="form-group"><label>Dusun</label><select id="crud-dusun"><option value="KEMAMBANG">KEMAMBANG</option><option value="SUMOTUWO">SUMOTUWO</option><option value="LUWUNG">LUWUNG</option><option value="WATESROWO">WATESROWO</option><option value="WONOKITRI WETAN">WONOKITRI WETAN</option><option value="WONOKITRI KULON">WONOKITRI KULON</option></select></div><div class="flex-gap"><div class="form-group"><label>RW</label><select id="crud-rw"><option value="RW 1">RW 1</option><option value="RW 2">RW 2</option><option value="RW 3">RW 3</option><option value="RW 4">RW 4</option><option value="RW 5">RW 5</option><option value="RW 6">RW 6</option></select></div><div class="form-group"><label>RT</label><input type="text" id="crud-rt"></div></div><div class="form-group"><label>Kategori</label><select id="crud-kategori"><option value="Fakir">Fakir</option><option value="Miskin">Miskin</option><option value="Sabilillah">Sabilillah</option><option value="Yatim">Yatim</option><option value="Ghorim">Ghorim</option><option value="Ibnu Sabil">Ibnu Sabil</option><option value="Muallaf">Muallaf</option><option value="Riqab">Riqab</option></select></div><div class="form-group"><label>Nama</label><input type="text" id="crud-nama"></div><button class="btn-submit" style="background:var(--success);" onclick="saveCrudMustahiq()">Simpan Data</button><button class="btn-submit btn-danger" id="btn-crud-delete" style="display:none;" onclick="deleteCrudMustahiq()">Hapus Data</button><button class="btn-submit btn-secondary" onclick="document.getElementById('crudModal').style.display='none'">Batal</button></div></div>
-  <div id="crudModalMuzakki" class="modal-overlay"><div class="modal-box"><h3>Edit Data Muzakki</h3><input type="hidden" id="muz-edit-id"><div class="form-group"><label>Dusun</label><select id="muz-edit-dusun"><option value="KEMAMBANG">KEMAMBANG</option><option value="SUMOTUWO">SUMOTUWO</option><option value="LUWUNG">LUWUNG</option><option value="WATESROWO">WATESROWO</option><option value="WONOKITRI WETAN">WONOKITRI WETAN</option><option value="WONOKITRI KULON">WONOKITRI KULON</option></select></div><div class="flex-gap"><div class="form-group"><label>RW</label><select id="muz-edit-rw"><option value="RW 1">RW 1</option><option value="RW 2">RW 2</option><option value="RW 3">RW 3</option><option value="RW 4">RW 4</option><option value="RW 5">RW 5</option><option value="RW 6">RW 6</option></select></div><div class="form-group"><label>RT</label><input type="text" id="muz-edit-rt"></div></div><div class="form-group"><label>Nama Muzakki</label><input type="text" id="muz-edit-nama"></div><div class="form-group"><label>Nominal</label><input type="text" id="muz-edit-nom"></div><button class="btn-submit" style="background:var(--success);" onclick="saveCrudMuzakki()">Update Data</button><button class="btn-submit btn-secondary" onclick="document.getElementById('crudModalMuzakki').style.display='none'">Batal</button></div></div>
-  <div id="crudModalAkun" class="modal-overlay"><div class="modal-box"><h3>Edit Akun</h3><input type="hidden" id="akun-id"><div class="form-group"><label>Nama</label><input type="text" id="akun-nama"></div><div class="flex-gap"><div class="form-group"><label>Nickname</label><input type="text" id="akun-nick"></div><div class="form-group"><label>Dusun</label><select id="akun-dusun"><option value="KEMAMBANG">KEMAMBANG</option><option value="SUMOTUWO">SUMOTUWO</option><option value="LUWUNG">LUWUNG</option><option value="WATESROWO">WATESROWO</option><option value="WONOKITRI WETAN">WONOKITRI WETAN</option><option value="WONOKITRI KULON">WONOKITRI KULON</option></select></div></div><div class="flex-gap"><div class="form-group"><label>Jenis Akun</label><select id="akun-jenis"><option value="Amil">Amil</option><option value="Pengurus">Pengurus</option></select></div><div class="form-group"><label>Status</label><select id="akun-status"><option value="Active">Active</option><option value="Pending">Pending</option></select></div></div><div class="form-group"><label>Password Baru</label><input type="text" id="akun-pass"></div><button class="btn-submit" style="background:var(--success);" onclick="saveCrudAkun()">Update Akun</button><button class="btn-submit btn-danger" onclick="deleteCrudAkun()">Hapus Akun</button><button class="btn-submit btn-secondary" onclick="document.getElementById('crudModalAkun').style.display='none'">Batal</button></div></div>
-
-  <div id="modalPengumuman" class="modal-overlay">
-    <div class="modal-box">
-      <h3>Buat Pengumuman</h3>
-      <div class="form-group">
-        <label>Pesan Singkat (Running Text)</label>
-        <input type="text" id="input-pengumuman" maxlength="150" placeholder="Ketik pengumuman di sini...">
+    <div id="page-laporan-dist" class="page">
+      <div class="card">
+        <h2>Laporan Distribusi</h2>
+        <div class="form-group"><input type="text" id="search-dist" placeholder="Cari nama..." onkeyup="filterDist()"></div>
+        <div id="list-distribusi"></div>
+        <button class="btn-submit btn-secondary" onclick="pindahHalaman('dashboard')">Kembali</button>
       </div>
-      <div class="form-group">
-        <label>Batas Waktu (Berakhir Pada)</label>
-        <input type="datetime-local" id="input-batas-waktu">
+    </div>
+
+    <div id="page-konfirmasi" class="page">
+      <div class="card">
+        <h2>Konfirmasi Pengajuan</h2>
+        <div id="list-pengajuan"></div>
+        <button class="btn-submit btn-secondary" onclick="pindahHalaman('dashboard')">Kembali</button>
       </div>
-      <button class="btn-submit" style="background:var(--warning);" onclick="kirimPengumuman()">Sebarkan</button>
-      <button class="btn-submit btn-secondary" onclick="document.getElementById('modalPengumuman').style.display='none'">Batal</button>
+    </div>
+
+    <div id="modalP" class="modal-overlay">
+      <div class="modal-box">
+        <h3>Buat Notif Dashboard</h3>
+        <div class="form-group"><label>Isi Pesan</label><input type="text" id="p-pesan"></div>
+        <div class="form-group"><label>Batas Waktu</label><input type="datetime-local" id="p-batas"></div>
+        <button class="btn-submit" onclick="saveP()">Sebarkan</button>
+        <button class="btn-submit btn-secondary" onclick="closeModalP()">Batal</button>
+      </div>
     </div>
   </div>
+
+  <div id="modalMsg" class="modal-overlay"><div class="modal-box" style="text-align:center;"><p id="msgText"></p><button class="btn-submit" onclick="closeMsg()">OK</button></div></div>
 
   <script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbxJMDKRdttXGU-a7XoXSRPoTSkU3Htpnx8goOAF7IpGvxMm7msaVj3XSzJjLq1JWLhb/exec";
+    const API = "https://script.google.com/macros/s/AKfycbxJMDKRdttXGU-a7XoXSRPoTSkU3Htpnx8goOAF7IpGvxMm7msaVj3XSzJjLq1JWLhb/exec";
+    let user = null; let masterM = [];
+
+    async function kirim(d) { try { let r = await fetch(API, { method: 'POST', body: JSON.stringify(d) }); return await r.json(); } catch(e) { return {sukses:false}; } }
     
-    let currentUser = null; let dataLaporan = []; let masterMustahiqData = []; let masterAkunData = [];
-    let pollingInterval = null; let sessionInterval = null;
-
-    function getCleanName(name) { return (name || '').replace(/\(Baris:\s*\d+\)/gi, '').trim(); }
-    function getCatBadge(kat) {
-      let k = (kat || '').toLowerCase();
-      if(k.includes('fakir')) return `<span class="badge badge-danger">${kat}</span>`;
-      if(k.includes('miskin')) return `<span class="badge badge-warning">${kat}</span>`;
-      if(k.includes('sabilillah')) return `<span class="badge badge-success">${kat}</span>`;
-      if(k.includes('yatim')) return `<span class="badge badge-info">${kat}</span>`;
-      return `<span class="badge" style="background:#e2e8f0; color:#475569;">${kat}</span>`;
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      const menuToggle = document.getElementById('menu-toggle'); const navMenu = document.getElementById('nav-menu');
-      if(menuToggle && navMenu) {
-        menuToggle.addEventListener('click', () => { menuToggle.classList.toggle('active'); navMenu.classList.toggle('active'); });
-        document.querySelectorAll('.nav-menu .nav-item').forEach(item => { item.addEventListener('click', () => { if(navMenu.classList.contains('active')) { menuToggle.classList.remove('active'); navMenu.classList.remove('active'); } }); });
-      }
-    });
-
-    function checkSession() {
-      let session = localStorage.getItem('lazisnuSession'); if (!session) return false;
-      let parsed = JSON.parse(session); if ((new Date().getTime() - parsed.timestamp) > (24*60*60*1000)) { localStorage.removeItem('lazisnuSession'); return false; }
-      currentUser = parsed.data; terapkanSesi(); mulaiCekSesiRealtime(); return true;
-    }
-    function setSession(data) { localStorage.setItem('lazisnuSession', JSON.stringify({ data: data, timestamp: new Date().getTime() })); }
-    
-    function mulaiCekSesiRealtime() {
-      if(sessionInterval) clearInterval(sessionInterval);
-      sessionInterval = setInterval(async () => {
-        if(!currentUser) return;
-        let res = await kirimAPI({action: "cekSesi", nickname: currentUser.nickname, token: currentUser.token});
-        if(res.sukses && res.valid === false) {
-          clearInterval(sessionInterval); localStorage.removeItem('lazisnuSession');
-          alert("Sesi Anda telah dihentikan (Logout Paksa) oleh Pengurus."); location.reload();
-        }
-      }, 30000);
-    }
-
-    window.addEventListener('hashchange', handleHashChange);
-    function handleHashChange() {
-      let hash = window.location.hash.replace('#', '') || 'home';
+    function pindahHalaman(id) {
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-      let targetPage = document.getElementById('page-' + hash);
-      if(targetPage) {
-        targetPage.classList.add('active');
-        document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-        let navBtn = document.querySelector(`.nav-item[onclick*="${hash}"]`); if(navBtn) navBtn.classList.add('active');
-        
-        if(pollingInterval) clearInterval(pollingInterval);
-        if(hash === 'laporan') { fetchLaporan(); pollingInterval = setInterval(()=>fetchLaporan(true), 15000); }
-        if(hash === 'progress') { fetchProgress(); pollingInterval = setInterval(()=>fetchProgress(true), 15000); }
-        if(hash === 'masalah') { fetchMasalah(); pollingInterval = setInterval(()=>fetchMasalah(true), 15000); }
-        if(hash === 'laporan-distribusi') { fetchLaporanDistribusi(); pollingInterval = setInterval(()=>fetchLaporanDistribusi(true), 15000); }
-        if(hash === 'kelola-mustahiq' && currentUser?.role === 'Pengurus') { fetchKelolaMustahiq(); pollingInterval = setInterval(()=>fetchKelolaMustahiq(true), 15000); }
-        if(hash === 'kelola-akun' && currentUser?.role === 'Pengurus') { fetchKelolaAkun(); pollingInterval = setInterval(()=>fetchKelolaAkun(true), 15000); }
-        if(hash === 'kelola-pengajuan' && currentUser?.role === 'Pengurus') { fetchPengajuan(); pollingInterval = setInterval(()=>fetchPengajuan(true), 15000); }
-        
-        if(hash === 'muzakki' && currentUser) { document.getElementById('muz-dusun').value = currentUser.dusun; document.getElementById('muz-amil').value = currentUser.nama; }
-        if(hash === 'distribusi' && currentUser) { document.getElementById('dist-dusun').value = currentUser.dusun; document.getElementById('dist-amil').value = currentUser.nama; }
-        if(hash === 'ajukan-mustahiq' && currentUser) { document.getElementById('aju-dusun').value = currentUser.dusun; document.getElementById('aju-amil').value = currentUser.nama; }
-      } else { document.getElementById('page-home').classList.add('active'); if(pollingInterval) clearInterval(pollingInterval); }
-      window.scrollTo(0,0);
+      document.getElementById('page-'+id).classList.add('active');
+      if(id === 'laporan-dist') fetchMaster();
+      if(id === 'konfirmasi') fetchAju();
+      if(id === 'ajukan') {
+        document.getElementById('aju-dusun').value = user.dusun;
+        toggleAjuMode();
+      }
     }
-    function pindahHalaman(id) { window.location.hash = id; }
-
-    async function kirimAPI(data) { try { let response = await fetch(API_URL, { method: 'POST', body: JSON.stringify(data) }); return await response.json(); } catch (e) { return { sukses: false, pesan: "Server sibuk." }; } }
-
-    function showModal(msg, isLoading = false) { document.getElementById('modalMsg').innerText = msg; document.getElementById('btn-modal-ok').style.display = isLoading ? 'none' : 'block'; document.getElementById('customModal').style.display = 'flex'; }
-    function closeModal() { document.getElementById('customModal').style.display = 'none'; }
-    function toggleAuth(t) { document.getElementById('box-login').style.display = (t === 'log') ? 'block' : 'none'; document.getElementById('box-reg').style.display = (t === 'reg') ? 'block' : 'none'; }
 
     async function prosesLoginWeb() {
-      let n = document.getElementById('l-nick').value; let p = document.getElementById('l-pass').value; if(!n || !p) return showModal("Isi data login!");
-      showModal("⏳ Sedang login...", true); let res = await kirimAPI({ action: "login", nickname: n, password: p });
-      if(res.sukses) { setSession(res.data); currentUser = res.data; terapkanSesi(); mulaiCekSesiRealtime(); showModal("✅ Login Berhasil!", false); setTimeout(() => { closeModal(); pindahHalaman('dashboard'); }, 1000); } else { showModal("❌ " + res.pesan); }
-    }
-
-    async function prosesDaftar() {
-      let form = { nama: document.getElementById('r-nama').value, nickname: document.getElementById('r-nick').value, dusun: document.getElementById('r-dusun').value, jenisAkun: document.getElementById('r-jenis').value, password: document.getElementById('r-pass').value };
-      if(!form.nama || !form.nickname || !form.password) return showModal("⚠️ Lengkapi semua data pendaftaran!"); if(form.password !== document.getElementById('r-pass2').value) return showModal("⚠️ Kata sandi tidak cocok!");
-      showModal("⏳ Sedang mendaftar...", true); let res = await kirimAPI({ action: "register", form: form });
-      if(res.sukses) { showModal("✅ Berhasil daftar!\nTunggu aktivasi Pengurus.", false); toggleAuth('log'); } else { showModal("❌ Gagal: " + res.pesan); }
-    }
-
-    async function logout() { 
-      showModal("⏳ Logout...", true); 
-      if(currentUser) await kirimAPI({action: "logout", nickname: currentUser.nickname});
-      localStorage.removeItem('lazisnuSession'); location.reload(); 
-    }
-    
-    function terapkanSesi() {
-      document.getElementById('d-nama').innerText = currentUser.nama; document.getElementById('d-dusun').innerText = currentUser.dusun; document.getElementById('d-role').innerText = currentUser.role;
-      document.getElementById('nav-login').style.display = 'none'; document.getElementById('nav-dash').style.display = 'inline-block'; document.getElementById('nav-logout').style.display = 'inline-block';
-      renderDashboard();
-      fetchPengumuman(); // Panggil pengumuman
-    }
-
-    function renderDashboard() {
-      let menu = document.getElementById('menu-container');
-      let html = `<div class="menu-box" onclick="pindahHalaman('muzakki')">📝 Input Muzakki</div><div class="menu-box" onclick="pindahHalaman('distribusi')">🤝 Input Distribusi</div><div class="menu-box" onclick="pindahHalaman('progress')">📊 Progress Zakat Mal</div><div class="menu-box" style="border-color:#059669; color:#059669;" onclick="pindahHalaman('laporan-distribusi')">📦 Laporan Distribusi</div>`;
-      if(currentUser.role === 'Pengurus') {
-        html += `<div class="menu-box" style="border-color:#eab308; color:#eab308;" onclick="document.getElementById('modalPengumuman').style.display='flex'">📢 Buat Pengumuman</div><div class="menu-box" style="border-color:#ea580c; color:#ea580c;" onclick="pindahHalaman('laporan')">⚙️ Kelola Muzakki</div><div class="menu-box" style="border-color:#7c3aed; color:#7c3aed;" onclick="pindahHalaman('kelola-mustahiq')">⚙️ Kelola Mustahiq</div><div class="menu-box" style="border-color:#d97706; color:#d97706;" onclick="pindahHalaman('kelola-pengajuan')">📩 Konfirmasi Pengajuan</div><div class="menu-box" style="border-color:var(--danger); color:var(--danger);" onclick="pindahHalaman('masalah')">⚠️ Laporan Masalah</div><div class="menu-box" style="border-color:#0284c7; color:#0284c7;" onclick="pindahHalaman('kelola-akun')">👥 Kelola Akun</div>`;
-      } else {
-        html += `<div class="menu-box" onclick="pindahHalaman('laporan')">📋 Data Muzakki</div><div class="menu-box" style="border-color:#d97706; color:#d97706;" onclick="pindahHalaman('ajukan-mustahiq')">🆕 Ajukan Mustahiq Baru</div><div class="menu-box" style="border-color:var(--danger); color:var(--danger);" onclick="pindahHalaman('masalah')">⚠️ Laporan Masalah</div>`;
-      }
-      menu.innerHTML = html;
-    }
-
-    async function saveMuz() {
-      let data = { dusun: document.getElementById('muz-dusun').value, amil: document.getElementById('muz-amil').value, rw: document.getElementById('muz-rw').value, rt: document.getElementById('muz-rt').value, nama: document.getElementById('muz-nama').value, nominal: document.getElementById('muz-nom').value };
-      if(!data.nama || !data.rt || !data.nominal) return showModal("⚠️ Lengkapi RT, Nama, dan Nominal!"); showModal("⏳ Sedang Menyimpan...", true); let res = await kirimAPI({ action: "simpanMuzakki", obj: data });
-      if(res.sukses) { showModal("✅ Data Berhasil Disimpan!", false); document.getElementById('muz-rt').value = ''; document.getElementById('muz-nama').value = ''; document.getElementById('muz-nom').value = ''; } else { showModal("❌ Gagal."); }
-    }
-
-    async function fetchLaporan(isSilent = false) {
-      if(!isSilent) document.getElementById('list-laporan').innerHTML = "<i>Memuat data...</i>"; 
-      let res = await kirimAPI({ action: "getLaporan" });
-      if(res.sukses) { dataLaporan = res.data; filterLaporan(); } 
-      else if(!isSilent) { document.getElementById('list-laporan').innerHTML = "<b style='color:red;'>Gagal memuat.</b>"; }
-    }
-
-    function renderLaporan(data) {
-      let html = ""; let sorted = [...data].sort((a,b) => (b.status === 'Error') - (a.status === 'Error'));
-      sorted.forEach(d => {
-        let isErr = (d.status === 'Error'); let formatRp = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(parseFloat(d.nominal) || 0);
-        let actionBtn = "";
-        if (currentUser.role === 'Pengurus') { actionBtn = `<div style="margin-top:10px;"><button class="btn-submit" style="width:auto; padding:6px 14px; margin-right:8px; background:#0284c7; font-size:0.85rem;" onclick='openModalMuzakki(${d.id})'>Edit Data</button><button class="btn-submit btn-danger" style="width:auto; padding:6px 14px; font-size:0.85rem;" onclick="deleteMuzakki(${d.id}, '${d.nama}')">Hapus</button></div>`; } else { if (isErr) { actionBtn = `<div style="margin-top:10px; padding:10px; background:#fee2e2; border:1px solid #fca5a5; border-radius:6px; font-size:0.85rem; color:#b91c1c;"><b>Pesan:</b> ${d.pesan}</div>`; } else { actionBtn = `<button style="margin-top: 10px; padding: 5px 10px; background: #f8f9fa; border: 1px solid #94a3b8; border-radius: 4px; font-family: 'Montserrat'; cursor: pointer; color: #0f172a; font-size: 0.85rem;" onclick="kirimLaporanSalah(${d.id}, '${d.nama}')">Lapor Salah Input</button>`; } }
-        html += `<div class="list-item" style="border-left: 6px solid ${isErr ? 'var(--danger)' : 'var(--dark)'}; background: ${isErr ? '#fef2f2' : 'var(--bg-card)'};"><div style="font-weight: 700; font-size: 1.15rem; color: ${isErr ? 'var(--danger)' : 'var(--dark)'}; margin-bottom: 4px;">${d.nama} ${isErr ? '<span style="font-size:0.8rem;">⚠️ Perbaikan</span>' : ''}</div><div style="font-weight: 700; font-size: 1.05rem; color: #d97706; margin-bottom: 5px;">${formatRp}</div><div style="font-size: 0.85rem; color: #64748b; margin-bottom: 5px;">Dusun ${d.dusun} | ${d.rw}/RT ${d.rt} | Amil: ${d.amil}</div>${actionBtn}</div>`;
-      }); 
-      document.getElementById('list-laporan').innerHTML = html || "<i>Belum ada data Muzakki.</i>";
-    }
-    function filterLaporan() { let s = document.getElementById('search-laporan').value.toLowerCase(); renderLaporan(dataLaporan.filter(d => d.nama.toLowerCase().includes(s) || d.dusun.toLowerCase().includes(s))); }
-
-    async function kirimLaporanSalah(id, nama) { let msg = prompt(`Detail kesalahan untuk: ${nama}`); if (!msg) return; showModal("⏳ Mengupdate...", true); let res = await kirimAPI({ action: "laporSalah", obj: { rowId: id, namaMuzakki: nama, dusun: currentUser.dusun, amil: currentUser.nama, pesan: msg } }); if (res.sukses) { showModal("✅ Dilaporkan.", false); fetchLaporan(); } else { showModal("❌ Gagal.", false); } }
-    function openModalMuzakki(id) { let d = dataLaporan.find(x => x.id === id); if(!d) return; document.getElementById('muz-edit-id').value = d.id; document.getElementById('muz-edit-dusun').value = d.dusun.toUpperCase(); document.getElementById('muz-edit-rw').value = d.rw; document.getElementById('muz-edit-rt').value = d.rt; document.getElementById('muz-edit-nama').value = d.nama; document.getElementById('muz-edit-nom').value = d.nominal; document.getElementById('crudModalMuzakki').style.display = "flex"; }
-    async function saveCrudMuzakki() { let obj = { id: document.getElementById('muz-edit-id').value, dusun: document.getElementById('muz-edit-dusun').value, rw: document.getElementById('muz-edit-rw').value, rt: document.getElementById('muz-edit-rt').value, nama: document.getElementById('muz-edit-nama').value, nominal: document.getElementById('muz-edit-nom').value }; document.getElementById('crudModalMuzakki').style.display = "none"; showModal("⏳ Update data...", true); let res = await kirimAPI({ action: "editMuzakki", obj: obj }); if(res.sukses) { showModal("✅ Data Update!", false); fetchLaporan(); } else { showModal("❌ Gagal.", false); } }
-    async function deleteMuzakki(id, nama) { if(!confirm(`Hapus permanen Zakat dari: ${nama}?`)) return; showModal("⏳ Menghapus...", true); let res = await kirimAPI({ action: "hapusMuzakki", id: id }); if(res.sukses) { showModal("✅ Dihapus!", false); fetchLaporan(); } else { showModal("❌ Gagal.", false); } }
-
-    async function fetchProgress(isSilent = false) {
-      if(!isSilent) document.getElementById('list-progress').innerHTML = "<i>Memuat progress...</i>"; let res = await kirimAPI({ action: "getProgress" });
+      let n = document.getElementById('l-nick').value;
+      let p = document.getElementById('l-pass').value;
+      let res = await kirim({action:"login", nickname:n, password:p});
       if(res.sukses) {
-        let html = ""; let sortedData = [...res.data].sort((a, b) => (b.dusun.toUpperCase().includes("TOTAL")) - (a.dusun.toUpperCase().includes("TOTAL")));
-        sortedData.forEach(d => { let formatRp = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(parseFloat(d.totalNominal) || 0); let title = d.dusun.toUpperCase().includes("TOTAL") ? "TOTAL DESA SUMOKEMBANGSRI" : `Dusun ${d.dusun}`; let w = d.progress.toString().replace(',', '.'); html += `<div class="list-item" style="border-left:6px solid ${d.dusun.toUpperCase().includes("TOTAL")?'var(--dark)':'var(--accent)'};"><div style="font-weight:700; font-size:1.1rem;">${title}</div><div style="display:flex; justify-content:space-between; margin-top:5px; font-size:0.9rem;"><span>Total: <b>${d.muzakki} Orang</b></span><span style="font-weight:700;">${formatRp}</span></div><div class="prog-bar-bg"><div class="prog-bar-fill" style="width:${w};"></div></div><div style="display:flex; justify-content:space-between; margin-top:5px; font-size:0.8rem; color:#64748b;"><span>Progress: ${d.progress}</span><span style="background:var(--accent); color:var(--dark); padding:2px 6px; border-radius:4px; font-weight:600;">Growth: ${d.growth}</span></div></div>`; }); document.getElementById('list-progress').innerHTML = html;
+        user = res.data;
+        document.getElementById('d-nama').innerText = user.nama;
+        document.getElementById('d-role').innerText = user.role;
+        document.getElementById('nav-dash').style.display = 'block';
+        document.getElementById('nav-logout').style.display = 'block';
+        renderMenu();
+        fetchNotif();
+        pindahHalaman('dashboard');
+      } else alert("Gagal Login!");
+    }
+
+    function renderMenu() {
+      let h = `<div class="menu-box" onclick="pindahHalaman('ajukan')">📝 Ajukan Mustahiq</div>
+               <div class="menu-box" onclick="pindahHalaman('laporan-dist')">📦 Laporan Distribusi</div>`;
+      if(user.role === 'Pengurus') {
+        h += `<div class="menu-box" style="color:var(--warning)" onclick="pindahHalaman('konfirmasi')">📩 Konfirmasi Aju</div>
+              <div class="menu-box" style="color:var(--warning)" onclick="openModalP()">📢 Buat Notif</div>`;
+      }
+      document.getElementById('menu-container').innerHTML = h;
+    }
+
+    async function fetchMaster() {
+      let res = await kirim({action:"getMasterMustahiq"});
+      if(res.sukses) { masterM = res.data; renderDist(); }
+    }
+
+    function renderDist() {
+      let h = "";
+      masterM.forEach(d => {
+        let labelNew = d.label === 'NEW' ? `<span class="badge-new">NEW !</span>` : "";
+        let histori = d.histori ? `<span class="histori-text">Riwayat: ${d.histori}</span>` : "";
+        h += `<div class="list-item">
+                <div style="font-weight:700; font-size:1.1rem;">${labelNew}${d.nama}</div>
+                <div style="font-size:0.85rem; color:#64748b; margin-top:5px;">Dusun ${d.dusun} | ${d.rw}/RT ${d.rt}</div>
+                ${histori}
+                <div style="margin-top:10px;"><span class="badge-new" style="background:${d.status==='Belum'?'#cbd5e1':''}">${d.status}</span></div>
+              </div>`;
+      });
+      document.getElementById('list-distribusi').innerHTML = h;
+    }
+
+    // PENGUMUMAN
+    async function fetchNotif() {
+      let res = await kirim({action:"getPengumuman"});
+      if(res.sukses && res.data) {
+        document.getElementById('teks-pengumuman').innerText = "📢 INFO: " + res.data;
+        document.getElementById('banner-pengumuman').style.display = 'block';
       }
     }
 
-    async function kompresFoto(f) { return new Promise((r) => { let reader = new FileReader(); reader.readAsDataURL(f); reader.onload = function(e) { let img = new Image(); img.src = e.target.result; img.onload = function() { let canvas = document.createElement('canvas'); let scale = Math.min(1000/img.width, 1); canvas.width = img.width*scale; canvas.height = img.height*scale; let ctx = canvas.getContext('2d'); ctx.drawImage(img, 0, 0, canvas.width, canvas.height); r({ base64: canvas.toDataURL('image/jpeg',0.7).split(',')[1], mime: 'image/jpeg', name: f.name }); } } }); }
-    async function saveDistribusi() { let d = { dusun: document.getElementById('dist-dusun').value, amil: document.getElementById('dist-amil').value, rw: document.getElementById('dist-rw').value, rt: document.getElementById('dist-rt').value, kategori: document.getElementById('dist-kategori').value, nama: document.getElementById('dist-nama').value }; let fi = document.getElementById('dist-foto'); if(!d.rt || !d.nama || fi.files.length === 0) return showModal("⚠️ Lengkapi RT, Nama, & Foto!"); showModal("⏳ Upload & Simpan...", true); let c = await kompresFoto(fi.files[0]); d.fotoBase64 = c.base64; d.fotoMime = c.mime; d.fotoName = c.name; let res = await kirimAPI({ action: "simpanDistribusi", obj: d }); if(res.sukses) { showModal("✅ Tersalurkan!", false); document.getElementById('dist-rt').value = ''; document.getElementById('dist-nama').value = ''; document.getElementById('dist-foto').value = ''; } else { showModal("❌ Gagal.", false); } }
-
-    async function fetchLaporanDistribusi(isSilent = false) {
-      if(!isSilent) { document.getElementById('progress-dist-container').innerHTML = "<i>Memuat...</i>"; document.getElementById('list-distribusi').innerHTML = "<i>Memuat...</i>"; }
-      let resP = await kirimAPI({ action: "getDistribusiProgress" });
-      if(resP.sukses) { let htmlP = ""; [...resP.data].sort((a,b)=>(b.dusun.toUpperCase().includes("TOTAL"))-(a.dusun.toUpperCase().includes("TOTAL"))).forEach(d => { htmlP += `<div class="list-item" style="border-left:6px solid ${d.dusun.toUpperCase().includes("TOTAL")?'#059669':'var(--accent)'};"><div style="font-weight:700;">${d.dusun.toUpperCase().includes("TOTAL")?"TOTAL DESA":'Dusun '+d.dusun}</div><div style="display:flex; justify-content:space-between; margin-top:5px; font-size:0.9rem;"><span>Target: <b>${d.target}</b></span><span style="color:#059669; font-weight:700;">Selesai: ${d.tersalurkan}</span></div><div class="prog-bar-bg"><div class="prog-bar-fill" style="width:${d.progress.toString().replace(',','.')}; background:${d.dusun.toUpperCase().includes("TOTAL")?'#059669':'var(--accent)'};"></div></div><div style="text-align:right; margin-top:5px; font-size:0.8rem;"><span class="badge badge-success">Persentase: ${d.progress}</span></div></div>`; }); document.getElementById('progress-dist-container').innerHTML = htmlP; }
-      let resD = await kirimAPI({ action: "getMasterMustahiq" }); if(resD.sukses) { masterMustahiqData = resD.data; filterDistribusi(); }
-    }
-
-    function renderLaporanDistribusi(data) { let html = ""; data.forEach(d => { let isDone = (d.status.toLowerCase() === 'tersalurkan'); let cName = getCleanName(d.nama); html += `<div class="list-item" style="border-left: 6px solid ${isDone ? 'var(--success)' : '#cbd5e1'};"><div style="display:flex; justify-content:space-between; align-items:flex-start;"><div><div style="font-weight:700; font-size:1.15rem; margin-bottom: 4px;">${cName}</div><div>${getCatBadge(d.kategori)}</div></div>${isDone ? '<span class="badge badge-success">✓ Tersalurkan</span>' : '<span class="badge badge-danger">✗ Belum</span>'}</div><div style="font-size:0.85rem; color:#64748b; margin-top:8px;">Dusun ${d.dusun} | ${d.rw} / RT ${d.rt}</div>${isDone ? `<div style="font-size:0.8rem; color:#94a3b8; margin-top:6px;">Oleh: ${d.amil} | ${d.timestamp}</div><a href="${d.foto}" target="_blank" style="display:inline-block; margin-top:8px; font-size:0.8rem; color:#0284c7; font-weight:bold; text-decoration:none;">Lihat Bukti Foto</a>` : ''}</div>`; }); document.getElementById('list-distribusi').innerHTML = html || "<i>Tidak ada data.</i>"; }
-    function filterDistribusi() { let fD = document.getElementById('f-dusun').value, fS = document.getElementById('f-status').value, fK = document.getElementById('f-kat').value, fSrc = document.getElementById('f-search').value.toLowerCase(); renderLaporanDistribusi(masterMustahiqData.filter(d => (fD==='ALL'||d.dusun.toUpperCase()===fD) && (fS==='ALL'||d.status===fS) && (fK==='ALL'||d.kategori===fK) && (d.nama.toLowerCase().includes(fSrc)||d.amil.toLowerCase().includes(fSrc)))); }
-
-    async function fetchKelolaMustahiq(isSilent = false) { if(!isSilent) document.getElementById('list-kelola').innerHTML = "<i>Memuat...</i>"; let res = await kirimAPI({ action: "getMasterMustahiq" }); if(res.sukses) { masterMustahiqData = res.data; filterKelola(); } }
-    
-    function renderKelolaMustahiq(data) { 
-      let html = ""; data.forEach(d => { let cName = getCleanName(d.nama); html += `<div class="list-item" style="cursor:pointer; border-left: 6px solid #7c3aed;" onclick='openModalMustahiq(${d.id})'><div style="font-weight: 700; font-size: 1.15rem; color: var(--dark); margin-bottom: 4px;">${cName}</div><div style="font-size: 0.85rem; color: #64748b;">${d.dusun} | ${d.rw} / RT ${d.rt} | ${getCatBadge(d.kategori)}</div></div>`; }); 
-      document.getElementById('list-kelola').innerHTML = html || "<i>Kosong.</i>"; 
-    }
-    function filterKelola() { let s = document.getElementById('search-kelola').value.toLowerCase(); renderKelolaMustahiq(masterMustahiqData.filter(d => d.nama.toLowerCase().includes(s) || d.dusun.toLowerCase().includes(s))); }
-
-    function openModalMustahiq(id) { if(id === 'NEW') { document.getElementById('crud-title').innerText = "Tambah Mustahiq Baru"; document.getElementById('crud-id').value = ""; document.getElementById('crud-rt').value = ""; document.getElementById('crud-nama').value = ""; document.getElementById('btn-crud-delete').style.display = "none"; } else { let d = masterMustahiqData.find(x=>x.id===id); let cName = getCleanName(d.nama); document.getElementById('crud-title').innerText = "Edit Mustahiq"; document.getElementById('crud-id').value = d.id; document.getElementById('crud-dusun').value = d.dusun.toUpperCase(); document.getElementById('crud-rw').value = d.rw; document.getElementById('crud-rt').value = d.rt; document.getElementById('crud-kategori').value = d.kategori; document.getElementById('crud-nama').value = cName; document.getElementById('btn-crud-delete').style.display = "block"; } document.getElementById('crudModal').style.display = "flex"; }
-    async function saveCrudMustahiq() { let o = { id: document.getElementById('crud-id').value, dusun: document.getElementById('crud-dusun').value, rw: document.getElementById('crud-rw').value, rt: document.getElementById('crud-rt').value, kategori: document.getElementById('crud-kategori').value, nama: document.getElementById('crud-nama').value }; if(!o.rt || !o.nama) return alert("Isi RT & Nama!"); document.getElementById('crudModal').style.display = "none"; showModal("⏳ Simpan...", true); let res = await kirimAPI({ action: o.id?"editMustahiq":"tambahMustahiq", obj: o }); if(res.sukses) { showModal("✅ Sukses!", false); fetchKelolaMustahiq(); } else { showModal("❌ Gagal.", false); } }
-    async function deleteCrudMustahiq() { if(!confirm("HAPUS data ini permanen?")) return; document.getElementById('crudModal').style.display = "none"; showModal("⏳ Menghapus...", true); let res = await kirimAPI({ action: "hapusMustahiq", id: document.getElementById('crud-id').value }); if(res.sukses) { showModal("✅ Dihapus!", false); fetchKelolaMustahiq(); } else { showModal("❌ Gagal.", false); } }
-
-    async function fetchKelolaAkun(isSilent = false) { if(!isSilent) document.getElementById('list-kelola-akun').innerHTML = "<i>Memuat...</i>"; let res = await kirimAPI({ action: "getSemuaAkun" }); if(res.sukses) { masterAkunData = res.data; filterKelolaAkun(); } }
-    function renderKelolaAkun(data) {
-      let html = ""; data.forEach(d => { let b = d.status==='Active'?`<span class="badge badge-success">Active</span>`:`<span class="badge badge-danger">Pending</span>`; let sOnline = d.isOnline ? `<span style="color:#16a34a; font-weight:bold; font-size:0.8rem; margin-left:10px;">🟢 Online</span>` : `<span style="color:#94a3b8; font-size:0.8rem; margin-left:10px;">⚫ Offline</span>`; let btnPaksa = d.isOnline ? `<button class="btn-submit btn-danger" style="width:auto; padding:6px 12px; margin-top:8px; font-size:0.8rem;" onclick="paksaLogoutUser(${d.id}, '${d.nama}')">Keluarkan (Force Logout)</button>` : ''; html += `<div class="list-item" style="border-left:6px solid #0284c7; display:flex; justify-content:space-between; align-items:flex-start;"><div><div style="font-weight:700; font-size: 1.1rem; margin-bottom: 4px;">${d.nama} (${d.jenis})</div><div style="font-size:0.85rem; color:#64748b;">${d.nickname} | ${d.dusun} <br><div style="margin-top:5px;">${b} ${sOnline}</div></div>${btnPaksa}</div><button class="btn-submit" style="width:auto; padding:6px 14px; background:#0284c7; margin:0;" onclick='openModalAkun(${d.id})'>Kelola</button></div>`; }); document.getElementById('list-kelola-akun').innerHTML = html || "<i>Tidak ada data.</i>";
-    }
-    function filterKelolaAkun() { let s = document.getElementById('search-akun').value.toLowerCase(); renderKelolaAkun(masterAkunData.filter(d => d.nama.toLowerCase().includes(s) || d.dusun.toLowerCase().includes(s) || d.nickname.toLowerCase().includes(s))); }
-    
-    async function paksaLogoutUser(id, nama) { if(!confirm(`Yakin ingin menendang akun ${nama} dari sistem?`)) return; showModal("⏳ Memproses...", true); let res = await kirimAPI({action: "paksaLogout", id: id}); if(res.sukses) { showModal("✅ Berhasil dikeluarin!", false); fetchKelolaAkun(); } else { showModal("❌ Gagal", false); } }
-
-    function openModalAkun(id) { let d = masterAkunData.find(x=>x.id===id); document.getElementById('akun-id').value = d.id; document.getElementById('akun-nama').value = d.nama; document.getElementById('akun-nick').value = d.nickname; document.getElementById('akun-dusun').value = d.dusun; document.getElementById('akun-jenis').value = d.jenis; document.getElementById('akun-status').value = d.status; document.getElementById('akun-pass').value = d.password; document.getElementById('crudModalAkun').style.display = "flex"; }
-    async function saveCrudAkun() { let o = { id: document.getElementById('akun-id').value, nama: document.getElementById('akun-nama').value, nickname: document.getElementById('akun-nick').value, dusun: document.getElementById('akun-dusun').value, jenis: document.getElementById('akun-jenis').value, status: document.getElementById('akun-status').value, password: document.getElementById('akun-pass').value }; document.getElementById('crudModalAkun').style.display = "none"; showModal("⏳ Simpan...", true); let res = await kirimAPI({ action: "editAkun", obj: o }); if(res.sukses) { showModal("✅ Sukses!", false); fetchKelolaAkun(); } else { showModal("❌ Gagal.", false); } }
-    async function deleteCrudAkun() { if(!confirm("Yakin HAPUS Akun ini?")) return; document.getElementById('crudModalAkun').style.display = "none"; showModal("⏳ Menghapus...", true); let res = await kirimAPI({ action: "hapusAkun", id: document.getElementById('akun-id').value }); if(res.sukses) { showModal("✅ Dihapus!", false); fetchKelolaAkun(); } else { showModal("❌ Gagal.", false); } }
-
-    async function ajukanMustahiq() { let o = { dusun: document.getElementById('aju-dusun').value, amil: document.getElementById('aju-amil').value, rw: document.getElementById('aju-rw').value, rt: document.getElementById('aju-rt').value, kategori: document.getElementById('aju-kat').value, nama: document.getElementById('aju-nama').value }; if(!o.rt || !o.nama) return showModal("⚠️ Isi RT & Nama!"); showModal("⏳ Kirim Pengajuan...", true); let res = await kirimAPI({ action: "ajukanMustahiq", obj: o }); if(res.sukses) { showModal("✅ Berhasil Diajukan!", false); document.getElementById('aju-rt').value = ''; document.getElementById('aju-nama').value = ''; } else { showModal("❌ Gagal.", false); } }
-    async function fetchPengajuan(isSilent = false) { if(!isSilent) document.getElementById('list-pengajuan').innerHTML = "<i>Memuat...</i>"; let res = await kirimAPI({ action: "getPengajuan" }); if(res.sukses) { let html = ""; res.data.forEach(d => { let cName = getCleanName(d.nama); html += `<div class="list-item" style="border-left:6px solid #d97706;"><div style="font-weight:700; font-size:1.1rem; margin-bottom:4px;">${cName} ${getCatBadge(d.kategori)}</div><div style="font-size:0.85rem; color:#64748b; margin-bottom:8px;">Dusun ${d.dusun} | ${d.rw} / RT ${d.rt}<br>Oleh: ${d.amil} (${d.timestamp})</div><button class="btn-submit" style="width:auto; padding:6px 14px; background:var(--success); margin-right:8px;" onclick="accPengajuan(${d.id}, 'ACC')">Terima (ACC)</button><button class="btn-submit btn-danger" style="width:auto; padding:6px 14px;" onclick="accPengajuan(${d.id}, 'Tolak')">Tolak</button></div>`; }); document.getElementById('list-pengajuan').innerHTML = html || "<i>Tidak ada pengajuan pending.</i>"; } }
-    async function accPengajuan(id, action) { if(!confirm(`Yakin ingin ${action} pengajuan ini?`)) return; showModal(`⏳ Sedang ${action}...`, true); let res = await kirimAPI({ action: "prosesPengajuan", obj: {id: id, action: action} }); if(res.sukses) { showModal("✅ Selesai!", false); fetchPengajuan(); } else { showModal("❌ Gagal.", false); } }
-
-    async function fetchMasalah(isSilent = false) { if(!isSilent) document.getElementById('list-masalah').innerHTML = "<i>Memuat...</i>"; let res = await kirimAPI({ action: "getLaporanMasalah" }); if(res.sukses) { let html = ""; res.data.forEach(d => { let badge = d.status === 'Selesai' ? `<span class="badge badge-success">✓ Selesai oleh ${d.penyelesai}</span>` : `<span class="badge badge-danger">! Pending</span>`; let btn = (d.status !== 'Selesai' && currentUser.role === 'Pengurus') ? `<button class="btn-submit" style="background:#16a34a; padding:6px 14px; width:auto; font-size:0.85rem; margin-top:10px;" onclick="selesaikanMasalah(${d.id})">Tandai Selesai</button>` : ''; html += `<div class="list-item" style="border-left: 6px solid ${d.status==='Selesai'?'#16a34a':'var(--danger)'};"><div style="display:flex; justify-content:space-between; font-weight:700; font-size:1.1rem; margin-bottom:4px;"><span>${d.muzakki}</span> ${badge}</div><div style="font-size:0.85rem; color:#64748b; margin-bottom:8px;">Amil: ${d.amil} (${d.dusun}) | Waktu: ${d.tanggal}</div><div style="padding:10px; background:#f1f5f9; border-radius:6px; font-size:0.9rem; color:#0f172a;"><b>Pesan:</b> ${d.pesan}</div>${btn}</div>`; }); document.getElementById('list-masalah').innerHTML = html || "<i>Aman, tidak ada masalah.</i>"; } }
-    async function selesaikanMasalah(id) { showModal("⏳ Proses...", true); let res = await kirimAPI({ action: "selesaikanMasalah", obj: {id: id, pengurus: currentUser.nama} }); if(res.sukses){ showModal("✅ Selesai", false); fetchMasalah(); } }
-
-    // FUNGSI PENGUMUMAN (JS)
-    async function fetchPengumuman() {
-      let res = await kirimAPI({ action: "getPengumuman" });
-      let banner = document.getElementById('banner-pengumuman');
-      if (res.sukses && res.data) {
-        document.getElementById('teks-pengumuman').innerText = "📢 PENGUMUMAN: " + res.data;
-        banner.style.display = "block";
+    // AJUKAN LOGIC
+    function toggleAjuMode() {
+      let tipe = document.getElementById('aju-tipe').value;
+      let box = document.getElementById('box-cari-mustahiq');
+      if(tipe === 'EDIT') {
+        box.style.display = 'block';
+        let opt = '<option value="">-- Pilih Nama --</option>';
+        masterM.forEach(m => opt += `<option value="${m.id}">${m.nama}</option>`);
+        document.getElementById('aju-pilih-nama').innerHTML = opt;
       } else {
-        banner.style.display = "none";
+        box.style.display = 'none';
+        document.getElementById('aju-nama').value = "";
       }
     }
 
-    async function kirimPengumuman() {
-      let pesan = document.getElementById('input-pengumuman').value;
-      let batas = document.getElementById('input-batas-waktu').value;
-      if(!pesan || !batas) return alert("Pesan dan batas waktu wajib diisi!");
-      
-      document.getElementById('modalPengumuman').style.display = 'none';
-      showModal("⏳ Menyebarkan pengumuman...", true);
-      
-      let res = await kirimAPI({ action: "simpanPengumuman", obj: {pesan: pesan, batasWaktu: batas} });
+    function isiDataOtomatis() {
+      let id = document.getElementById('aju-pilih-nama').value;
+      let d = masterM.find(x => x.id == id);
+      if(d) {
+        document.getElementById('aju-nama').value = d.nama;
+        document.getElementById('aju-rw').value = d.rw;
+        document.getElementById('aju-rt').value = d.rt;
+        document.getElementById('aju-kat').value = d.kategori;
+      }
+    }
+
+    async function kirimAju() {
+      let o = {
+        tipe: document.getElementById('aju-tipe').value,
+        dusun: document.getElementById('aju-dusun').value,
+        rw: document.getElementById('aju-rw').value,
+        rt: document.getElementById('aju-rt').value,
+        nama: document.getElementById('aju-nama').value,
+        kategori: document.getElementById('aju-kat').value,
+        amil: user.nama,
+        idMaster: document.getElementById('aju-pilih-nama').value
+      };
+      let res = await kirim({action:"ajukanMustahiq", obj:o});
+      if(res.sukses) { alert("Berhasil Diajukan!"); pindahHalaman('dashboard'); }
+    }
+
+    async function fetchAju() {
+      let res = await kirim({action:"getPengajuan"});
       if(res.sukses) {
-        showModal("✅ Berhasil disebar!", false);
-        fetchPengumuman();
-        document.getElementById('input-pengumuman').value = '';
-        document.getElementById('input-batas-waktu').value = '';
-      } else {
-        showModal("❌ Gagal.", false);
+        let h = "";
+        res.data.forEach(d => {
+          h += `<div class="list-item">
+                  <b>[${d.tipe}]</b> ${d.nama} (${d.kategori})<br>
+                  <small>Dusun ${d.dusun} | Amil: ${d.amil}</small><br>
+                  <button class="btn-submit" style="width:auto; padding:5px 15px; background:var(--success)" onclick="accAju(${d.id}, 'ACC')">ACC</button>
+                  <button class="btn-submit btn-danger" style="width:auto; padding:5px 15px;" onclick="accAju(${d.id}, 'Tolak')">Tolak</button>
+                </div>`;
+        });
+        document.getElementById('list-pengajuan').innerHTML = h || "Kosong";
       }
     }
 
-    window.onload = function() { checkSession(); handleHashChange(); };
+    async function accAju(id, act) {
+      let res = await kirim({action:"prosesPengajuan", id:id, action:act});
+      if(res.sukses) fetchAju();
+    }
+
+    function openModalP() { document.getElementById('modalP').style.display='flex'; }
+    function closeModalP() { document.getElementById('modalP').style.display='none'; }
+    async function saveP() {
+      let o = { pesan: document.getElementById('p-pesan').value, batasWaktu: document.getElementById('p-batas').value };
+      await kirim({action:"simpanPengumuman", obj:o});
+      closeModalP(); fetchNotif();
+    }
+    
+    function logout() { localStorage.clear(); location.reload(); }
   </script>
 </body>
 </html>
