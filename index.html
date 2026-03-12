@@ -4,14 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Portal LAZISNU SUMOKEMBANGSRI</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root { --bg-body: #FDFBF7; --bg-card: #FFFFFF; --accent: #B5C19E; --dark: #2E3524; --danger: #ef4444; --success: #16a34a; --warning: #d97706; }
     * { box-sizing: border-box; }
-    body { font-family: 'Montserrat', sans-serif; margin: 0; background: var(--bg-body); color: var(--dark); overflow-x: hidden; }
+    html { scroll-behavior: smooth; } /* EFEK SCROLL HALUS */
+    body { font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; background: var(--bg-body); color: var(--dark); overflow-x: hidden; }
     
+    /* NAVBAR PUBLIC */
     .navbar { background: var(--dark); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; color: #fff; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-    .logo { font-weight: 700; font-size: 1.1rem; line-height: 1.2; text-transform: uppercase; }
+    .logo { font-weight: 800; font-size: 1.1rem; line-height: 1.2; text-transform: uppercase; cursor: pointer; }
     
     .menu-toggle { display: block; background: none; border: none; cursor: pointer; padding: 5px; z-index: 1001; }
     .menu-toggle span { display: block; width: 25px; height: 3px; background-color: #fff; margin-bottom: 5px; transition: all 0.3s; }
@@ -23,7 +25,7 @@
     @media (min-width: 992px) { 
       .menu-toggle { display: none; }
       .nav-menu { position: static; width: auto; height: auto; background: none; flex-direction: row; align-items: center; gap: 15px; padding: 0; right: 0; }
-      .nav-menu .nav-item { padding: 0; width: auto; border-bottom: none; color: #cbd5e1; font-size: 0.8rem; }
+      .nav-menu .nav-item { padding: 0; width: auto; border-bottom: none; color: #cbd5e1; font-size: 0.8rem; text-transform: uppercase; }
       .nav-menu .nav-item:hover, .nav-menu .nav-item.active { color: #fff; }
       .nav-item#nav-login { background: var(--accent) !important; color: var(--dark) !important; padding: 8px 18px !important; border-radius: 6px; }
       .nav-item#nav-logout { background: #ef4444 !important; color: #fff !important; padding: 8px 18px !important; border-radius: 6px; }
@@ -35,22 +37,27 @@
     .page.active { display: block; animation: fadeIn 0.3s ease; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     
+    /* SECTION HOME (LANDING PAGE) */
+    .home-section { padding: 40px 0; border-bottom: 1px solid #e2e8f0; }
+    .home-section:last-child { border-bottom: none; }
+    
     .card { background: var(--bg-card); padding: 25px; border-radius: 12px; box-shadow: 2px 2px 8px rgba(0,0,0,0.05); margin-bottom: 20px; border: 1px solid #f1f5f9; }
-    h2, h3 { color: var(--dark); margin-top: 0; font-weight: 700; }
+    h2, h3 { color: var(--dark); margin-top: 0; font-weight: 800; }
     
     .form-group { margin-bottom: 1.2rem; }
-    .form-group label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 0.9rem; }
-    .form-group input, .form-group select { width: 100%; padding: 12px; border: 2px solid var(--accent); border-radius: 8px; font-family: 'Montserrat', sans-serif; font-size: 0.95rem; }
+    .form-group label { display: block; margin-bottom: 6px; font-weight: 700; font-size: 0.9rem; }
+    .form-group input, .form-group select { width: 100%; padding: 12px; border: 2px solid var(--accent); border-radius: 8px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.95rem; }
     .form-group input[type="file"] { padding: 9px; }
     .form-group input:focus, .form-group select:focus { border-color: var(--dark); outline: none; }
     
     .flex-gap { display: flex; gap: 15px; } .flex-gap > div { flex: 1; }
-    .btn-submit { width: 100%; padding: 14px; background: var(--dark); color: #fff; border: none; border-radius: 8px; font-weight: 700; font-family: 'Montserrat', sans-serif; cursor: pointer; margin-top: 10px; font-size: 1rem; }
+    .btn-submit { width: 100%; padding: 14px; background: var(--dark); color: #fff; border: none; border-radius: 8px; font-weight: 700; font-family: 'Plus Jakarta Sans', sans-serif; cursor: pointer; margin-top: 10px; font-size: 1rem; transition: background 0.3s; }
+    .btn-submit:hover { background: #1a1e14; }
     .btn-secondary { background: #64748b; }
     .btn-danger { background: var(--danger); }
     
     .grid-menu { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px;}
-    .menu-box { background: var(--bg-card); border: 2px solid var(--accent); padding: 20px; text-align: center; border-radius: 12px; cursor: pointer; font-weight: 700; box-shadow: 2px 2px 5px rgba(0,0,0,0.05); transition: all 0.3s;}
+    .menu-box { background: var(--bg-card); border: 2px solid var(--accent); padding: 20px; text-align: center; border-radius: 12px; cursor: pointer; font-weight: 800; box-shadow: 2px 2px 5px rgba(0,0,0,0.05); transition: all 0.3s;}
     .menu-box:hover { background: var(--accent); transform: translateY(-3px); }
     
     .list-item { background: var(--bg-card); padding: 18px; margin-bottom: 15px; border-radius: 8px; box-shadow: 2px 2px 8px rgba(0,0,0,0.06); position: relative;}
@@ -75,17 +82,25 @@
     .rt-container { width: 100vw; margin-left: calc(-50vw + 50%); background: #fef08a; color: #b45309; padding: 10px 0; overflow: hidden; white-space: nowrap; font-weight: 700; display: none; border-bottom: 2px solid #fde047; margin-bottom: 20px; }
     .rt-text { display: inline-block; padding-left: 100%; animation: marquee 18s linear infinite; }
     @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
+
+    /* TAB PUBLIC DATA */
+    .tab-container { display: flex; gap: 10px; margin-bottom: 20px; }
+    .tab-btn { flex: 1; padding: 12px; text-align: center; background: #e2e8f0; border-radius: 8px; cursor: pointer; font-weight: 700; transition: 0.3s; font-size: 0.85rem; }
+    .tab-btn.active { background: var(--dark); color: #fff; }
   </style>
 </head>
 <body>
 
   <nav class="navbar">
-    <div class="logo">LAZISNU<br>SUMOKEMBANGSRI</div>
+    <div class="logo" onclick="navigasiKe('home')">LAZISNU<br>SUMOKEMBANGSRI</div>
     <button class="menu-toggle" id="menu-toggle"><span></span><span></span><span></span></button>
     <div class="nav-menu" id="nav-menu">
-      <span class="nav-item" onclick="pindahHalaman('home')">HOME</span>
-      <span class="nav-item" onclick="pindahHalaman('dummy')">ABOUT US</span>
-      <span class="nav-item" id="nav-dash" style="display:none;" onclick="pindahHalaman('dashboard')">DASHBOARD</span>
+      <span class="nav-item nav-public" onclick="navigasiKe('home')">HOME</span>
+      <span class="nav-item nav-public" onclick="navigasiKe('sect-program')">PROGRAM</span>
+      <span class="nav-item nav-public" onclick="navigasiKe('sect-about')">ABOUT US</span>
+      <span class="nav-item nav-public" onclick="navigasiKe('sect-struktur')">STRUKTUR</span>
+      <span class="nav-item nav-public" onclick="pindahHalaman('public-data')">SEMUA DATA</span>
+      <span class="nav-item" id="nav-dash" style="display:none;" onclick="pindahHalaman('dashboard')">DASHBOARD AMIL</span>
       <span class="nav-item" id="nav-login" onclick="pindahHalaman('login')">LOGIN</span>
       <span class="nav-item" id="nav-logout" style="display:none;" onclick="logout()">LOGOUT</span>
     </div>
@@ -94,31 +109,86 @@
   <div class="container">
     
     <div id="page-home" class="page active">
-      <div class="card" style="text-align: center; border-top: 6px solid var(--dark);">
-        <h2>SELAMAT DATANG DI PORTAL<br>LAZISNU SUMOKEMBANGSRI</h2>
-        <p style="color: #475569; font-weight: 600;">Aplikasi pengelolaan Zakat, Infaq, dan Sedekah Ranting Sumokembangsri.</p>
+      
+      <div id="sect-home" class="home-section" style="padding-top: 0;">
+        <div class="card" style="text-align: center; border-top: 6px solid var(--dark);">
+          <h2>SELAMAT DATANG DI PORTAL<br>LAZISNU SUMOKEMBANGSRI</h2>
+          <p style="color: #475569; font-weight: 600;">Transparansi pengelolaan Zakat, Infaq, dan Sedekah.</p>
+        </div>
       </div>
-      <div class="grid-menu" style="grid-template-columns: 1fr;">
-        <div class="card" style="margin-bottom:0; border-left: 6px solid var(--dark); padding: 20px;"><h3 style="margin:0 0 5px 0;">🌾 Zakat Fitrah</h3><p style="margin:0; font-size:0.9rem;">Penerimaan dan penyaluran Zakat Fitrah.</p></div>
-        <div class="card" style="margin-bottom:0; border-left: 6px solid var(--dark); padding: 20px;"><h3 style="margin:0 0 5px 0;">💰 Zakat Mal</h3><p style="margin:0; font-size:0.9rem;">Pengelolaan Zakat Harta (Mal) dari para Muzakki.</p></div>
-        <div class="card" style="margin-bottom:0; border-left: 6px solid var(--dark); padding: 20px;"><h3 style="margin:0 0 5px 0;">🤲 Infaq Kaleng</h3><p style="margin:0; font-size:0.9rem;">Penyaluran dana Infaq dan Sedekah.</p></div>
+
+      <div id="sect-program" class="home-section">
+        <h2 style="text-align: center; margin-bottom: 20px;">Program Berjalan</h2>
+        <div class="grid-menu" style="grid-template-columns: 1fr; margin-top: 0;">
+          <div class="card" style="margin-bottom:0; border-left: 6px solid var(--dark); padding: 20px;"><h3 style="margin:0 0 5px 0;">🌾 Zakat Fitrah</h3><p style="margin:0; font-size:0.9rem;">Penerimaan dan penyaluran Zakat Fitrah tahunan.</p></div>
+          <div class="card" style="margin-bottom:0; border-left: 6px solid var(--dark); padding: 20px;"><h3 style="margin:0 0 5px 0;">💰 Zakat Mal</h3><p style="margin:0; font-size:0.9rem;">Pengelolaan Zakat Harta (Mal) dari para Muzakki desa.</p></div>
+          <div class="card" style="margin-bottom:0; border-left: 6px solid var(--dark); padding: 20px;"><h3 style="margin:0 0 5px 0;">🤲 Infaq Kaleng</h3><p style="margin:0; font-size:0.9rem;">Penyaluran dana Infaq dan Sedekah warga.</p></div>
+        </div>
+      </div>
+
+      <div id="sect-about" class="home-section">
+        <div class="card">
+          <h2>About Us</h2>
+          <p style="line-height: 1.6;">LAZISNU Sumokembangsri: Menjembatani Kebaikan, Memberdayakan Umat
+
+LAZISNU (Lembaga Amil Zakat, Infaq, dan Shadaqah Nahdlatul Ulama) Sumokembangsri adalah lembaga filantropi Islam yang berdedikasi untuk menghimpun, mengelola, dan menyalurkan dana Zakat, Infaq, dan Shadaqah (ZIS) serta dana sosial keagamaan lainnya untuk kesejahteraan masyarakat.
+
+Jejak Langkah & Sejarah Kami
+Kepedulian terhadap kesejahteraan umat di wilayah Sumokembangsri bukanlah sebuah langkah baru. Akar pengabdian kami telah tertanam kuat sejak tahun 1999, di mana lembaga ini pertama kali dirintis dengan nama LAZIS Sumokembangsri. Bermula dari inisiatif lokal dan semangat gotong royong masyarakat, LAZIS Sumokembangsri bergerak secara mandiri selama dua dekade untuk membantu meringankan beban sesama dan menebar manfaat di lingkungan desa.
+
+Seiring dengan niat untuk terus memperluas jangkauan manfaat dan meningkatkan profesionalisme tata kelola, sebuah langkah besar diambil. Pada periode tahun 2019 - 2020, sejalan dengan terbentuknya kepengurusan LAZISNU di wilayah ini, LAZIS Sumokembangsri secara resmi melebur dan bertransformasi menjadi LAZISNU Sumokembangsri.
+
+Integrasi ini mengukuhkan posisi kami di bawah naungan jam'iyah Nahdlatul Ulama (NU). Dengan transformasi ini, sistem pengelolaan ZIS kami menjadi lebih terstruktur, transparan, dan terstandarisasi sesuai dengan pedoman operasional LAZISNU secara nasional, tanpa meninggalkan kearifan dan kedekatan lokal yang telah terbangun sejak 1999.
+
+Komitmen Kami
+Kini, dengan semangat baru sebagai LAZISNU Sumokembangsri, kami berkomitmen untuk tidak sekadar menjadi tempat penyaluran donasi, melainkan menjadi motor penggerak pemberdayaan umat. Melalui pilar-pilar program sosial, pendidikan, kesehatan, dan ekonomi, kami berusaha mewujudkan masyarakat Sumokembangsri yang lebih mandiri dan sejahtera.
+
+Dengan memegang teguh prinsip Amanah, Transparan, dan Profesional, kami siap menjadi jembatan kebaikan yang menghubungkan para Muzakki (dermawan) dengan para Mustahiq (penerima manfaat).
+
+Mari bersama LAZISNU Sumokembangsri, kita rajut kepedulian dan tebar keberkahan untuk sesama.</p>
+        </div>
+      </div>
+
+      <div id="sect-struktur" class="home-section">
+        <div class="card">
+          <h2>Struktur Organisasi</h2>
+          <p style="color: #64748b;">(Data struktur pengurus akan diupdate oleh tim admin)</p>
+          <ul style="line-height: 1.8; font-weight: 600;">
+            <li>Ketua: -</li>
+            <li>Sekretaris: -</li>
+            <li>Bendahara: -</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <div id="page-public-data" class="page">
+      <div class="card">
+        <h2>Transparansi Data</h2>
+        <p style="font-size: 0.9rem; color: #64748b; margin-bottom: 20px;">Data bersifat <i>read-only</i> (hanya lihat) untuk transparansi publik Ranting Sumokembangsri.</p>
+        
+        <div class="tab-container">
+          <div class="tab-btn active" id="tab-muzakki" onclick="switchPublicTab('muzakki')">Data Muzakki</div>
+          <div class="tab-btn" id="tab-mustahiq" onclick="switchPublicTab('mustahiq')">Data Mustahiq</div>
+          <div class="tab-btn" id="tab-amil" onclick="switchPublicTab('amil')">Data Amil</div>
+        </div>
+
+        <div id="public-list-muzakki"><i>Memuat data...</i></div>
+        
+        <div id="public-list-mustahiq" style="display:none;"><i>Memuat data...</i></div>
+
+        <div id="public-list-amil" style="display:none;"><i>Memuat data...</i></div>
       </div>
     </div>
 
-    <div id="page-dummy" class="page">
-      <div class="card" style="text-align: center;">
-        <h2>Mohon Maaf</h2>
-        <p>Halaman ini sedang dalam tahap pengembangan.</p>
-        <button class="btn-submit btn-secondary" style="width:auto; padding: 10px 20px;" onclick="pindahHalaman('home')">Kembali</button>
-      </div>
-    </div>
 
     <div id="page-login" class="page">
       <div id="box-login" class="card" style="max-width: 400px; margin: auto;">
-        <h2>Login</h2>
+        <h2>Login Amil</h2>
         <div class="form-group"><label>Nickname</label><input type="text" id="l-nick"></div>
         <div class="form-group"><label>Password</label><input type="password" id="l-pass"></div>
-        <button class="btn-submit" onclick="prosesLoginWeb()">Login</button>
+        <button class="btn-submit" onclick="prosesLoginWeb()">Masuk Dashboard</button>
       </div>
     </div>
 
@@ -172,16 +242,6 @@
   
   <div id="crudModalAkun" class="modal-overlay"><div class="modal-box"><h3>Edit Akun</h3><input type="hidden" id="akun-id"><div class="form-group"><label>Nama</label><input type="text" id="akun-nama"></div><div class="flex-gap"><div class="form-group"><label>Nickname</label><input type="text" id="akun-nick"></div><div class="form-group"><label>Dusun</label><select id="akun-dusun"><option value="KEMAMBANG">KEMAMBANG</option><option value="SUMOTUWO">SUMOTUWO</option><option value="LUWUNG">LUWUNG</option><option value="WATESROWO">WATESROWO</option><option value="WONOKITRI WETAN">WONOKITRI WETAN</option><option value="WONOKITRI KULON">WONOKITRI KULON</option></select></div></div><div class="flex-gap"><div class="form-group"><label>Jenis Akun</label><select id="akun-jenis"><option value="Amil">Amil</option><option value="Pengurus">Pengurus</option></select></div><div class="form-group"><label>Status</label><select id="akun-status"><option value="Active">Active</option><option value="Pending">Pending</option></select></div></div><div class="form-group"><label>Password Baru</label><input type="text" id="akun-pass"></div><button class="btn-submit" style="background:var(--success);" onclick="saveCrudAkun()">Update Akun</button><button class="btn-submit btn-danger" onclick="deleteCrudAkun()">Hapus Akun</button><button class="btn-submit btn-secondary" onclick="document.getElementById('crudModalAkun').style.display='none'">Batal</button></div></div>
 
-  <div id="modalPengumuman" class="modal-overlay">
-    <div class="modal-box">
-      <h3>Buat Pengumuman</h3>
-      <div class="form-group"><label>Pesan Singkat (Running Text)</label><input type="text" id="input-pengumuman" maxlength="150" placeholder="Ketik pengumuman di sini..."></div>
-      <div class="form-group"><label>Batas Waktu</label><input type="datetime-local" id="input-batas-waktu"></div>
-      <button class="btn-submit" style="background:var(--warning);" onclick="kirimPengumuman()">Sebarkan</button>
-      <button class="btn-submit btn-secondary" onclick="document.getElementById('modalPengumuman').style.display='none'">Batal</button>
-    </div>
-  </div>
-
   <script>
     const API_URL = "https://script.google.com/macros/s/AKfycbxJMDKRdttXGU-a7XoXSRPoTSkU3Htpnx8goOAF7IpGvxMm7msaVj3XSzJjLq1JWLhb/exec";
     
@@ -198,13 +258,98 @@
       return `<span class="badge" style="background:#e2e8f0; color:#475569;">${kat}</span>`;
     }
 
+    // --- NAVIGASI PUBLIC SCROLL ---
+    function navigasiKe(target) {
+      if (!document.getElementById('page-home').classList.contains('active')) {
+        pindahHalaman('home');
+        setTimeout(() => {
+          let el = document.getElementById(target);
+          if(el) window.scrollTo({ top: el.offsetTop - 70, behavior: 'smooth' });
+        }, 100);
+      } else {
+        let el = document.getElementById(target);
+        if(el) window.scrollTo({ top: el.offsetTop - 70, behavior: 'smooth' });
+      }
+      const navMenu = document.getElementById('nav-menu');
+      const menuToggle = document.getElementById('menu-toggle');
+      if(navMenu.classList.contains('active')) {
+        navMenu.classList.remove('active'); menuToggle.classList.remove('active');
+      }
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       const menuToggle = document.getElementById('menu-toggle'); const navMenu = document.getElementById('nav-menu');
       if(menuToggle && navMenu) {
         menuToggle.addEventListener('click', () => { menuToggle.classList.toggle('active'); navMenu.classList.toggle('active'); });
-        document.querySelectorAll('.nav-menu .nav-item').forEach(item => { item.addEventListener('click', () => { if(navMenu.classList.contains('active')) { menuToggle.classList.remove('active'); navMenu.classList.remove('active'); } }); });
       }
     });
+
+    // --- FITUR SEMUA DATA (PUBLIC) ---
+    async function fetchPublicData() {
+      // Ambil data Muzakki
+      let resMuz = await kirimAPI({ action: "getLaporan" });
+      if(resMuz.sukses) renderPublicMuzakki(resMuz.data);
+      // Ambil data Mustahiq
+      let resMus = await kirimAPI({ action: "getMasterMustahiq" });
+      if(resMus.sukses) renderPublicMustahiq(resMus.data);
+      // Ambil data Amil
+      let resAmil = await kirimAPI({ action: "getPublicAkun" });
+      if(resAmil.sukses) renderPublicAmil(resAmil.data);
+    }
+
+    function switchPublicTab(tab) {
+      document.getElementById('tab-muzakki').classList.remove('active');
+      document.getElementById('tab-mustahiq').classList.remove('active');
+      document.getElementById('tab-amil').classList.remove('active');
+      document.getElementById('public-list-muzakki').style.display = 'none';
+      document.getElementById('public-list-mustahiq').style.display = 'none';
+      document.getElementById('public-list-amil').style.display = 'none';
+      
+      document.getElementById(`tab-${tab}`).classList.add('active');
+      document.getElementById(`public-list-${tab}`).style.display = 'block';
+    }
+
+    function renderPublicMuzakki(data) {
+      let html = ""; let cleanData = data.filter(d => d.status !== 'Error');
+      cleanData.forEach(d => {
+        let formatRp = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(parseFloat(d.nominal) || 0);
+        html += `<div class="list-item" style="border-left: 6px solid var(--dark);">
+                  <div style="font-weight: 700; font-size: 1.1rem; color: var(--dark); margin-bottom: 4px;">${d.nama}</div>
+                  <div style="font-weight: 700; font-size: 1.05rem; color: #d97706; margin-bottom: 5px;">${formatRp}</div>
+                  <div style="font-size: 0.85rem; color: #64748b;">Dusun ${d.dusun} | ${d.rw}/RT ${d.rt}</div>
+                 </div>`;
+      }); 
+      document.getElementById('public-list-muzakki').innerHTML = html || "<i>Belum ada data.</i>";
+    }
+
+    function renderPublicMustahiq(data) {
+      let html = ""; data.forEach(d => { 
+        let isDone = (d.status.toLowerCase() === 'tersalurkan'); let cName = getCleanName(d.nama); 
+        html += `<div class="list-item" style="border-left: 6px solid ${isDone ? 'var(--success)' : '#cbd5e1'};">
+                  <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                    <div><div style="font-weight:700; font-size:1.1rem; margin-bottom: 4px;">${cName}</div><div>${getCatBadge(d.kategori)}</div></div>
+                    ${isDone ? '<span class="badge badge-success">Tersalurkan</span>' : '<span class="badge" style="background:#e2e8f0; color:#475569;">Belum Salur</span>'}
+                  </div>
+                 </div>`; 
+      }); 
+      document.getElementById('public-list-mustahiq').innerHTML = html || "<i>Belum ada data.</i>";
+    }
+
+    function renderPublicAmil(data) {
+      let html = ""; data.forEach(d => {
+        html += `<div class="list-item" style="border-left: 6px solid #0284c7;">
+                  <div style="font-weight: 700; font-size: 1.1rem; color: var(--dark); margin-bottom: 4px;">${d.nama}</div>
+                  <div style="font-size: 0.85rem; color: #64748b;">Dusun ${d.dusun}</div>
+                  <div style="margin-top:5px;"><span class="badge badge-info">${d.jenis}</span></div>
+                 </div>`;
+      });
+      document.getElementById('public-list-amil').innerHTML = html || "<i>Belum ada data.</i>";
+    }
+
+
+    // ===============================================
+    // DASHBOARD CORE SYSTEM (TIDAK DISENTUH)
+    // ===============================================
 
     function checkSession() {
       let session = localStorage.getItem('lazisnuSession'); if (!session) return false;
@@ -225,40 +370,49 @@
     window.addEventListener('hashchange', handleHashChange);
     function handleHashChange() {
       let hash = window.location.hash.replace('#', '') || 'home';
+
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       let targetPage = document.getElementById('page-' + hash);
       if(targetPage) {
         targetPage.classList.add('active');
-        document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-        let navBtn = document.querySelector(`.nav-item[onclick*="${hash}"]`); if(navBtn) navBtn.classList.add('active');
         
+        // Atur Navbar Public vs Dashboard
+        if(hash === 'home' || hash === 'public-data') {
+          document.querySelectorAll('.nav-public').forEach(el => el.style.display = 'inline-block');
+        } else {
+          document.querySelectorAll('.nav-public').forEach(el => el.style.display = 'none');
+        }
+
         if(pollingInterval) clearInterval(pollingInterval);
         
-        // ZAKAT MAL
+        if(hash === 'public-data') { fetchPublicData(); }
+        
         if(hash === 'laporan') { fetchLaporan(); pollingInterval = setInterval(()=>fetchLaporan(true), 15000); }
         if(hash === 'progress') { fetchProgress(); pollingInterval = setInterval(()=>fetchProgress(true), 15000); }
         if(hash === 'masalah') { fetchMasalah(); pollingInterval = setInterval(()=>fetchMasalah(true), 15000); }
-        
-        // DISTRIBUSI & MUSTAHIQ
         if(hash === 'laporan-distribusi') { fetchLaporanDistribusi(); pollingInterval = setInterval(()=>fetchLaporanDistribusi(true), 15000); }
         if(hash === 'kelola-mustahiq' && currentUser?.role === 'Pengurus') { fetchKelolaMustahiq(); pollingInterval = setInterval(()=>fetchKelolaMustahiq(true), 15000); }
         if(hash === 'kelola-akun' && currentUser?.role === 'Pengurus') { fetchKelolaAkun(); pollingInterval = setInterval(()=>fetchKelolaAkun(true), 15000); }
         if(hash === 'kelola-pengajuan' && currentUser?.role === 'Pengurus') { fetchPengajuan(); pollingInterval = setInterval(()=>fetchPengajuan(true), 15000); }
         
-        // FORMS PREFILL
         if(hash === 'muzakki' && currentUser) { document.getElementById('muz-dusun').value = currentUser.dusun; document.getElementById('muz-amil').value = currentUser.nama; }
         if(hash === 'distribusi' && currentUser) { document.getElementById('dist-dusun').value = currentUser.dusun; document.getElementById('dist-amil').value = currentUser.nama; }
         if(hash === 'ajukan-mustahiq' && currentUser) { document.getElementById('aju-dusun').value = currentUser.dusun; document.getElementById('aju-amil').value = currentUser.nama; fetchKelolaMustahiq(true); toggleAjuMode(); }
-      } else { document.getElementById('page-home').classList.add('active'); if(pollingInterval) clearInterval(pollingInterval); }
-      window.scrollTo(0,0);
+      } else { 
+        document.getElementById('page-home').classList.add('active'); 
+        document.querySelectorAll('.nav-public').forEach(el => el.style.display = 'inline-block');
+        if(pollingInterval) clearInterval(pollingInterval); 
+      }
+      // Jangan paksa scroll top kalau lagi navigasi antar section Home
+      if(!window.location.hash.includes('sect-')) window.scrollTo(0,0);
     }
+    
     function pindahHalaman(id) { window.location.hash = id; }
 
     async function kirimAPI(data) { try { let response = await fetch(API_URL, { method: 'POST', body: JSON.stringify(data) }); return await response.json(); } catch (e) { return { sukses: false, pesan: "Server sibuk." }; } }
     function showModal(msg, isLoading = false) { document.getElementById('modalMsg').innerText = msg; document.getElementById('btn-modal-ok').style.display = isLoading ? 'none' : 'block'; document.getElementById('customModal').style.display = 'flex'; }
     function closeModal() { document.getElementById('customModal').style.display = 'none'; }
 
-    // --- AUTHENTICATION ---
     async function prosesLoginWeb() {
       let n = document.getElementById('l-nick').value; let p = document.getElementById('l-pass').value; if(!n || !p) return showModal("Isi data login!");
       showModal("⏳ Sedang login...", true); let res = await kirimAPI({ action: "login", nickname: n, password: p });
@@ -283,7 +437,6 @@
       menu.innerHTML = html;
     }
 
-    // --- ZAKAT MAL ---
     async function saveMuz() {
       let data = { dusun: document.getElementById('muz-dusun').value, amil: document.getElementById('muz-amil').value, rw: document.getElementById('muz-rw').value, rt: document.getElementById('muz-rt').value, nama: document.getElementById('muz-nama').value, nominal: document.getElementById('muz-nom').value };
       if(!data.nama || !data.rt || !data.nominal) return showModal("⚠️ Lengkapi RT, Nama, dan Nominal!"); showModal("⏳ Sedang Menyimpan...", true); let res = await kirimAPI({ action: "simpanMuzakki", obj: data });
@@ -294,26 +447,23 @@
       if(!isSilent) document.getElementById('list-laporan').innerHTML = "<i>Memuat data...</i>"; 
       let res = await kirimAPI({ action: "getLaporan" });
       if(res.sukses) { dataLaporan = res.data; filterLaporan(); } 
-      else if(!isSilent) { document.getElementById('list-laporan').innerHTML = "<b style='color:red;'>Gagal memuat.</b>"; }
     }
     function renderLaporan(data) {
       let html = ""; let sorted = [...data].sort((a,b) => (b.status === 'Error') - (a.status === 'Error'));
       sorted.forEach(d => {
         let isErr = (d.status === 'Error'); let formatRp = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(parseFloat(d.nominal) || 0);
         let actionBtn = "";
-        if (currentUser.role === 'Pengurus') { actionBtn = `<div style="margin-top:10px;"><button class="btn-submit" style="width:auto; padding:6px 14px; margin-right:8px; background:#0284c7; font-size:0.85rem;" onclick='openModalMuzakki(${d.id})'>Edit Data</button><button class="btn-submit btn-danger" style="width:auto; padding:6px 14px; font-size:0.85rem;" onclick="deleteMuzakki(${d.id}, '${d.nama}')">Hapus</button></div>`; } else { if (isErr) { actionBtn = `<div style="margin-top:10px; padding:10px; background:#fee2e2; border:1px solid #fca5a5; border-radius:6px; font-size:0.85rem; color:#b91c1c;"><b>Pesan:</b> ${d.pesan}</div>`; } else { actionBtn = `<button style="margin-top: 10px; padding: 5px 10px; background: #f8f9fa; border: 1px solid #94a3b8; border-radius: 4px; font-family: 'Montserrat'; cursor: pointer; color: #0f172a; font-size: 0.85rem;" onclick="kirimLaporanSalah(${d.id}, '${d.nama}')">Lapor Salah Input</button>`; } }
+        if (currentUser.role === 'Pengurus') { actionBtn = `<div style="margin-top:10px;"><button class="btn-submit" style="width:auto; padding:6px 14px; margin-right:8px; background:#0284c7; font-size:0.85rem;" onclick='openModalMuzakki(${d.id})'>Edit Data</button><button class="btn-submit btn-danger" style="width:auto; padding:6px 14px; font-size:0.85rem;" onclick="deleteMuzakki(${d.id}, '${d.nama}')">Hapus</button></div>`; } else { if (isErr) { actionBtn = `<div style="margin-top:10px; padding:10px; background:#fee2e2; border:1px solid #fca5a5; border-radius:6px; font-size:0.85rem; color:#b91c1c;"><b>Pesan:</b> ${d.pesan}</div>`; } else { actionBtn = `<button style="margin-top: 10px; padding: 5px 10px; background: #f8f9fa; border: 1px solid #94a3b8; border-radius: 4px; font-family: 'Plus Jakarta Sans'; cursor: pointer; color: #0f172a; font-size: 0.85rem;" onclick="kirimLaporanSalah(${d.id}, '${d.nama}')">Lapor Salah Input</button>`; } }
         html += `<div class="list-item" style="border-left: 6px solid ${isErr ? 'var(--danger)' : 'var(--dark)'}; background: ${isErr ? '#fef2f2' : 'var(--bg-card)'};"><div style="font-weight: 700; font-size: 1.15rem; color: ${isErr ? 'var(--danger)' : 'var(--dark)'}; margin-bottom: 4px;">${d.nama} ${isErr ? '<span style="font-size:0.8rem;">⚠️ Perbaikan</span>' : ''}</div><div style="font-weight: 700; font-size: 1.05rem; color: #d97706; margin-bottom: 5px;">${formatRp}</div><div style="font-size: 0.85rem; color: #64748b; margin-bottom: 5px;">Dusun ${d.dusun} | ${d.rw}/RT ${d.rt} | Amil: ${d.amil}</div>${actionBtn}</div>`;
       }); 
       document.getElementById('list-laporan').innerHTML = html || "<i>Belum ada data Muzakki.</i>";
     }
     function filterLaporan() { let s = document.getElementById('search-laporan').value.toLowerCase(); renderLaporan(dataLaporan.filter(d => d.nama.toLowerCase().includes(s) || d.dusun.toLowerCase().includes(s))); }
     
-    // LAPOR SALAH
     async function kirimLaporanSalah(id, nama) { let msg = prompt(`Detail kesalahan untuk: ${nama}`); if (!msg) return; showModal("⏳ Mengupdate...", true); let res = await kirimAPI({ action: "laporSalah", obj: { rowId: id, namaMuzakki: nama, dusun: currentUser.dusun, amil: currentUser.nama, pesan: msg } }); if (res.sukses) { showModal("✅ Dilaporkan.", false); fetchLaporan(); } }
     async function fetchMasalah(isSilent = false) { if(!isSilent) document.getElementById('list-masalah').innerHTML = "<i>Memuat...</i>"; let res = await kirimAPI({ action: "getLaporanMasalah" }); if(res.sukses) { let html = ""; res.data.forEach(d => { let badge = d.status === 'Selesai' ? `<span class="badge badge-success">✓ Selesai oleh ${d.penyelesai}</span>` : `<span class="badge badge-danger">! Pending</span>`; let btn = (d.status !== 'Selesai' && currentUser.role === 'Pengurus') ? `<button class="btn-submit" style="background:#16a34a; padding:6px 14px; width:auto; font-size:0.85rem; margin-top:10px;" onclick="selesaikanMasalah(${d.id})">Tandai Selesai</button>` : ''; html += `<div class="list-item" style="border-left: 6px solid ${d.status==='Selesai'?'#16a34a':'var(--danger)'};"><div style="display:flex; justify-content:space-between; font-weight:700; font-size:1.1rem; margin-bottom:4px;"><span>${d.muzakki}</span> ${badge}</div><div style="font-size:0.85rem; color:#64748b; margin-bottom:8px;">Amil: ${d.amil} (${d.dusun}) | Waktu: ${d.tanggal}</div><div style="padding:10px; background:#f1f5f9; border-radius:6px; font-size:0.9rem; color:#0f172a;"><b>Pesan:</b> ${d.pesan}</div>${btn}</div>`; }); document.getElementById('list-masalah').innerHTML = html || "<i>Aman, tidak ada masalah.</i>"; } }
     async function selesaikanMasalah(id) { showModal("⏳ Proses...", true); let res = await kirimAPI({ action: "selesaikanMasalah", obj: {id: id, pengurus: currentUser.nama} }); if(res.sukses){ showModal("✅ Selesai", false); fetchMasalah(); } }
 
-    // CRUD ZAKAT MAL
     function openModalMuzakki(id) { let d = dataLaporan.find(x => x.id === id); if(!d) return; document.getElementById('muz-edit-id').value = d.id; document.getElementById('muz-edit-dusun').value = d.dusun.toUpperCase(); document.getElementById('muz-edit-rw').value = d.rw; document.getElementById('muz-edit-rt').value = d.rt; document.getElementById('muz-edit-nama').value = d.nama; document.getElementById('muz-edit-nom').value = d.nominal; document.getElementById('crudModalMuzakki').style.display = "flex"; }
     async function saveCrudMuzakki() { let obj = { id: document.getElementById('muz-edit-id').value, dusun: document.getElementById('muz-edit-dusun').value, rw: document.getElementById('muz-edit-rw').value, rt: document.getElementById('muz-edit-rt').value, nama: document.getElementById('muz-edit-nama').value, nominal: document.getElementById('muz-edit-nom').value }; document.getElementById('crudModalMuzakki').style.display = "none"; showModal("⏳ Update data...", true); let res = await kirimAPI({ action: "editMuzakki", obj: obj }); if(res.sukses) { showModal("✅ Data Update!", false); fetchLaporan(); } }
     async function deleteMuzakki(id, nama) { if(!confirm(`Hapus permanen Zakat dari: ${nama}?`)) return; showModal("⏳ Menghapus...", true); let res = await kirimAPI({ action: "hapusMuzakki", id: id }); if(res.sukses) { showModal("✅ Dihapus!", false); fetchLaporan(); } }
@@ -323,7 +473,6 @@
       if(res.sukses) { let html = ""; let sortedData = [...res.data].sort((a, b) => (b.dusun.toUpperCase().includes("TOTAL")) - (a.dusun.toUpperCase().includes("TOTAL"))); sortedData.forEach(d => { let formatRp = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(parseFloat(d.totalNominal) || 0); let title = d.dusun.toUpperCase().includes("TOTAL") ? "TOTAL DESA SUMOKEMBANGSRI" : `Dusun ${d.dusun}`; let w = d.progress.toString().replace(',', '.'); html += `<div class="list-item" style="border-left:6px solid ${d.dusun.toUpperCase().includes("TOTAL")?'var(--dark)':'var(--accent)'};"><div style="font-weight:700; font-size:1.1rem;">${title}</div><div style="display:flex; justify-content:space-between; margin-top:5px; font-size:0.9rem;"><span>Total: <b>${d.muzakki} Orang</b></span><span style="font-weight:700;">${formatRp}</span></div><div class="prog-bar-bg"><div class="prog-bar-fill" style="width:${w};"></div></div><div style="display:flex; justify-content:space-between; margin-top:5px; font-size:0.8rem; color:#64748b;"><span>Progress: ${d.progress}</span><span style="background:var(--accent); color:var(--dark); padding:2px 6px; border-radius:4px; font-weight:600;">Growth: ${d.growth}</span></div></div>`; }); document.getElementById('list-progress').innerHTML = html; }
     }
 
-    // --- DISTRIBUSI & MUSTAHIQ ---
     async function kompresFoto(f) { return new Promise((r) => { let reader = new FileReader(); reader.readAsDataURL(f); reader.onload = function(e) { let img = new Image(); img.src = e.target.result; img.onload = function() { let canvas = document.createElement('canvas'); let scale = Math.min(1000/img.width, 1); canvas.width = img.width*scale; canvas.height = img.height*scale; let ctx = canvas.getContext('2d'); ctx.drawImage(img, 0, 0, canvas.width, canvas.height); r({ base64: canvas.toDataURL('image/jpeg',0.7).split(',')[1], mime: 'image/jpeg', name: f.name }); } } }); }
     async function saveDistribusi() { let d = { dusun: document.getElementById('dist-dusun').value, amil: document.getElementById('dist-amil').value, rw: document.getElementById('dist-rw').value, rt: document.getElementById('dist-rt').value, kategori: document.getElementById('dist-kategori').value, nama: document.getElementById('dist-nama').value }; let fi = document.getElementById('dist-foto'); if(!d.rt || !d.nama || fi.files.length === 0) return showModal("⚠️ Lengkapi RT, Nama, & Foto!"); showModal("⏳ Upload & Simpan...", true); let c = await kompresFoto(fi.files[0]); d.fotoBase64 = c.base64; d.fotoMime = c.mime; d.fotoName = c.name; let res = await kirimAPI({ action: "simpanDistribusi", obj: d }); if(res.sukses) { showModal("✅ Tersalurkan!", false); document.getElementById('dist-rt').value = ''; document.getElementById('dist-nama').value = ''; document.getElementById('dist-foto').value = ''; } else { showModal("❌ Gagal."); } }
 
@@ -334,7 +483,6 @@
       let resD = await kirimAPI({ action: "getMasterMustahiq" }); if(resD.sukses) { masterMustahiqData = resD.data; filterDistribusi(); }
     }
     
-    // RENDER DISTRIBUSI & HISTORI
     function renderLaporanDistribusi(data) { let html = ""; data.forEach(d => { let isDone = (d.status.toLowerCase() === 'tersalurkan'); let cName = getCleanName(d.nama); let labelNew = d.label === 'NEW' ? `<span class="badge-new">NEW !</span>` : ""; let histori = d.histori ? `<span class="histori-text">Riwayat: ${d.histori}</span>` : ""; html += `<div class="list-item" style="border-left: 6px solid ${isDone ? 'var(--success)' : '#cbd5e1'};"><div style="display:flex; justify-content:space-between; align-items:flex-start;"><div><div style="font-weight:700; font-size:1.15rem; margin-bottom: 4px;">${labelNew}${cName}</div><div>${getCatBadge(d.kategori)}</div></div>${isDone ? '<span class="badge badge-success">✓ Tersalurkan</span>' : '<span class="badge badge-danger">✗ Belum</span>'}</div><div style="font-size:0.85rem; color:#64748b; margin-top:8px;">Dusun ${d.dusun} | ${d.rw} / RT ${d.rt}</div>${histori}${isDone ? `<div style="font-size:0.8rem; color:#94a3b8; margin-top:6px;">Oleh: ${d.amil} | ${d.timestamp}</div><a href="${d.foto}" target="_blank" style="display:inline-block; margin-top:8px; font-size:0.8rem; color:#0284c7; font-weight:bold; text-decoration:none;">Lihat Bukti Foto</a>` : ''}</div>`; }); document.getElementById('list-distribusi').innerHTML = html || "<i>Tidak ada data.</i>"; }
     function filterDistribusi() { let fD = document.getElementById('f-dusun').value, fS = document.getElementById('f-status').value, fK = document.getElementById('f-kat').value, fSrc = document.getElementById('f-search').value.toLowerCase(); renderLaporanDistribusi(masterMustahiqData.filter(d => (fD==='ALL'||d.dusun.toUpperCase()===fD) && (fS==='ALL'||d.status===fS) && (fK==='ALL'||d.kategori===fK) && (d.nama.toLowerCase().includes(fSrc)||d.amil.toLowerCase().includes(fSrc)))); }
 
@@ -346,23 +494,15 @@
     async function saveCrudMustahiq() { let o = { id: document.getElementById('crud-id').value, dusun: document.getElementById('crud-dusun').value, rw: document.getElementById('crud-rw').value, rt: document.getElementById('crud-rt').value, kategori: document.getElementById('crud-kategori').value, nama: document.getElementById('crud-nama').value }; if(!o.rt || !o.nama) return alert("Isi RT & Nama!"); document.getElementById('crudModal').style.display = "none"; showModal("⏳ Simpan...", true); let res = await kirimAPI({ action: o.id?"editMustahiq":"tambahMustahiq", obj: o }); if(res.sukses) { showModal("✅ Sukses!", false); fetchKelolaMustahiq(); } }
     async function deleteCrudMustahiq() { if(!confirm("HAPUS data ini permanen?")) return; document.getElementById('crudModal').style.display = "none"; showModal("⏳ Menghapus...", true); let res = await kirimAPI({ action: "hapusMustahiq", id: document.getElementById('crud-id').value }); if(res.sukses) { showModal("✅ Dihapus!", false); fetchKelolaMustahiq(); } }
 
-    // --- PENGAJUAN (NEW & EDIT) ---
     function toggleAjuMode() {
-      let tipe = document.getElementById('aju-tipe').value;
-      let box = document.getElementById('box-cari-mustahiq');
+      let tipe = document.getElementById('aju-tipe').value; let box = document.getElementById('box-cari-mustahiq');
       if(tipe === 'EDIT') {
-        box.style.display = 'block';
-        let opt = '<option value="">-- Pilih Nama Lama --</option>';
+        box.style.display = 'block'; let opt = '<option value="">-- Pilih Nama Lama --</option>';
         masterMustahiqData.filter(d=>d.dusun.toUpperCase() === currentUser.dusun.toUpperCase()).forEach(m => opt += `<option value="${m.id}">${getCleanName(m.nama)} (RT ${m.rt} - ${m.kategori})</option>`);
         document.getElementById('aju-pilih-nama').innerHTML = opt;
-      } else {
-        box.style.display = 'none'; document.getElementById('aju-nama').value = ""; document.getElementById('aju-rt').value = "";
-      }
+      } else { box.style.display = 'none'; document.getElementById('aju-nama').value = ""; document.getElementById('aju-rt').value = ""; }
     }
-    function isiDataOtomatis() {
-      let id = document.getElementById('aju-pilih-nama').value; let d = masterMustahiqData.find(x => x.id == id);
-      if(d) { document.getElementById('aju-nama').value = getCleanName(d.nama); document.getElementById('aju-rw').value = d.rw; document.getElementById('aju-rt').value = d.rt; document.getElementById('aju-kat').value = d.kategori; }
-    }
+    function isiDataOtomatis() { let id = document.getElementById('aju-pilih-nama').value; let d = masterMustahiqData.find(x => x.id == id); if(d) { document.getElementById('aju-nama').value = getCleanName(d.nama); document.getElementById('aju-rw').value = d.rw; document.getElementById('aju-rt').value = d.rt; document.getElementById('aju-kat').value = d.kategori; } }
     async function ajukanMustahiq() {
       let o = { tipe: document.getElementById('aju-tipe').value, dusun: document.getElementById('aju-dusun').value, amil: document.getElementById('aju-amil').value, rw: document.getElementById('aju-rw').value, rt: document.getElementById('aju-rt').value, kategori: document.getElementById('aju-kat').value, nama: document.getElementById('aju-nama').value, idMaster: document.getElementById('aju-pilih-nama').value };
       if(!o.rt || !o.nama) return showModal("⚠️ Isi RT & Nama!"); showModal("⏳ Kirim Pengajuan...", true); let res = await kirimAPI({ action: "ajukanMustahiq", obj: o });
@@ -372,7 +512,6 @@
     async function fetchPengajuan(isSilent = false) { if(!isSilent) document.getElementById('list-pengajuan').innerHTML = "<i>Memuat...</i>"; let res = await kirimAPI({ action: "getPengajuan" }); if(res.sukses) { let html = ""; res.data.forEach(d => { html += `<div class="list-item" style="border-left:6px solid #d97706;"><div style="font-weight:700; font-size:1.1rem; margin-bottom:4px;">[${d.tipe}] ${d.nama} ${getCatBadge(d.kategori)}</div><div style="font-size:0.85rem; color:#64748b; margin-bottom:8px;">Dusun ${d.dusun} | ${d.rw} / RT ${d.rt}<br>Oleh: ${d.amil} (${d.timestamp})</div><button class="btn-submit" style="width:auto; padding:6px 14px; background:var(--success); margin-right:8px;" onclick="accPengajuan(${d.id}, 'ACC')">Terima (ACC)</button><button class="btn-submit btn-danger" style="width:auto; padding:6px 14px;" onclick="accPengajuan(${d.id}, 'Tolak')">Tolak</button></div>`; }); document.getElementById('list-pengajuan').innerHTML = html || "<i>Tidak ada pengajuan.</i>"; } }
     async function accPengajuan(id, action) { if(!confirm(`Yakin ingin ${action} pengajuan ini?`)) return; showModal(`⏳ Sedang ${action}...`, true); let res = await kirimAPI({ action: "prosesPengajuan", obj: {id: id, action: action} }); if(res.sukses) { showModal("✅ Selesai!", false); fetchPengajuan(); } }
 
-    // --- KELOLA AKUN ---
     async function fetchKelolaAkun(isSilent = false) { if(!isSilent) document.getElementById('list-kelola-akun').innerHTML = "<i>Memuat...</i>"; let res = await kirimAPI({ action: "getSemuaAkun" }); if(res.sukses) { masterAkunData = res.data; filterKelolaAkun(); } }
     function renderKelolaAkun(data) { let html = ""; data.forEach(d => { let b = d.status==='Active'?`<span class="badge badge-success">Active</span>`:`<span class="badge badge-danger">Pending</span>`; let sOnline = d.isOnline ? `<span style="color:#16a34a; font-weight:bold; font-size:0.8rem; margin-left:10px;">🟢 Online</span>` : `<span style="color:#94a3b8; font-size:0.8rem; margin-left:10px;">⚫ Offline</span>`; let btnPaksa = d.isOnline ? `<button class="btn-submit btn-danger" style="width:auto; padding:6px 12px; margin-top:8px; font-size:0.8rem;" onclick="paksaLogoutUser(${d.id}, '${d.nama}')">Force Logout</button>` : ''; html += `<div class="list-item" style="border-left:6px solid #0284c7; display:flex; justify-content:space-between; align-items:flex-start;"><div><div style="font-weight:700; font-size: 1.1rem; margin-bottom: 4px;">${d.nama} (${d.jenis})</div><div style="font-size:0.85rem; color:#64748b;">${d.nickname} | ${d.dusun} <br><div style="margin-top:5px;">${b} ${sOnline}</div></div>${btnPaksa}</div><button class="btn-submit" style="width:auto; padding:6px 14px; background:#0284c7; margin:0;" onclick='openModalAkun(${d.id})'>Kelola</button></div>`; }); document.getElementById('list-kelola-akun').innerHTML = html || "<i>Kosong.</i>"; }
     function filterKelolaAkun() { let s = document.getElementById('search-akun').value.toLowerCase(); renderKelolaAkun(masterAkunData.filter(d => d.nama.toLowerCase().includes(s) || d.dusun.toLowerCase().includes(s) || d.nickname.toLowerCase().includes(s))); }
@@ -382,7 +521,6 @@
     async function deleteCrudAkun() { if(!confirm("Yakin HAPUS Akun ini?")) return; document.getElementById('crudModalAkun').style.display = "none"; showModal("⏳ Menghapus...", true); let res = await kirimAPI({ action: "hapusAkun", id: document.getElementById('akun-id').value }); if(res.sukses) { showModal("✅ Dihapus!", false); fetchKelolaAkun(); } }
     async function paksaLogoutUser(id, nama) { if(!confirm(`Keluarkan ${nama} dari sistem?`)) return; showModal("⏳ Proses...", true); let res = await kirimAPI({action: "paksaLogout", id: id}); if(res.sukses) { showModal("✅ Dikeluarkan!", false); fetchKelolaAkun(); } }
 
-    // --- PENGUMUMAN ---
     async function fetchPengumuman() {
       let res = await kirimAPI({ action: "getPengumuman" }); let banner = document.getElementById('banner-pengumuman');
       if (res.sukses && res.data) { document.getElementById('teks-pengumuman').innerText = "📢 PENGUMUMAN: " + res.data; banner.style.display = "block"; } else { banner.style.display = "none"; }
