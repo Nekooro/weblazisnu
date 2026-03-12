@@ -25,8 +25,9 @@
       .nav-menu { position: static; width: auto; height: auto; background: none; flex-direction: row; align-items: center; gap: 15px; padding: 0; right: 0; }
       .nav-menu .nav-item { padding: 0; width: auto; border-bottom: none; color: #cbd5e1; font-size: 0.8rem; }
       .nav-menu .nav-item:hover, .nav-menu .nav-item.active { color: #fff; }
-      .btn-logout { background: var(--danger); color: #fff; padding: 8px 16px; border-radius: 20px; border: none; font-weight: 700; cursor: pointer; font-family: 'Montserrat'; font-size: 0.85rem; display: none; }
-      .btn-logout:hover { background: #dc2626; }
+      .nav-item#nav-login { background: var(--accent) !important; color: var(--dark) !important; padding: 8px 18px !important; border-radius: 6px; }
+      .nav-item#nav-logout { background: #ef4444 !important; color: #fff !important; padding: 8px 18px !important; border-radius: 6px; }
+      .nav-item#nav-logout:hover { background: #dc2626 !important; }
     }
 
     .container { max-width: 850px; margin: 20px auto; padding: 0 15px; }
@@ -82,14 +83,11 @@
     <div class="logo">LAZISNU<br>SUMOKEMBANGSRI</div>
     <button class="menu-toggle" id="menu-toggle"><span></span><span></span><span></span></button>
     <div class="nav-menu" id="nav-menu">
-      <span class="nav-item active" onclick="pindahHalaman('home')">HOME</span>
-      <span class="nav-item" onclick="pindahHalaman('program')">PROGRAM BERJALAN</span>
-      <span class="nav-item" onclick="pindahHalaman('about')">ABOUT US</span>
-      <span class="nav-item" onclick="pindahHalaman('struktur')">STRUKTUR</span>
-      <span class="nav-item" onclick="pindahHalaman('laporan-publik')">LAPORAN</span>
-      <span class="nav-item" id="nav-login" onclick="pindahHalaman('login')">LOGIN</span>
+      <span class="nav-item" onclick="pindahHalaman('home')">HOME</span>
+      <span class="nav-item" onclick="pindahHalaman('dummy')">ABOUT US</span>
       <span class="nav-item" id="nav-dash" style="display:none;" onclick="pindahHalaman('dashboard')">DASHBOARD</span>
-      <button class="btn-logout" id="nav-logout" onclick="logout()">LOGOUT</button>
+      <span class="nav-item" id="nav-login" onclick="pindahHalaman('login')">LOGIN</span>
+      <span class="nav-item" id="nav-logout" style="display:none;" onclick="logout()">LOGOUT</span>
     </div>
   </nav>
 
@@ -98,40 +96,20 @@
     <div id="page-home" class="page active">
       <div class="card" style="text-align: center; border-top: 6px solid var(--dark);">
         <h2>SELAMAT DATANG DI PORTAL<br>LAZISNU SUMOKEMBANGSRI</h2>
-        <p style="color: #475569; font-weight: 600;">Aplikasi pengelolaan Zakat, Infaq, dan Sedekah.</p>
-        <button class="btn-submit" style="width: auto; padding: 10px 30px; margin-top: 15px;" onclick="pindahHalaman('login')">Masuk ke Sistem</button>
+        <p style="color: #475569; font-weight: 600;">Aplikasi pengelolaan Zakat, Infaq, dan Sedekah Ranting Sumokembangsri.</p>
+      </div>
+      <div class="grid-menu" style="grid-template-columns: 1fr;">
+        <div class="card" style="margin-bottom:0; border-left: 6px solid var(--dark); padding: 20px;"><h3 style="margin:0 0 5px 0;">🌾 Zakat Fitrah</h3><p style="margin:0; font-size:0.9rem;">Penerimaan dan penyaluran Zakat Fitrah.</p></div>
+        <div class="card" style="margin-bottom:0; border-left: 6px solid var(--dark); padding: 20px;"><h3 style="margin:0 0 5px 0;">💰 Zakat Mal</h3><p style="margin:0; font-size:0.9rem;">Pengelolaan Zakat Harta (Mal) dari para Muzakki.</p></div>
+        <div class="card" style="margin-bottom:0; border-left: 6px solid var(--dark); padding: 20px;"><h3 style="margin:0 0 5px 0;">🤲 Infaq Kaleng</h3><p style="margin:0; font-size:0.9rem;">Penyaluran dana Infaq dan Sedekah.</p></div>
       </div>
     </div>
 
-    <div id="page-program" class="page">
-      <div class="card">
-        <h2>Program Berjalan</h2>
-        <p>Informasi detail program LAZISNU sedang dalam pengembangan.</p>
-        <button class="btn-submit btn-secondary" onclick="pindahHalaman('home')">Kembali ke Home</button>
-      </div>
-    </div>
-
-    <div id="page-about" class="page">
-      <div class="card">
-        <h2>About Us</h2>
-        <p>Halaman ini berisi visi, misi, dan profil LAZISNU Ranting Sumokembangsri.</p>
-        <button class="btn-submit btn-secondary" onclick="pindahHalaman('home')">Kembali ke Home</button>
-      </div>
-    </div>
-
-    <div id="page-struktur" class="page">
-      <div class="card">
-        <h2>Struktur Organisasi</h2>
-        <p>Daftar susunan pengurus LAZISNU Ranting Sumokembangsri.</p>
-        <button class="btn-submit btn-secondary" onclick="pindahHalaman('home')">Kembali ke Home</button>
-      </div>
-    </div>
-
-    <div id="page-laporan-publik" class="page">
-      <div class="card">
-        <h2>Laporan LAZISNU</h2>
-        <p>Halaman transparansi data laporan publik sedang dipersiapkan.</p>
-        <button class="btn-submit btn-secondary" onclick="pindahHalaman('home')">Kembali ke Home</button>
+    <div id="page-dummy" class="page">
+      <div class="card" style="text-align: center;">
+        <h2>Mohon Maaf</h2>
+        <p>Halaman ini sedang dalam tahap pengembangan.</p>
+        <button class="btn-submit btn-secondary" style="width:auto; padding: 10px 20px;" onclick="pindahHalaman('home')">Kembali</button>
       </div>
     </div>
 
