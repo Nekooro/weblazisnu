@@ -8,7 +8,7 @@
   <style>
     :root { --bg-body: #FDFBF7; --bg-card: #FFFFFF; --accent: #B5C19E; --dark: #2E3524; --danger: #ef4444; --success: #16a34a; --warning: #d97706; }
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; } /* EFEK SCROLL HALUS */
+    html { scroll-behavior: smooth; }
     body { font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; background: var(--bg-body); color: var(--dark); overflow-x: hidden; }
     
     /* NAVBAR PUBLIC */
@@ -37,7 +37,7 @@
     .page.active { display: block; animation: fadeIn 0.3s ease; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     
-    /* SECTION HOME (LANDING PAGE) */
+    /* SECTION HOME */
     .home-section { padding: 40px 0; border-bottom: 1px solid #e2e8f0; }
     .home-section:last-child { border-bottom: none; }
     
@@ -70,7 +70,6 @@
     .badge-info { background: #e0f2fe; color: #0284c7; }
     .badge-warning { background: #fef3c7; color: var(--warning); }
     
-    /* BADGE NEW & HISTORI */
     .badge-new { background: var(--success); color: #fff; padding: 3px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 800; margin-right: 10px; display: inline-block; vertical-align: middle; }
     .histori-text { font-size: 0.8rem; color: #d97706; font-weight: 600; margin-top: 5px; display: block; }
 
@@ -78,13 +77,12 @@
     .modal-box { background: var(--bg-card); padding: 35px; border-radius: 15px; max-width: 450px; width: 90%; margin: auto; }
     .filter-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
 
-    /* RUNNING TEXT FULL WIDTH */
     .rt-container { width: 100vw; margin-left: calc(-50vw + 50%); background: #fef08a; color: #b45309; padding: 10px 0; overflow: hidden; white-space: nowrap; font-weight: 700; display: none; border-bottom: 2px solid #fde047; margin-bottom: 20px; }
     .rt-text { display: inline-block; padding-left: 100%; animation: marquee 18s linear infinite; }
     @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
 
     /* TAB PUBLIC DATA */
-    .tab-container { display: flex; gap: 10px; margin-bottom: 20px; }
+    .tab-container { display: flex; gap: 10px; margin-bottom: 15px; }
     .tab-btn { flex: 1; padding: 12px; text-align: center; background: #e2e8f0; border-radius: 8px; cursor: pointer; font-weight: 700; transition: 0.3s; font-size: 0.85rem; }
     .tab-btn.active { background: var(--dark); color: #fff; }
   </style>
@@ -127,9 +125,21 @@
       </div>
 
       <div id="sect-about" class="home-section">
-        <div class="card">
+        <div class="card" style="line-height: 1.6; color: #334155;">
           <h2>About Us</h2>
-          <p style="line-height: 1.6;">Lembaga Amil Zakat, Infaq dan Shadaqah Nahdlatul Ulama (LAZISNU) Ranting Sumokembangsri adalah lembaga resmi yang bertugas menghimpun dan menyalurkan dana umat secara transparan, profesional, dan tepat sasaran sesuai syariat Islam.</p>
+          <p style="font-weight: 800; font-size: 1.1rem; color: var(--dark); margin-bottom: 10px;">LAZISNU Sumokembangsri: Menjembatani Kebaikan, Memberdayakan Umat</p>
+          <p>LAZISNU (Lembaga Amil Zakat, Infaq, dan Shadaqah Nahdlatul Ulama) Sumokembangsri adalah lembaga filantropi Islam yang berdedikasi untuk menghimpun, mengelola, dan menyalurkan dana Zakat, Infaq, dan Shadaqah (ZIS) serta dana sosial keagamaan lainnya untuk kesejahteraan masyarakat.</p>
+          
+          <h3 style="margin-top: 20px; font-size: 1.1rem;">Jejak Langkah & Sejarah Kami</h3>
+          <p>Kepedulian terhadap kesejahteraan umat di wilayah Sumokembangsri bukanlah sebuah langkah baru. Akar pengabdian kami telah tertanam kuat sejak tahun 1999, di mana lembaga ini pertama kali dirintis dengan nama <b>LAZIS Sumokembangsri</b>. Bermula dari inisiatif lokal dan semangat gotong royong masyarakat, LAZIS Sumokembangsri bergerak secara mandiri selama dua dekade untuk membantu meringankan beban sesama dan menebar manfaat di lingkungan desa.</p>
+          <p>Seiring dengan niat untuk terus memperluas jangkauan manfaat dan meningkatkan profesionalisme tata kelola, sebuah langkah besar diambil. Pada periode tahun 2019 - 2020, sejalan dengan terbentuknya kepengurusan LAZISNU di wilayah ini, LAZIS Sumokembangsri secara resmi melebur dan bertransformasi menjadi <b>LAZISNU Sumokembangsri</b>.</p>
+          <p>Integrasi ini mengukuhkan posisi kami di bawah naungan jam'iyah Nahdlatul Ulama (NU). Dengan transformasi ini, sistem pengelolaan ZIS kami menjadi lebih terstruktur, transparan, dan terstandarisasi sesuai dengan pedoman operasional LAZISNU secara nasional, tanpa meninggalkan kearifan dan kedekatan lokal yang telah terbangun sejak 1999.</p>
+          
+          <h3 style="margin-top: 20px; font-size: 1.1rem;">Komitmen Kami</h3>
+          <p>Kini, dengan semangat baru sebagai LAZISNU Sumokembangsri, kami berkomitmen untuk tidak sekadar menjadi tempat penyaluran donasi, melainkan menjadi motor penggerak pemberdayaan umat. Melalui pilar-pilar program sosial, pendidikan, kesehatan, dan ekonomi, kami berusaha mewujudkan masyarakat Sumokembangsri yang lebih mandiri dan sejahtera.</p>
+          <p>Dengan memegang teguh prinsip <b>Amanah, Transparan, dan Profesional</b>, kami siap menjadi jembatan kebaikan yang menghubungkan para Muzakki (dermawan) dengan para Mustahiq (penerima manfaat).</p>
+          
+          <p style="font-weight: 800; margin-top: 15px; color: var(--dark); text-align: center; background: #f1f5f9; padding: 15px; border-radius: 8px;">Mari bersama LAZISNU Sumokembangsri, kita rajut kepedulian dan tebar keberkahan untuk sesama.</p>
         </div>
       </div>
 
@@ -158,21 +168,44 @@
           <div class="tab-btn" id="tab-amil" onclick="switchPublicTab('amil')">Data Amil</div>
         </div>
 
-        <div id="public-list-muzakki"><i>Memuat data...</i></div>
-        
-        <div id="public-list-mustahiq" style="display:none;"><i>Memuat data...</i></div>
+        <div class="form-group" style="margin-bottom: 20px;">
+          <input type="text" id="search-public" placeholder="Pencarian Nama / Dusun..." onkeyup="filterPublicData()">
+        </div>
 
+        <div id="public-list-muzakki"><i>Memuat data...</i></div>
+        <div id="public-list-mustahiq" style="display:none;"><i>Memuat data...</i></div>
         <div id="public-list-amil" style="display:none;"><i>Memuat data...</i></div>
       </div>
     </div>
 
-
     <div id="page-login" class="page">
-      <div id="box-login" class="card" style="max-width: 400px; margin: auto;">
-        <h2>Login Amil</h2>
-        <div class="form-group"><label>Nickname</label><input type="text" id="l-nick"></div>
-        <div class="form-group"><label>Password</label><input type="password" id="l-pass"></div>
-        <button class="btn-submit" onclick="prosesLoginWeb()">Masuk Dashboard</button>
+      <div class="card" style="max-width: 400px; margin: auto;">
+        <h2 id="auth-title">Login Amil</h2>
+        
+        <div id="form-login-sec">
+          <div class="form-group"><label>Nickname</label><input type="text" id="l-nick"></div>
+          <div class="form-group"><label>Password</label><input type="password" id="l-pass"></div>
+          <button class="btn-submit" onclick="prosesLoginWeb()">Masuk Dashboard</button>
+          <p style="text-align:center; font-size:0.85rem; margin-top:20px; font-weight:600;">Belum punya akun? <span style="color:#0284c7; cursor:pointer; font-weight:800;" onclick="toggleAuthMode('register')">Daftar Amil</span></p>
+        </div>
+
+        <div id="form-register-sec" style="display:none;">
+          <div class="form-group"><label>Nama Lengkap</label><input type="text" id="r-nama"></div>
+          <div class="form-group"><label>Nickname</label><input type="text" id="r-nick"></div>
+          <div class="form-group"><label>Dusun Tugas</label>
+            <select id="r-dusun">
+              <option value="KEMAMBANG">KEMAMBANG</option>
+              <option value="SUMOTUWO">SUMOTUWO</option>
+              <option value="LUWUNG">LUWUNG</option>
+              <option value="WATESROWO">WATESROWO</option>
+              <option value="WONOKITRI WETAN">WONOKITRI WETAN</option>
+              <option value="WONOKITRI KULON">WONOKITRI KULON</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Password</label><input type="password" id="r-pass"></div>
+          <button class="btn-submit" style="background:var(--success);" onclick="prosesDaftarWeb()">Kirim Pendaftaran</button>
+          <p style="text-align:center; font-size:0.85rem; margin-top:20px; font-weight:600;">Sudah punya akun? <span style="color:#0284c7; cursor:pointer; font-weight:800;" onclick="toggleAuthMode('login')">Login di sini</span></p>
+        </div>
       </div>
     </div>
 
@@ -185,52 +218,29 @@
     <div id="page-muzakki" class="page"><div class="card"><h3>Input Zakat Mal</h3><div class="flex-gap"><div class="form-group"><label>Dusun</label><input type="text" id="muz-dusun" readonly style="background:#f1f5f9;"></div><div class="form-group"><label>Nama Amil</label><input type="text" id="muz-amil" readonly style="background:#f1f5f9;"></div></div><div class="flex-gap"><div class="form-group"><label>RW</label><select id="muz-rw"><option value="RW 1">RW 1</option><option value="RW 2">RW 2</option><option value="RW 3">RW 3</option><option value="RW 4">RW 4</option><option value="RW 5">RW 5</option><option value="RW 6">RW 6</option></select></div><div class="form-group"><label>RT</label><input type="text" id="muz-rt" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></div></div><div class="form-group"><label>Nama Muzakki</label><input type="text" id="muz-nama"></div><div class="form-group"><label>Nominal</label><input type="text" id="muz-nom" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></div><button class="btn-submit" onclick="saveMuz()">Simpan Zakat Mal</button><button class="btn-submit btn-secondary" onclick="pindahHalaman('dashboard')">Kembali</button></div></div>
     <div id="page-laporan" class="page"><div class="card"><h2>Data Muzakki</h2><button class="btn-submit btn-secondary" style="margin-bottom:15px; padding: 10px;" onclick="pindahHalaman('dashboard')">Kembali</button><div class="form-group"><input type="text" id="search-laporan" placeholder="Cari Nama / Dusun..." onkeyup="filterLaporan()"></div><div id="list-laporan"><i>Memuat data...</i></div></div></div>
     <div id="page-progress" class="page"><div class="card"><h2>Progress Zakat Mal</h2><button class="btn-submit btn-secondary" style="margin-bottom:15px; padding: 10px;" onclick="pindahHalaman('dashboard')">Kembali</button><div id="list-progress"><i>Memuat progress...</i></div></div></div>
-    
     <div id="page-distribusi" class="page"><div class="card"><h3>Input Distribusi</h3><div class="flex-gap"><div class="form-group"><label>Dusun</label><input type="text" id="dist-dusun" readonly style="background:#f1f5f9;"></div><div class="form-group"><label>Nama Petugas</label><input type="text" id="dist-amil" readonly style="background:#f1f5f9;"></div></div><div class="flex-gap"><div class="form-group"><label>RW</label><select id="dist-rw"><option value="RW 1">RW 1</option><option value="RW 2">RW 2</option><option value="RW 3">RW 3</option><option value="RW 4">RW 4</option><option value="RW 5">RW 5</option><option value="RW 6">RW 6</option></select></div><div class="form-group"><label>RT</label><input type="text" id="dist-rt" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></div></div><div class="form-group"><label>Kategori Mustahiq</label><select id="dist-kategori"><option value="Fakir">Fakir</option><option value="Miskin">Miskin</option><option value="Sabilillah">Sabilillah</option><option value="Yatim">Yatim</option><option value="Ghorim">Ghorim</option><option value="Ibnu Sabil">Ibnu Sabil</option><option value="Muallaf">Muallaf</option><option value="Riqab">Riqab</option></select></div><div class="form-group"><label>Nama Penerima</label><input type="text" id="dist-nama"></div><div class="form-group"><label>Foto Bukti</label><input type="file" id="dist-foto" accept="image/*"></div><button class="btn-submit" onclick="saveDistribusi()">Simpan Penyaluran</button><button class="btn-submit btn-secondary" onclick="pindahHalaman('dashboard')">Kembali</button></div></div>
-    <div id="page-laporan-distribusi" class="page"><div class="card"><h2>Laporan Distribusi</h2><button class="btn-submit btn-secondary" style="margin-bottom:15px; padding: 10px;" onclick="pindahHalaman('dashboard')">Kembali</button><div id="progress-dist-container" style="margin-bottom: 20px;"><i>Memuat progress...</i></div><hr style="border:1px solid #e2e8f0; margin: 20px 0;"><h3>Daftar Mustahiq</h3><div class="filter-grid"><div class="form-group"><select id="f-dusun" onchange="filterDistribusi()"><option value="ALL">Semua Dusun</option><option value="KEMAMBANG">Kemambang</option><option value="SUMOTUWO">Sumotuwo</option><option value="LUWUNG">Luwung</option><option value="WATESROWO">Watesrowo</option><option value="WONOKITRI WETAN">WONOKITRI WETAN</option><option value="WONOKITRI KULON">WONOKITRI KULON</option></select></div><div class="form-group"><select id="f-status" onchange="filterDistribusi()"><option value="ALL">Semua Status</option><option value="Tersalurkan">Tersalurkan</option><option value="Belum">Belum Salur</option></select></div><div class="form-group"><select id="f-kat" onchange="filterDistribusi()"><option value="ALL">Semua Kategori</option><option value="Fakir">Fakir</option><option value="Miskin">Miskin</option><option value="Sabilillah">Sabilillah</option><option value="Yatim">Yatim</option></select></div></div><div class="form-group"><input type="text" id="f-search" placeholder="Cari Nama Penerima..." onkeyup="filterDistribusi()"></div><div id="list-distribusi"><i>Memuat data...</i></div></div></div>
+    <div id="page-laporan-distribusi" class="page"><div class="card"><h2>Laporan Distribusi</h2><button class="btn-submit btn-secondary" style="margin-bottom:15px; padding: 10px;" onclick="pindahHalaman('dashboard')">Kembali</button><div id="progress-dist-container" style="margin-bottom: 20px;"><i>Memuat progress...</i></div><hr style="border:1px solid #e2e8f0; margin: 20px 0;"><h3>Daftar Mustahiq</h3><div class="filter-grid"><div class="form-group"><select id="f-dusun" onchange="filterDistribusi()"><option value="ALL">Semua Dusun</option><option value="KEMAMBANG">Kemambang</option><option value="SUMOTUWO">Sumotuwo</option><option value="LUWUNG">Luwung</option><option value="WATESROWO">WATESROWO</option><option value="WONOKITRI WETAN">WONOKITRI WETAN</option><option value="WONOKITRI KULON">WONOKITRI KULON</option></select></div><div class="form-group"><select id="f-status" onchange="filterDistribusi()"><option value="ALL">Semua Status</option><option value="Tersalurkan">Tersalurkan</option><option value="Belum">Belum Salur</option></select></div><div class="form-group"><select id="f-kat" onchange="filterDistribusi()"><option value="ALL">Semua Kategori</option><option value="Fakir">Fakir</option><option value="Miskin">Miskin</option><option value="Sabilillah">Sabilillah</option><option value="Yatim">Yatim</option></select></div></div><div class="form-group"><input type="text" id="f-search" placeholder="Cari Nama Penerima..." onkeyup="filterDistribusi()"></div><div id="list-distribusi"><i>Memuat data...</i></div></div></div>
     <div id="page-kelola-mustahiq" class="page"><div class="card"><h2>Kelola Master Mustahiq</h2><button class="btn-submit btn-secondary" style="margin-bottom:15px; padding: 10px;" onclick="pindahHalaman('dashboard')">Kembali</button><button class="btn-submit" style="background:var(--success); margin-bottom: 20px;" onclick="openModalMustahiq('NEW')">+ Tambah Mustahiq Baru</button><div class="form-group"><input type="text" id="search-kelola" placeholder="Cari Nama / Dusun..." onkeyup="filterKelola()"></div><div id="list-kelola"><i>Memuat data...</i></div></div></div>
-    
-    <div id="page-ajukan-mustahiq" class="page">
-      <div class="card">
-        <h2>Ajukan Mustahiq</h2>
-        <div class="form-group">
-          <label>Tipe Pengajuan</label>
-          <select id="aju-tipe" onchange="toggleAjuMode()">
-            <option value="BARU">Usulan Warga Baru</option>
-            <option value="EDIT">Perubahan Data Lama</option>
-          </select>
-        </div>
-        <div id="box-cari-mustahiq" class="form-group" style="display:none;">
-          <label>Pilih Nama Mustahiq Lama</label>
-          <select id="aju-pilih-nama" onchange="isiDataOtomatis()"></select>
-        </div>
-        <div class="flex-gap"><div class="form-group"><label>Dusun</label><input type="text" id="aju-dusun" readonly style="background:#f1f5f9;"></div><div class="form-group"><label>Amil Pengaju</label><input type="text" id="aju-amil" readonly style="background:#f1f5f9;"></div></div>
-        <div class="flex-gap"><div class="form-group"><label>RW</label><select id="aju-rw"><option value="RW 1">RW 1</option><option value="RW 2">RW 2</option><option value="RW 3">RW 3</option><option value="RW 4">RW 4</option><option value="RW 5">RW 5</option><option value="RW 6">RW 6</option></select></div><div class="form-group"><label>RT</label><input type="text" id="aju-rt" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></div></div>
-        <div class="form-group"><label>Kategori</label><select id="aju-kat"><option value="Fakir">Fakir</option><option value="Miskin">Miskin</option><option value="Sabilillah">Sabilillah</option><option value="Yatim">Yatim</option><option value="Ghorim">Ghorim</option><option value="Ibnu Sabil">Ibnu Sabil</option><option value="Muallaf">Muallaf</option><option value="Riqab">Riqab</option></select></div>
-        <div class="form-group"><label>Nama Penerima</label><input type="text" id="aju-nama"></div>
-        <button class="btn-submit" onclick="ajukanMustahiq()">Kirim Pengajuan</button><button class="btn-submit btn-secondary" onclick="pindahHalaman('dashboard')">Kembali</button>
-      </div>
-    </div>
-    
+    <div id="page-ajukan-mustahiq" class="page"><div class="card"><h2>Ajukan Mustahiq</h2><div class="form-group"><label>Tipe Pengajuan</label><select id="aju-tipe" onchange="toggleAjuMode()"><option value="BARU">Usulan Warga Baru</option><option value="EDIT">Perubahan Data Lama</option></select></div><div id="box-cari-mustahiq" class="form-group" style="display:none;"><label>Pilih Nama Mustahiq Lama</label><select id="aju-pilih-nama" onchange="isiDataOtomatis()"></select></div><div class="flex-gap"><div class="form-group"><label>Dusun</label><input type="text" id="aju-dusun" readonly style="background:#f1f5f9;"></div><div class="form-group"><label>Amil Pengaju</label><input type="text" id="aju-amil" readonly style="background:#f1f5f9;"></div></div><div class="flex-gap"><div class="form-group"><label>RW</label><select id="aju-rw"><option value="RW 1">RW 1</option><option value="RW 2">RW 2</option><option value="RW 3">RW 3</option><option value="RW 4">RW 4</option><option value="RW 5">RW 5</option><option value="RW 6">RW 6</option></select></div><div class="form-group"><label>RT</label><input type="text" id="aju-rt" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></div></div><div class="form-group"><label>Kategori</label><select id="aju-kat"><option value="Fakir">Fakir</option><option value="Miskin">Miskin</option><option value="Sabilillah">Sabilillah</option><option value="Yatim">Yatim</option><option value="Ghorim">Ghorim</option><option value="Ibnu Sabil">Ibnu Sabil</option><option value="Muallaf">Muallaf</option><option value="Riqab">Riqab</option></select></div><div class="form-group"><label>Nama Penerima</label><input type="text" id="aju-nama"></div><button class="btn-submit" onclick="ajukanMustahiq()">Kirim Pengajuan</button><button class="btn-submit btn-secondary" onclick="pindahHalaman('dashboard')">Kembali</button></div></div>
     <div id="page-kelola-pengajuan" class="page"><div class="card"><h2>Konfirmasi Pengajuan</h2><button class="btn-submit btn-secondary" style="margin-bottom:15px; padding: 10px;" onclick="pindahHalaman('dashboard')">Kembali</button><div id="list-pengajuan"><i>Memuat data...</i></div></div></div>
-    
     <div id="page-masalah" class="page"><div class="card"><h2>Laporan Masalah</h2><button class="btn-submit btn-secondary" style="margin-bottom:15px; padding: 10px;" onclick="pindahHalaman('dashboard')">Kembali</button><div id="list-masalah"><i>Memuat data...</i></div></div></div>
     <div id="page-kelola-akun" class="page"><div class="card"><h2>Kelola Akun</h2><button class="btn-submit btn-secondary" style="margin-bottom:15px; padding: 10px;" onclick="pindahHalaman('dashboard')">Kembali</button><div class="form-group"><input type="text" id="search-akun" placeholder="Cari Nama / Dusun / Nickname..." onkeyup="filterKelolaAkun()"></div><div id="list-kelola-akun"><i>Memuat data...</i></div></div></div>
   </div>
 
   <div id="customModal" class="modal-overlay" style="z-index:99999;"><div class="modal-box" style="text-align:center;"><p id="modalMsg" style="white-space: pre-wrap; margin-bottom: 20px; font-size: 1.1rem; font-weight:bold;"></p><button class="btn-submit" id="btn-modal-ok" onclick="closeModal()">Selesai</button></div></div>
-  
   <div id="crudModal" class="modal-overlay"><div class="modal-box"><h3 id="crud-title">Mustahiq</h3><input type="hidden" id="crud-id"><div class="form-group"><label>Dusun</label><select id="crud-dusun"><option value="KEMAMBANG">KEMAMBANG</option><option value="SUMOTUWO">SUMOTUWO</option><option value="LUWUNG">LUWUNG</option><option value="WATESROWO">WATESROWO</option><option value="WONOKITRI WETAN">WONOKITRI WETAN</option><option value="WONOKITRI KULON">WONOKITRI KULON</option></select></div><div class="flex-gap"><div class="form-group"><label>RW</label><select id="crud-rw"><option value="RW 1">RW 1</option><option value="RW 2">RW 2</option><option value="RW 3">RW 3</option><option value="RW 4">RW 4</option><option value="RW 5">RW 5</option><option value="RW 6">RW 6</option></select></div><div class="form-group"><label>RT</label><input type="text" id="crud-rt"></div></div><div class="form-group"><label>Kategori</label><select id="crud-kategori"><option value="Fakir">Fakir</option><option value="Miskin">Miskin</option><option value="Sabilillah">Sabilillah</option><option value="Yatim">Yatim</option></select></div><div class="form-group"><label>Nama</label><input type="text" id="crud-nama"></div><button class="btn-submit" style="background:var(--success);" onclick="saveCrudMustahiq()">Simpan Data</button><button class="btn-submit btn-danger" id="btn-crud-delete" style="display:none;" onclick="deleteCrudMustahiq()">Hapus Data</button><button class="btn-submit btn-secondary" onclick="document.getElementById('crudModal').style.display='none'">Batal</button></div></div>
-  
   <div id="crudModalMuzakki" class="modal-overlay"><div class="modal-box"><h3>Edit Data Muzakki</h3><input type="hidden" id="muz-edit-id"><div class="form-group"><label>Dusun</label><select id="muz-edit-dusun"><option value="KEMAMBANG">KEMAMBANG</option><option value="SUMOTUWO">SUMOTUWO</option><option value="LUWUNG">LUWUNG</option><option value="WATESROWO">WATESROWO</option><option value="WONOKITRI WETAN">WONOKITRI WETAN</option><option value="WONOKITRI KULON">WONOKITRI KULON</option></select></div><div class="flex-gap"><div class="form-group"><label>RW</label><select id="muz-edit-rw"><option value="RW 1">RW 1</option><option value="RW 2">RW 2</option><option value="RW 3">RW 3</option><option value="RW 4">RW 4</option><option value="RW 5">RW 5</option><option value="RW 6">RW 6</option></select></div><div class="form-group"><label>RT</label><input type="text" id="muz-edit-rt"></div></div><div class="form-group"><label>Nama Muzakki</label><input type="text" id="muz-edit-nama"></div><div class="form-group"><label>Nominal</label><input type="text" id="muz-edit-nom"></div><button class="btn-submit" style="background:var(--success);" onclick="saveCrudMuzakki()">Update Data</button><button class="btn-submit btn-secondary" onclick="document.getElementById('crudModalMuzakki').style.display='none'">Batal</button></div></div>
-  
   <div id="crudModalAkun" class="modal-overlay"><div class="modal-box"><h3>Edit Akun</h3><input type="hidden" id="akun-id"><div class="form-group"><label>Nama</label><input type="text" id="akun-nama"></div><div class="flex-gap"><div class="form-group"><label>Nickname</label><input type="text" id="akun-nick"></div><div class="form-group"><label>Dusun</label><select id="akun-dusun"><option value="KEMAMBANG">KEMAMBANG</option><option value="SUMOTUWO">SUMOTUWO</option><option value="LUWUNG">LUWUNG</option><option value="WATESROWO">WATESROWO</option><option value="WONOKITRI WETAN">WONOKITRI WETAN</option><option value="WONOKITRI KULON">WONOKITRI KULON</option></select></div></div><div class="flex-gap"><div class="form-group"><label>Jenis Akun</label><select id="akun-jenis"><option value="Amil">Amil</option><option value="Pengurus">Pengurus</option></select></div><div class="form-group"><label>Status</label><select id="akun-status"><option value="Active">Active</option><option value="Pending">Pending</option></select></div></div><div class="form-group"><label>Password Baru</label><input type="text" id="akun-pass"></div><button class="btn-submit" style="background:var(--success);" onclick="saveCrudAkun()">Update Akun</button><button class="btn-submit btn-danger" onclick="deleteCrudAkun()">Hapus Akun</button><button class="btn-submit btn-secondary" onclick="document.getElementById('crudModalAkun').style.display='none'">Batal</button></div></div>
+  <div id="modalPengumuman" class="modal-overlay"><div class="modal-box"><h3>Buat Pengumuman</h3><div class="form-group"><label>Pesan Singkat (Running Text)</label><input type="text" id="input-pengumuman" maxlength="150" placeholder="Ketik pengumuman di sini..."></div><div class="form-group"><label>Batas Waktu</label><input type="datetime-local" id="input-batas-waktu"></div><button class="btn-submit" style="background:var(--warning);" onclick="kirimPengumuman()">Sebarkan</button><button class="btn-submit btn-secondary" onclick="document.getElementById('modalPengumuman').style.display='none'">Batal</button></div></div>
 
   <script>
     const API_URL = "https://script.google.com/macros/s/AKfycbxJMDKRdttXGU-a7XoXSRPoTSkU3Htpnx8goOAF7IpGvxMm7msaVj3XSzJjLq1JWLhb/exec";
     
     let currentUser = null; let dataLaporan = []; let masterMustahiqData = []; let masterAkunData = [];
     let pollingInterval = null; let sessionInterval = null;
+
+    // Data Penampung Public
+    let pubMuzakki = []; let pubMustahiq = []; let pubAmil = [];
 
     function getCleanName(name) { return (name || '').replace(/\(Baris:\s*\d+\)/gi, '').trim(); }
     function getCatBadge(kat) {
@@ -268,17 +278,18 @@
       }
     });
 
-    // --- FITUR SEMUA DATA (PUBLIC) ---
+    // ===============================================
+    // FITUR PUBLIC DATA (READ-ONLY) + PENCARIAN
+    // ===============================================
     async function fetchPublicData() {
-      // Ambil data Muzakki
       let resMuz = await kirimAPI({ action: "getLaporan" });
-      if(resMuz.sukses) renderPublicMuzakki(resMuz.data);
-      // Ambil data Mustahiq
+      if(resMuz.sukses) { pubMuzakki = resMuz.data.filter(d => d.status !== 'Error'); renderPublicMuzakki(pubMuzakki); }
+      
       let resMus = await kirimAPI({ action: "getMasterMustahiq" });
-      if(resMus.sukses) renderPublicMustahiq(resMus.data);
-      // Ambil data Amil
+      if(resMus.sukses) { pubMustahiq = resMus.data; renderPublicMustahiq(pubMustahiq); }
+      
       let resAmil = await kirimAPI({ action: "getPublicAkun" });
-      if(resAmil.sukses) renderPublicAmil(resAmil.data);
+      if(resAmil.sukses) { pubAmil = resAmil.data; renderPublicAmil(pubAmil); }
     }
 
     function switchPublicTab(tab) {
@@ -291,28 +302,58 @@
       
       document.getElementById(`tab-${tab}`).classList.add('active');
       document.getElementById(`public-list-${tab}`).style.display = 'block';
+      
+      document.getElementById('search-public').value = ""; // Reset pencarian saat pindah tab
+      filterPublicData();
     }
 
+    function filterPublicData() {
+      let s = document.getElementById('search-public').value.toLowerCase();
+      let activeTab = document.querySelector('.tab-btn.active').id;
+      
+      if (activeTab === 'tab-muzakki') {
+        renderPublicMuzakki(pubMuzakki.filter(d => d.nama.toLowerCase().includes(s) || d.dusun.toLowerCase().includes(s)));
+      } else if (activeTab === 'tab-mustahiq') {
+        renderPublicMustahiq(pubMustahiq.filter(d => d.nama.toLowerCase().includes(s) || d.dusun.toLowerCase().includes(s)));
+      } else if (activeTab === 'tab-amil') {
+        renderPublicAmil(pubAmil.filter(d => d.nama.toLowerCase().includes(s) || d.dusun.toLowerCase().includes(s)));
+      }
+    }
+
+    // REVISI VISUAL: Card Muzakki (Kiri Nama/Nominal - Kanan Dusun/RTRW)
     function renderPublicMuzakki(data) {
-      let html = ""; let cleanData = data.filter(d => d.status !== 'Error');
-      cleanData.forEach(d => {
+      let html = ""; 
+      data.forEach(d => {
         let formatRp = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(parseFloat(d.nominal) || 0);
-        html += `<div class="list-item" style="border-left: 6px solid var(--dark);">
-                  <div style="font-weight: 700; font-size: 1.1rem; color: var(--dark); margin-bottom: 4px;">${d.nama}</div>
-                  <div style="font-weight: 700; font-size: 1.05rem; color: #d97706; margin-bottom: 5px;">${formatRp}</div>
-                  <div style="font-size: 0.85rem; color: #64748b;">Dusun ${d.dusun} | ${d.rw}/RT ${d.rt}</div>
+        html += `<div class="list-item" style="border-left: 6px solid var(--dark); display: flex; justify-content: space-between; align-items: center;">
+                  <div>
+                    <div style="font-weight: 800; font-size: 1.15rem; color: var(--dark); margin-bottom: 4px;">${d.nama}</div>
+                    <div style="font-weight: 800; font-size: 1.1rem; color: #d97706;">${formatRp}</div>
+                  </div>
+                  <div style="text-align: right;">
+                    <div style="background: #e2e8f0; color: #334155; padding: 4px 10px; border-radius: 6px; font-weight: 800; font-size: 0.8rem; margin-bottom: 4px; display: inline-block;">DUSUN ${d.dusun.toUpperCase()}</div>
+                    <div style="font-size: 0.85rem; color: #64748b; font-weight: 600;">${d.rw} / RT ${d.rt}</div>
+                  </div>
                  </div>`;
       }); 
       document.getElementById('public-list-muzakki').innerHTML = html || "<i>Belum ada data.</i>";
     }
 
+    // REVISI VISUAL: Card Mustahiq (Ditambah Dusun & Label SUDAH/BELUM)
     function renderPublicMustahiq(data) {
       let html = ""; data.forEach(d => { 
-        let isDone = (d.status.toLowerCase() === 'tersalurkan'); let cName = getCleanName(d.nama); 
+        let isDone = (d.status.toLowerCase() === 'tersalurkan'); 
+        let cName = getCleanName(d.nama); 
+        let badgeSalur = isDone ? '<span class="badge badge-success" style="font-size:0.8rem;">SUDAH</span>' : '<span class="badge" style="background:#e2e8f0; color:#ef4444; font-size:0.8rem;">BELUM</span>';
+        
         html += `<div class="list-item" style="border-left: 6px solid ${isDone ? 'var(--success)' : '#cbd5e1'};">
                   <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-                    <div><div style="font-weight:700; font-size:1.1rem; margin-bottom: 4px;">${cName}</div><div>${getCatBadge(d.kategori)}</div></div>
-                    ${isDone ? '<span class="badge badge-success">Tersalurkan</span>' : '<span class="badge" style="background:#e2e8f0; color:#475569;">Belum Salur</span>'}
+                    <div>
+                      <div style="font-weight:800; font-size:1.15rem; margin-bottom: 4px;">${cName}</div>
+                      <div style="margin-bottom: 6px;">${getCatBadge(d.kategori)}</div>
+                      <div style="font-size:0.85rem; color:#64748b; font-weight:700;">Dusun ${d.dusun}</div>
+                    </div>
+                    <div>${badgeSalur}</div>
                   </div>
                  </div>`; 
       }); 
@@ -322,19 +363,52 @@
     function renderPublicAmil(data) {
       let html = ""; data.forEach(d => {
         html += `<div class="list-item" style="border-left: 6px solid #0284c7;">
-                  <div style="font-weight: 700; font-size: 1.1rem; color: var(--dark); margin-bottom: 4px;">${d.nama}</div>
-                  <div style="font-size: 0.85rem; color: #64748b;">Dusun ${d.dusun}</div>
-                  <div style="margin-top:5px;"><span class="badge badge-info">${d.jenis}</span></div>
+                  <div style="font-weight: 800; font-size: 1.15rem; color: var(--dark); margin-bottom: 4px;">${d.nama}</div>
+                  <div style="font-size: 0.85rem; color: #64748b; font-weight:700;">Dusun ${d.dusun}</div>
+                  <div style="margin-top:6px;"><span class="badge badge-info">${d.jenis}</span></div>
                  </div>`;
       });
       document.getElementById('public-list-amil').innerHTML = html || "<i>Belum ada data.</i>";
+    }
+
+    // ===============================================
+    // AUTH & REGISTER
+    // ===============================================
+    function toggleAuthMode(mode) {
+      if(mode === 'register') {
+        document.getElementById('form-login-sec').style.display = 'none';
+        document.getElementById('form-register-sec').style.display = 'block';
+        document.getElementById('auth-title').innerText = 'Daftar Amil Baru';
+      } else {
+        document.getElementById('form-login-sec').style.display = 'block';
+        document.getElementById('form-register-sec').style.display = 'none';
+        document.getElementById('auth-title').innerText = 'Login Amil';
+      }
+    }
+
+    async function prosesDaftarWeb() {
+      let n = document.getElementById('r-nama').value;
+      let nick = document.getElementById('r-nick').value;
+      let d = document.getElementById('r-dusun').value;
+      let p = document.getElementById('r-pass').value;
+      if(!n || !nick || !p) return showModal("⚠️ Lengkapi semua form pendaftaran!");
+      
+      showModal("⏳ Mengirim pendaftaran...", true);
+      let form = { nama: n, nickname: nick, dusun: d, jenisAkun: 'Amil', password: p };
+      let res = await kirimAPI({ action: "register", form: form });
+      if(res.sukses) {
+        showModal("✅ Pendaftaran berhasil! Silakan hubungi Pengurus untuk aktivasi akun.", false);
+        document.getElementById('r-nama').value = ""; document.getElementById('r-nick').value = ""; document.getElementById('r-pass').value = "";
+        toggleAuthMode('login');
+      } else {
+        showModal("❌ Gagal: " + res.pesan);
+      }
     }
 
 
     // ===============================================
     // DASHBOARD CORE SYSTEM (TIDAK DISENTUH)
     // ===============================================
-
     function checkSession() {
       let session = localStorage.getItem('lazisnuSession'); if (!session) return false;
       let parsed = JSON.parse(session); if ((new Date().getTime() - parsed.timestamp) > (24*60*60*1000)) { localStorage.removeItem('lazisnuSession'); return false; }
@@ -360,7 +434,6 @@
       if(targetPage) {
         targetPage.classList.add('active');
         
-        // Atur Navbar Public vs Dashboard
         if(hash === 'home' || hash === 'public-data') {
           document.querySelectorAll('.nav-public').forEach(el => el.style.display = 'inline-block');
         } else {
@@ -387,7 +460,6 @@
         document.querySelectorAll('.nav-public').forEach(el => el.style.display = 'inline-block');
         if(pollingInterval) clearInterval(pollingInterval); 
       }
-      // Jangan paksa scroll top kalau lagi navigasi antar section Home
       if(!window.location.hash.includes('sect-')) window.scrollTo(0,0);
     }
     
