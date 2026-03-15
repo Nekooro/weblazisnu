@@ -475,7 +475,35 @@
     function filterLaporan() { let s = document.getElementById('search-laporan').value.toLowerCase(); renderLaporan(dataLaporan.filter(d => d.nama.toLowerCase().includes(s) || d.dusun.toLowerCase().includes(s))); }
     
     async function kirimLaporanSalah(id, nama) { let msg = prompt(`Detail kesalahan untuk: ${nama}`); if (!msg) return; showModal("⏳ Mengupdate...", true); let res = await kirimAPI({ action: "laporSalah", obj: { rowId: id, namaMuzakki: nama, dusun: currentUser.dusun, amil: currentUser.nama, pesan: msg } }); if (res.sukses) { showModal("✅ Dilaporkan.", false); fetchLaporan(); } }
-    async function fetchMasalah(isSilent = false) { if(!isSilent) document.getElementById('list-masalah').innerHTML = "<i>Memuat...</i>"; let res = await kirimAPI({ action: "getLaporanMasalah" }); if(res.sukses) { let html = ""; res.data.forEach(d => { let badge = d.status === 'Selesai' ? `<span class="badge">✓ Selesai</span>` : `<span class="badge">! Pending</span>`; let btn = (d.status !== 'Selesai' && currentUser.role === 'Pengurus') ? `<button class="btn-submit" style="margin-top:15px; padding:10px;" onclick="selesaikanMasalah(${d.id})">Tandai Selesai</button>` : ''; html += `<div class="list-item"><div style="display:flex; justify-content:space-between; font-weight:800; font-size:1.15rem; margin-bottom:6px;"><span>${d.muzakki}</span> ${badge}</div><div style="font-size:0.9rem; font-weight:600; margin-bottom:10px;">Amil: ${d.amil} (${d.dusun}) | Waktu: ${d.tanggal}</div><div style="padding:15px; border-radius:12px; font-size:0.95rem; font-weight:700; box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);"><b>Pesan:</b> ${d.pesan}</div>${btn}</div>`; }); document.getElementById('list-masalah').innerHTML = html || "<i>Aman, tidak ada masalah.</i>"; } }
+    
+    // PERBAIKAN FITUR LAPORAN MASALAH (DISELESAIKAN OLEH)
+    async function fetchMasalah(isSilent = false) { 
+      if(!isSilent) document.getElementById('list-masalah').innerHTML = "<i>Memuat...</i>"; 
+      let res = await kirimAPI({ action: "getLaporanMasalah" }); 
+      if(res.sukses) { 
+        let html = ""; 
+        res.data.forEach(d => { 
+          let badge = d.status === 'Selesai' ? `<span class="badge">✓ Selesai</span>` : `<span class="badge" style="opacity:0.6;">! Pending</span>`; 
+          let btn = (d.status !== 'Selesai' && currentUser.role === 'Pengurus') ? `<button class="btn-submit" style="margin-top:15px; padding:10px;" onclick="selesaikanMasalah(${d.id})">Tandai Selesai</button>` : ''; 
+          
+          // Ini baris penting yang kemaren Joko lupa masukin:
+          let penyelesai = (d.status === 'Selesai' && d.penyelesai) ? `<div style="margin-top:12px; font-size:0.85rem; font-weight:700; color: var(--text-muted); border-top: 1px dashed var(--shadow-dark); padding-top: 10px;">✓ Diselesaikan oleh: ${d.penyelesai}</div>` : '';
+          
+          html += `<div class="list-item">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+              <div style="font-family: var(--font-judul); font-weight:800; font-size:1.15rem; margin-bottom:6px;">${d.muzakki}</div>
+              <div>${badge}</div>
+            </div>
+            <div style="font-size:0.9rem; font-weight:600; margin-bottom:12px; color: var(--text-muted);">Amil: ${d.amil} (${d.dusun}) | Waktu: ${d.tanggal}</div>
+            <div style="padding:15px; border-radius:12px; font-size:0.95rem; font-weight:700; background: var(--bg-color); box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light); color: var(--dark);"><b>Pesan:</b> ${d.pesan}</div>
+            ${penyelesai}
+            ${btn}
+          </div>`; 
+        }); 
+        document.getElementById('list-masalah').innerHTML = html || "<i>Aman, tidak ada masalah.</i>"; 
+      } 
+    }
+    
     async function selesaikanMasalah(id) { showModal("⏳ Proses...", true); let res = await kirimAPI({ action: "selesaikanMasalah", obj: {id: id, pengurus: currentUser.nama} }); if(res.sukses){ showModal("✅ Selesai", false); fetchMasalah(); } }
 
     function openModalMuzakki(id) { let d = dataLaporan.find(x => x.id === id); if(!d) return; document.getElementById('muz-edit-id').value = d.id; document.getElementById('muz-edit-dusun').value = d.dusun.toUpperCase(); document.getElementById('muz-edit-rw').value = d.rw; document.getElementById('muz-edit-rt').value = d.rt; document.getElementById('muz-edit-nama').value = d.nama; document.getElementById('muz-edit-nom').value = d.nominal; document.getElementById('crudModalMuzakki').style.display = "flex"; }
