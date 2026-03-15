@@ -6,117 +6,220 @@
   <title>Portal LAZISNU SUMOKEMBANGSRI</title>
   <style>
     /* =========================================
-       TEMA MONOKROM PREMIUM - LAZIS DASBOR
-       Font Judul : Playfair Display
+       TEMA NEUMORPHISM / SOFT UI MONOKROM
+       Font Judul : Gabarito
        Font Teks  : Plus Jakarta Sans
     ========================================= */
     
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 
     :root { 
-      --bg-body: #F4F5F7;        
-      --bg-card: #FFFFFF;        
-      --accent: #E2E8F0;         
-      --dark: #111111;           
-      --danger: #475569;         
-      --success: #111111;        
-      --warning: #64748b;        
+      /* Palet Neumorphism: Latar dan elemen menggunakan warna yang sama persis */
+      --bg-color: #E6EBF0;       /* Abu-abu terang agak sejuk */
+      --shadow-light: #FFFFFF;   /* Bayangan cahaya dari sudut kiri atas */
+      --shadow-dark: #C5CCD6;    /* Bayangan gelap dari sudut kanan bawah */
       
-      --font-judul: 'Playfair Display', serif;
+      --dark: #2A313C;           /* Hitam/Abu-abu sangat pekat untuk teks agar kontras */
+      --text-muted: #64748B;     /* Abu-abu untuk teks sekunder */
+      
+      --font-judul: 'Gabarito', sans-serif;
       --font-teks: 'Plus Jakarta Sans', sans-serif;
     }
     
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { font-family: var(--font-teks) !important; margin: 0; background: var(--bg-body); color: var(--dark); overflow-x: hidden; }
+    body { 
+      font-family: var(--font-teks) !important; 
+      margin: 0; 
+      background: var(--bg-color); 
+      color: var(--dark); 
+      overflow-x: hidden; 
+    }
     
     /* PENGUNCIAN FONT JUDUL & TEKS UMUM */
-    h1, h2, h3, h4, h5, h6, .logo { font-family: var(--font-judul) !important; font-weight: 700 !important; color: var(--dark) !important; }
-    p, span, div, a { font-family: var(--font-teks) !important; }
+    h1, h2, h3, h4, h5, h6, .logo { 
+      font-family: var(--font-judul) !important; 
+      font-weight: 700 !important; 
+      color: var(--dark) !important; 
+    }
+    p, span, div, a, label { font-family: var(--font-teks) !important; }
 
-    /* NAVBAR PUBLIC */
-    .navbar { background: var(--bg-card); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; color: var(--dark); position: sticky; top: 0; z-index: 1000; box-shadow: 0 1px 3px rgba(0,0,0,0.05); border-bottom: 1px solid #E2E8F0; }
-    .logo { font-weight: 800; font-size: 1.2rem; line-height: 1.2; text-transform: uppercase; cursor: pointer; letter-spacing: -0.5px; }
+    /* NAVBAR SOFT UI */
+    .navbar { 
+      background: var(--bg-color); 
+      padding: 15px 5%; 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      color: var(--dark); 
+      position: sticky; 
+      top: 0; 
+      z-index: 1000; 
+      box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light); 
+      border: none; 
+    }
+    .logo { font-weight: 800; font-size: 1.3rem; line-height: 1.2; text-transform: uppercase; cursor: pointer; }
     
     .menu-toggle { display: block; background: none; border: none; cursor: pointer; padding: 5px; z-index: 1001; }
-    .menu-toggle span { display: block; width: 25px; height: 3px; background-color: var(--dark); margin-bottom: 5px; transition: all 0.3s; }
+    .menu-toggle span { display: block; width: 25px; height: 3px; background-color: var(--dark); margin-bottom: 5px; transition: all 0.3s; border-radius: 2px; }
     
-    .nav-menu { position: absolute; top: 100%; right: -100%; width: 100%; height: calc(100vh - 60px); background-color: var(--bg-card); display: flex; flex-direction: column; gap: 15px; padding: 30px; transition: right 0.3s ease-in-out; overflow-y: auto; border-left: 1px solid #E2E8F0; }
+    .nav-menu { position: absolute; top: 100%; right: -100%; width: 100%; height: calc(100vh - 60px); background-color: var(--bg-color); display: flex; flex-direction: column; gap: 15px; padding: 30px; transition: right 0.3s ease-in-out; overflow-y: auto; box-shadow: -10px 0 20px rgba(0,0,0,0.05); }
     .nav-menu.active { right: 0; }
-    .nav-menu .nav-item { width: 100%; text-align: left; cursor: pointer; padding: 12px 0; font-size: 0.95rem; font-weight: 600; color: #475569; border-bottom: 1px solid #F1F5F9; }
+    .nav-menu .nav-item { width: 100%; text-align: left; cursor: pointer; padding: 12px 0; font-size: 1rem; font-weight: 700; color: var(--text-muted); border-bottom: 1px solid var(--shadow-light); }
     
     @media (min-width: 992px) { 
       .menu-toggle { display: none; }
-      .nav-menu { position: static; width: auto; height: auto; background: none; flex-direction: row; align-items: center; gap: 15px; padding: 0; right: 0; border: none; }
-      .nav-menu .nav-item { padding: 0; width: auto; border-bottom: none; color: #64748b; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; }
+      .nav-menu { position: static; width: auto; height: auto; background: none; flex-direction: row; align-items: center; gap: 20px; padding: 0; right: 0; box-shadow: none; }
+      .nav-menu .nav-item { padding: 0; width: auto; border-bottom: none; color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; font-weight: 800; transition: color 0.2s; }
       .nav-menu .nav-item:hover, .nav-menu .nav-item.active { color: var(--dark); }
-      .nav-item#nav-login { background: var(--dark) !important; color: var(--bg-card) !important; padding: 8px 18px !important; border-radius: 6px; }
-      .nav-item#nav-logout { background: transparent !important; color: var(--dark) !important; border: 1px solid var(--dark); padding: 7px 17px !important; border-radius: 6px; }
-      .nav-item#nav-logout:hover { background: #f1f5f9 !important; }
+      
+      /* Tombol Navbar Neumorphic */
+      .nav-item#nav-login, .nav-item#nav-logout { 
+        background: var(--bg-color) !important; 
+        color: var(--dark) !important; 
+        padding: 10px 20px !important; 
+        border-radius: 12px; 
+        box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
+        transition: all 0.2s ease;
+      }
+      .nav-item#nav-login:active, .nav-item#nav-logout:active {
+        box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
+      }
     }
 
-    .container { max-width: 850px; margin: 20px auto; padding: 0 15px; }
+    .container { max-width: 850px; margin: 30px auto; padding: 0 15px; }
     .page { display: none; }
-    .page.active { display: block; animation: fadeIn 0.3s ease; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .page.active { display: block; animation: fadeIn 0.4s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
     
-    /* KARTU & KONTEN */
-    .home-section { padding: 40px 0; border-bottom: 1px solid #F1F5F9; }
-    .home-section:last-child { border-bottom: none; }
+    .home-section { padding: 30px 0; }
     
-    .card { background: var(--bg-card) !important; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.03) !important; margin-bottom: 20px; border: 1px solid #E2E8F0 !important; }
-    h2, h3 { margin-top: 0; }
+    /* KARTU NEUMORPHIC (Timbul) */
+    .card { 
+      background: var(--bg-color) !important; 
+      padding: 30px; 
+      border-radius: 20px; 
+      box-shadow: 10px 10px 20px var(--shadow-dark), -10px -10px 20px var(--shadow-light) !important; 
+      margin-bottom: 30px; 
+      border: none !important; 
+    }
+    h2 { margin-top: 0; font-size: 1.8rem; }
+    h3 { font-size: 1.3rem; }
     
-    /* FORM INPUT */
-    .form-group { margin-bottom: 1.2rem; }
-    .form-group label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 0.9rem; color: #475569 !important; }
-    .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid #CBD5E1 !important; border-radius: 8px; font-family: var(--font-teks) !important; font-size: 0.95rem; background: var(--bg-card) !important; color: var(--dark) !important; }
-    .form-group input[type="file"] { padding: 9px; }
-    .form-group input:focus, .form-group select:focus { border-color: var(--dark) !important; outline: none; box-shadow: 0 0 0 3px rgba(17, 17, 17, 0.05); }
+    /* FORM INPUT NEUMORPHIC (Mencekung ke dalam) */
+    .form-group { margin-bottom: 1.5rem; }
+    .form-group label { display: block; margin-bottom: 8px; font-weight: 700; font-size: 0.95rem; color: var(--dark) !important; }
+    .form-group input, .form-group select { 
+      width: 100%; 
+      padding: 14px 16px; 
+      background: var(--bg-color) !important; 
+      border: none !important; 
+      border-radius: 12px; 
+      font-family: var(--font-teks) !important; 
+      font-size: 1rem; 
+      font-weight: 600;
+      color: var(--dark) !important; 
+      box-shadow: inset 5px 5px 10px var(--shadow-dark), inset -5px -5px 10px var(--shadow-light) !important; 
+      transition: all 0.2s ease;
+    }
+    .form-group input[type="file"] { padding: 10px; }
+    .form-group input:focus, .form-group select:focus { 
+      outline: none; 
+      box-shadow: inset 7px 7px 14px var(--shadow-dark), inset -7px -7px 14px var(--shadow-light) !important; 
+    }
     
-    /* TOMBOL MONOKROM */
-    .flex-gap { display: flex; gap: 15px; } .flex-gap > div { flex: 1; }
-    .btn-submit { width: 100%; padding: 14px; background: var(--dark) !important; color: var(--bg-card) !important; border: none !important; border-radius: 8px; font-weight: 700; font-family: var(--font-teks) !important; cursor: pointer; margin-top: 10px; font-size: 1rem; transition: background 0.3s; }
-    .btn-submit:hover { background: #333333 !important; }
-    .btn-secondary { background: #F1F5F9 !important; color: var(--dark) !important; border: 1px solid #CBD5E1 !important; }
-    .btn-secondary:hover { background: #E2E8F0 !important; }
-    .btn-danger { background: transparent !important; color: var(--dark) !important; border: 1px dashed #94A3B8 !important; }
-    .btn-danger:hover { background: #f8fafc !important; }
+    /* TOMBOL AKSI NEUMORPHIC (Timbul, ditekan mencekung) */
+    .flex-gap { display: flex; gap: 20px; } .flex-gap > div { flex: 1; }
+    .btn-submit { 
+      width: 100%; 
+      padding: 16px; 
+      background: var(--bg-color) !important; 
+      color: var(--dark) !important; 
+      border: none !important; 
+      border-radius: 12px; 
+      font-weight: 800; 
+      font-family: var(--font-teks) !important; 
+      cursor: pointer; 
+      margin-top: 15px; 
+      font-size: 1.05rem; 
+      box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light) !important; 
+      transition: all 0.2s ease; 
+    }
+    .btn-submit:hover { color: var(--dark) !important; }
+    .btn-submit:active { box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light) !important; }
     
-    /* MENU KOTAK */
-    .grid-menu { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px;}
-    .menu-box { background: var(--bg-card) !important; border: 1px solid #CBD5E1 !important; padding: 20px; text-align: center; border-radius: 12px; cursor: pointer; font-weight: 700; box-shadow: 0 2px 5px rgba(0,0,0,0.02); transition: all 0.3s; color: var(--dark) !important; }
-    .menu-box:hover { border-color: var(--dark) !important; transform: translateY(-3px); box-shadow: 0 4px 10px rgba(0,0,0,0.06); }
+    .btn-secondary { color: var(--text-muted) !important; }
+    .btn-danger { color: #D32F2F !important; }
     
-    /* LIST DATA & PROGRESS BAR */
-    .list-item { background: var(--bg-card) !important; padding: 18px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #E2E8F0 !important; box-shadow: 0 2px 6px rgba(0,0,0,0.02) !important; position: relative; border-left: 4px solid var(--dark) !important;}
-    .prog-bar-bg { background: #F1F5F9 !important; height: 14px; border-radius: 7px; overflow: hidden; margin-top: 10px; border: 1px solid #E2E8F0; }
-    .prog-bar-fill { background: var(--dark) !important; height: 100%; transition: width 0.5s ease; }
+    /* MENU KOTAK DASBOR */
+    .grid-menu { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 25px;}
+    .menu-box { 
+      background: var(--bg-color) !important; 
+      border: none !important; 
+      padding: 25px; 
+      text-align: center; 
+      border-radius: 16px; 
+      cursor: pointer; 
+      font-weight: 800; 
+      box-shadow: 7px 7px 14px var(--shadow-dark), -7px -7px 14px var(--shadow-light); 
+      transition: all 0.2s ease; 
+      color: var(--dark) !important; 
+    }
+    .menu-box:active { box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light); }
     
-    /* PEMBUNUH WARNA BADGE JS (OVERRIDE MUTLAK) */
-    .badge { padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; display: inline-block; background: #F1F5F9 !important; color: #475569 !important; border: 1px solid #CBD5E1 !important; }
-    .badge-success { background: var(--dark) !important; color: var(--bg-card) !important; border: none !important; }
-    .badge-danger { background: transparent !important; color: var(--dark) !important; border: 1px dashed #94A3B8 !important; }
-    .badge-info { background: #F8FAFC !important; color: var(--dark) !important; border: 1px solid #E2E8F0 !important; }
-    .badge-warning { background: #E2E8F0 !important; color: var(--dark) !important; border: none !important; }
+    /* LIST DATA KOTAK */
+    .list-item { 
+      background: var(--bg-color) !important; 
+      padding: 20px; 
+      margin-bottom: 20px; 
+      border-radius: 16px; 
+      border: none !important; 
+      box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light) !important; 
+      position: relative; 
+    }
     
-    .badge-new { background: var(--dark) !important; color: var(--bg-card) !important; padding: 3px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 800; margin-right: 10px; display: inline-block; vertical-align: middle; }
-    .histori-text { font-size: 0.8rem; color: #64748b !important; font-weight: 600; margin-top: 5px; display: block; font-style: italic; }
+    /* PROGRESS BAR NEUMORPHIC */
+    .prog-bar-bg { 
+      background: var(--bg-color) !important; 
+      height: 16px; 
+      border-radius: 8px; 
+      overflow: hidden; 
+      margin-top: 12px; 
+      box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light); 
+      border: none; 
+    }
+    .prog-bar-fill { background: var(--dark) !important; height: 100%; border-radius: 8px; transition: width 0.5s ease; }
+    
+    /* BADGE (Label Status / Kategori) */
+    .badge, .badge-success, .badge-danger, .badge-info, .badge-warning { 
+      padding: 6px 12px; 
+      border-radius: 8px; 
+      font-size: 0.8rem; 
+      font-weight: 800; 
+      display: inline-block; 
+      background: var(--bg-color) !important; 
+      color: var(--dark) !important; 
+      border: none !important; 
+      box-shadow: 3px 3px 6px var(--shadow-dark), -3px -3px 6px var(--shadow-light) !important; 
+    }
+    
+    .badge-new { background: var(--dark) !important; color: var(--bg-color) !important; padding: 4px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 800; margin-right: 10px; display: inline-block; vertical-align: middle; }
+    .histori-text { font-size: 0.85rem; color: var(--text-muted) !important; font-weight: 600; margin-top: 8px; display: block; font-style: italic; }
 
-    /* MODAL */
-    .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 9999; justify-content: center; align-items: center; overflow-y: auto; padding: 20px 0;}
-    .modal-box { background: var(--bg-card); padding: 35px; border-radius: 12px; max-width: 450px; width: 90%; margin: auto; border: 1px solid #E2E8F0; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-    .filter-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+    /* MODAL POPUP */
+    .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(230, 235, 240, 0.8); backdrop-filter: blur(5px); z-index: 9999; justify-content: center; align-items: center; overflow-y: auto; padding: 20px 0;}
+    .modal-box { background: var(--bg-color); padding: 40px; border-radius: 24px; max-width: 480px; width: 90%; margin: auto; border: none; box-shadow: 15px 15px 30px var(--shadow-dark), -15px -15px 30px var(--shadow-light); }
+    .filter-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
 
-    /* RUNNING TEXT */
-    .rt-container { width: 100vw; margin-left: calc(-50vw + 50%); background: #F8FAFC !important; color: var(--dark) !important; padding: 10px 0; overflow: hidden; white-space: nowrap; font-weight: 700; display: none; border-bottom: 1px solid #E2E8F0 !important; border-top: 1px solid #E2E8F0 !important; margin-bottom: 20px; font-family: var(--font-teks) !important; }
+    /* RUNNING TEXT (PENGUMUMAN) */
+    .rt-container { width: 100vw; margin-left: calc(-50vw + 50%); background: var(--bg-color) !important; color: var(--dark) !important; padding: 15px 0; overflow: hidden; white-space: nowrap; font-weight: 800; display: none; border: none !important; box-shadow: inset 0 4px 8px var(--shadow-dark), inset 0 -4px 8px var(--shadow-light); margin-bottom: 30px; font-family: var(--font-judul) !important; font-size: 1.1rem; }
     .rt-text { display: inline-block; padding-left: 100%; animation: marquee 18s linear infinite; }
     @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
 
     /* TAB PUBLIC DATA */
-    .tab-container { display: flex; gap: 10px; margin-bottom: 15px; }
-    .tab-btn { flex: 1; padding: 12px; text-align: center; background: #F1F5F9 !important; border-radius: 8px; cursor: pointer; font-weight: 700; transition: 0.3s; font-size: 0.85rem; color: #475569 !important; border: 1px solid transparent; }
-    .tab-btn.active { background: var(--dark) !important; color: var(--bg-card) !important; }
+    .tab-container { display: flex; gap: 15px; margin-bottom: 20px; }
+    .tab-btn { flex: 1; padding: 14px; text-align: center; background: var(--bg-color) !important; border-radius: 12px; cursor: pointer; font-weight: 800; transition: 0.2s; font-size: 0.9rem; color: var(--text-muted) !important; border: none; box-shadow: 5px 5px 10px var(--shadow-dark), -5px -5px 10px var(--shadow-light); }
+    .tab-btn.active { color: var(--dark) !important; box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light); }
   </style>
 </head>
 <body>
@@ -141,44 +244,44 @@
     <div id="page-home" class="page active">
       
       <div id="sect-home" class="home-section" style="padding-top: 0;">
-        <div class="card" style="text-align: center; border-top: 6px solid var(--dark);">
+        <div class="card" style="text-align: center;">
           <h2>SELAMAT DATANG DI PORTAL<br>LAZISNU SUMOKEMBANGSRI</h2>
-          <p style="color: #475569; font-weight: 600;">Transparansi pengelolaan Zakat, Infaq, dan Sedekah.</p>
+          <p style="color: var(--text-muted); font-weight: 600;">Transparansi pengelolaan Zakat, Infaq, dan Sedekah.</p>
         </div>
       </div>
 
       <div id="sect-program" class="home-section">
-        <h2 style="text-align: center; margin-bottom: 20px;">Program Berjalan</h2>
+        <h2 style="text-align: center; margin-bottom: 25px;">Program Berjalan</h2>
         <div class="grid-menu" style="grid-template-columns: 1fr; margin-top: 0;">
-          <div class="card" style="margin-bottom:0; border-left: 6px solid var(--dark); padding: 20px;"><h3 style="margin:0 0 5px 0;">🌾 Zakat Fitrah</h3><p style="margin:0; font-size:0.9rem;">Penerimaan dan penyaluran Zakat Fitrah tahunan.</p></div>
-          <div class="card" style="margin-bottom:0; border-left: 6px solid var(--dark); padding: 20px;"><h3 style="margin:0 0 5px 0;">💰 Zakat Mal</h3><p style="margin:0; font-size:0.9rem;">Pengelolaan Zakat Harta (Mal) dari para Muzakki desa.</p></div>
-          <div class="card" style="margin-bottom:0; border-left: 6px solid var(--dark); padding: 20px;"><h3 style="margin:0 0 5px 0;">🤲 Infaq Kaleng</h3><p style="margin:0; font-size:0.9rem;">Penyaluran dana Infaq dan Sedekah warga.</p></div>
+          <div class="card" style="margin-bottom:0; padding: 25px;"><h3 style="margin:0 0 8px 0;">🌾 Zakat Fitrah</h3><p style="margin:0; font-size:0.95rem;">Penerimaan dan penyaluran Zakat Fitrah tahunan.</p></div>
+          <div class="card" style="margin-bottom:0; padding: 25px;"><h3 style="margin:0 0 8px 0;">💰 Zakat Mal</h3><p style="margin:0; font-size:0.95rem;">Pengelolaan Zakat Harta (Mal) dari para Muzakki desa.</p></div>
+          <div class="card" style="margin-bottom:0; padding: 25px;"><h3 style="margin:0 0 8px 0;">🤲 Infaq Kaleng</h3><p style="margin:0; font-size:0.95rem;">Penyaluran dana Infaq dan Sedekah warga.</p></div>
         </div>
       </div>
 
       <div id="sect-about" class="home-section">
-        <div class="card" style="line-height: 1.6; color: #334155;">
+        <div class="card" style="line-height: 1.7;">
           <h2>About Us</h2>
-          <p style="font-weight: 800; font-size: 1.1rem; color: var(--dark); margin-bottom: 10px;">LAZISNU Sumokembangsri: Menjembatani Kebaikan, Memberdayakan Umat</p>
+          <p style="font-weight: 800; font-size: 1.15rem; color: var(--dark); margin-bottom: 12px;">LAZISNU Sumokembangsri: Menjembatani Kebaikan, Memberdayakan Umat</p>
           <p>LAZISNU (Lembaga Amil Zakat, Infaq, dan Shadaqah Nahdlatul Ulama) Sumokembangsri adalah lembaga filantropi Islam yang berdedikasi untuk menghimpun, mengelola, dan menyalurkan dana Zakat, Infaq, dan Shadaqah (ZIS) serta dana sosial keagamaan lainnya untuk kesejahteraan masyarakat.</p>
           
-          <h3 style="margin-top: 20px; font-size: 1.1rem;">Jejak Langkah & Sejarah Kami</h3>
+          <h3 style="margin-top: 25px; font-size: 1.2rem;">Jejak Langkah & Sejarah Kami</h3>
           <p>Kepedulian terhadap kesejahteraan umat di wilayah Sumokembangsri bukanlah sebuah langkah baru. Akar pengabdian kami telah tertanam kuat sejak tahun 1999, di mana lembaga ini pertama kali dirintis dengan nama <b>LAZIS Sumokembangsri</b>. Bermula dari inisiatif lokal dan semangat gotong royong masyarakat, LAZIS Sumokembangsri bergerak secara mandiri selama dua dekade untuk membantu meringankan beban sesama dan menebar manfaat di lingkungan desa.</p>
           <p>Seiring dengan niat untuk terus memperluas jangkauan manfaat dan meningkatkan profesionalisme tata kelola, sebuah langkah besar diambil. Pada periode tahun 2019 - 2020, sejalan dengan terbentuknya kepengurusan LAZISNU di wilayah ini, LAZIS Sumokembangsri secara resmi melebur dan bertransformasi menjadi <b>LAZISNU Sumokembangsri</b>.</p>
           <p>Integrasi ini mengukuhkan posisi kami di bawah naungan jam'iyah Nahdlatul Ulama (NU). Dengan transformasi ini, sistem pengelolaan ZIS kami menjadi lebih terstruktur, transparan, dan terstandarisasi sesuai dengan pedoman operasional LAZISNU secara nasional, tanpa meninggalkan kearifan dan kedekatan lokal yang telah terbangun sejak 1999.</p>
           
-          <h3 style="margin-top: 20px; font-size: 1.1rem;">Komitmen Kami</h3>
+          <h3 style="margin-top: 25px; font-size: 1.2rem;">Komitmen Kami</h3>
           <p>Kini, dengan semangat baru sebagai LAZISNU Sumokembangsri, kami berkomitmen untuk tidak sekadar menjadi tempat penyaluran donasi, melainkan menjadi motor penggerak pemberdayaan umat. Melalui pilar-pilar program sosial, pendidikan, kesehatan, dan ekonomi, kami berusaha mewujudkan masyarakat Sumokembangsri yang lebih mandiri dan sejahtera.</p>
           <p>Dengan memegang teguh prinsip <b>Amanah, Transparan, dan Profesional</b>, kami siap menjadi jembatan kebaikan yang menghubungkan para Muzakki (dermawan) dengan para Mustahiq (penerima manfaat).</p>
           
-          <p style="font-weight: 800; margin-top: 15px; color: var(--dark); text-align: center; background: #f1f5f9; padding: 15px; border-radius: 8px;">Mari bersama LAZISNU Sumokembangsri, kita rajut kepedulian dan tebar keberkahan untuk sesama.</p>
+          <div style="font-weight: 800; margin-top: 20px; text-align: center; padding: 20px; border-radius: 12px; box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);">Mari bersama LAZISNU Sumokembangsri, kita rajut kepedulian dan tebar keberkahan untuk sesama.</div>
         </div>
       </div>
 
       <div id="sect-struktur" class="home-section">
         <div class="card">
           <h2>Struktur Organisasi</h2>
-          <p style="color: #64748b;">(Data struktur pengurus akan diupdate oleh tim admin)</p>
+          <p style="color: var(--text-muted);">(Data struktur pengurus akan diupdate oleh tim admin)</p>
           <ul style="line-height: 1.8; font-weight: 600;">
             <li>Ketua: -</li>
             <li>Sekretaris: -</li>
@@ -192,7 +295,7 @@
     <div id="page-public-data" class="page">
       <div class="card">
         <h2>Transparansi Data</h2>
-        <p style="font-size: 0.9rem; color: #64748b; margin-bottom: 20px;">Data bersifat <i>read-only</i> (hanya lihat) untuk transparansi publik Ranting Sumokembangsri.</p>
+        <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 25px;">Data bersifat <i>read-only</i> (hanya lihat) untuk transparansi publik Ranting Sumokembangsri.</p>
         
         <div class="tab-container">
           <div class="tab-btn active" id="tab-muzakki" onclick="switchPublicTab('muzakki')">Data Muzakki</div>
@@ -200,7 +303,7 @@
           <div class="tab-btn" id="tab-amil" onclick="switchPublicTab('amil')">Data Amil</div>
         </div>
 
-        <div class="form-group" style="margin-bottom: 20px;">
+        <div class="form-group" style="margin-bottom: 25px;">
           <input type="text" id="search-public" placeholder="Pencarian Nama / Dusun..." onkeyup="filterPublicData()">
         </div>
 
@@ -211,14 +314,14 @@
     </div>
 
     <div id="page-login" class="page">
-      <div class="card" style="max-width: 400px; margin: auto;">
+      <div class="card" style="max-width: 420px; margin: auto;">
         <h2 id="auth-title">Login Amil</h2>
         
         <div id="form-login-sec">
           <div class="form-group"><label>Nickname</label><input type="text" id="l-nick"></div>
           <div class="form-group"><label>Password</label><input type="password" id="l-pass"></div>
           <button class="btn-submit" onclick="prosesLoginWeb()">Masuk Dashboard</button>
-          <p style="text-align:center; font-size:0.85rem; margin-top:20px; font-weight:600;">Belum punya akun? <span style="color:#0284c7; cursor:pointer; font-weight:800;" onclick="toggleAuthMode('register')">Daftar Amil</span></p>
+          <p style="text-align:center; font-size:0.9rem; margin-top:25px; font-weight:600;">Belum punya akun? <span style="cursor:pointer; font-weight:800; text-decoration: underline;" onclick="toggleAuthMode('register')">Daftar Amil</span></p>
         </div>
 
         <div id="form-register-sec" style="display:none;">
@@ -235,35 +338,35 @@
             </select>
           </div>
           <div class="form-group"><label>Password</label><input type="password" id="r-pass"></div>
-          <button class="btn-submit" style="background:var(--success);" onclick="prosesDaftarWeb()">Kirim Pendaftaran</button>
-          <p style="text-align:center; font-size:0.85rem; margin-top:20px; font-weight:600;">Sudah punya akun? <span style="color:#0284c7; cursor:pointer; font-weight:800;" onclick="toggleAuthMode('login')">Login di sini</span></p>
+          <button class="btn-submit" onclick="prosesDaftarWeb()">Kirim Pendaftaran</button>
+          <p style="text-align:center; font-size:0.9rem; margin-top:25px; font-weight:600;">Sudah punya akun? <span style="cursor:pointer; font-weight:800; text-decoration: underline;" onclick="toggleAuthMode('login')">Login di sini</span></p>
         </div>
       </div>
     </div>
 
     <div id="page-dashboard" class="page">
-      <div class="card" style="border-top: 6px solid var(--dark);"><h2>Dashboard <span id="d-role">Amil</span></h2><p style="margin-bottom: 0;">Hai, <b id="d-nama">Nama</b>! (Dusun: <span id="d-dusun">Dusun</span>)</p></div>
+      <div class="card"><h2>Dashboard <span id="d-role">Amil</span></h2><p style="margin-bottom: 0;">Hai, <b id="d-nama">Nama</b>! (Dusun: <span id="d-dusun">Dusun</span>)</p></div>
       <div id="banner-pengumuman" class="rt-container"><div class="rt-text" id="teks-pengumuman"></div></div>
       <div class="grid-menu" id="menu-container"></div>
     </div>
 
-    <div id="page-muzakki" class="page"><div class="card"><h3>Input Zakat Mal</h3><div class="flex-gap"><div class="form-group"><label>Dusun</label><input type="text" id="muz-dusun" readonly style="background:#f1f5f9;"></div><div class="form-group"><label>Nama Amil</label><input type="text" id="muz-amil" readonly style="background:#f1f5f9;"></div></div><div class="flex-gap"><div class="form-group"><label>RW</label><select id="muz-rw"><option value="RW 1">RW 1</option><option value="RW 2">RW 2</option><option value="RW 3">RW 3</option><option value="RW 4">RW 4</option><option value="RW 5">RW 5</option><option value="RW 6">RW 6</option></select></div><div class="form-group"><label>RT</label><input type="text" id="muz-rt" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></div></div><div class="form-group"><label>Nama Muzakki</label><input type="text" id="muz-nama"></div><div class="form-group"><label>Nominal</label><input type="text" id="muz-nom" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></div><button class="btn-submit" onclick="saveMuz()">Simpan Zakat Mal</button><button class="btn-submit btn-secondary" onclick="pindahHalaman('dashboard')">Kembali</button></div></div>
-    <div id="page-laporan" class="page"><div class="card"><h2>Data Muzakki</h2><button class="btn-submit btn-secondary" style="margin-bottom:15px; padding: 10px;" onclick="pindahHalaman('dashboard')">Kembali</button><div class="form-group"><input type="text" id="search-laporan" placeholder="Cari Nama / Dusun..." onkeyup="filterLaporan()"></div><div id="list-laporan"><i>Memuat data...</i></div></div></div>
-    <div id="page-progress" class="page"><div class="card"><h2>Progress Zakat Mal</h2><button class="btn-submit btn-secondary" style="margin-bottom:15px; padding: 10px;" onclick="pindahHalaman('dashboard')">Kembali</button><div id="list-progress"><i>Memuat progress...</i></div></div></div>
-    <div id="page-distribusi" class="page"><div class="card"><h3>Input Distribusi</h3><div class="flex-gap"><div class="form-group"><label>Dusun</label><input type="text" id="dist-dusun" readonly style="background:#f1f5f9;"></div><div class="form-group"><label>Nama Petugas</label><input type="text" id="dist-amil" readonly style="background:#f1f5f9;"></div></div><div class="flex-gap"><div class="form-group"><label>RW</label><select id="dist-rw"><option value="RW 1">RW 1</option><option value="RW 2">RW 2</option><option value="RW 3">RW 3</option><option value="RW 4">RW 4</option><option value="RW 5">RW 5</option><option value="RW 6">RW 6</option></select></div><div class="form-group"><label>RT</label><input type="text" id="dist-rt" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></div></div><div class="form-group"><label>Kategori Mustahiq</label><select id="dist-kategori"><option value="Fakir">Fakir</option><option value="Miskin">Miskin</option><option value="Sabilillah">Sabilillah</option><option value="Yatim">Yatim</option><option value="Ghorim">Ghorim</option><option value="Ibnu Sabil">Ibnu Sabil</option><option value="Muallaf">Muallaf</option><option value="Riqab">Riqab</option></select></div><div class="form-group"><label>Nama Penerima</label><input type="text" id="dist-nama"></div><div class="form-group"><label>Foto Bukti</label><input type="file" id="dist-foto" accept="image/*"></div><button class="btn-submit" onclick="saveDistribusi()">Simpan Penyaluran</button><button class="btn-submit btn-secondary" onclick="pindahHalaman('dashboard')">Kembali</button></div></div>
-    <div id="page-laporan-distribusi" class="page"><div class="card"><h2>Laporan Distribusi</h2><button class="btn-submit btn-secondary" style="margin-bottom:15px; padding: 10px;" onclick="pindahHalaman('dashboard')">Kembali</button><div id="progress-dist-container" style="margin-bottom: 20px;"><i>Memuat progress...</i></div><hr style="border:1px solid #e2e8f0; margin: 20px 0;"><h3>Daftar Mustahiq</h3><div class="filter-grid"><div class="form-group"><select id="f-dusun" onchange="filterDistribusi()"><option value="ALL">Semua Dusun</option><option value="KEMAMBANG">Kemambang</option><option value="SUMOTUWO">Sumotuwo</option><option value="LUWUNG">Luwung</option><option value="WATESROWO">WATESROWO</option><option value="WONOKITRI WETAN">WONOKITRI WETAN</option><option value="WONOKITRI KULON">WONOKITRI KULON</option></select></div><div class="form-group"><select id="f-status" onchange="filterDistribusi()"><option value="ALL">Semua Status</option><option value="Tersalurkan">Tersalurkan</option><option value="Belum">Belum Salur</option></select></div><div class="form-group"><select id="f-kat" onchange="filterDistribusi()"><option value="ALL">Semua Kategori</option><option value="Fakir">Fakir</option><option value="Miskin">Miskin</option><option value="Sabilillah">Sabilillah</option><option value="Yatim">Yatim</option></select></div></div><div class="form-group"><input type="text" id="f-search" placeholder="Cari Nama Penerima..." onkeyup="filterDistribusi()"></div><div id="list-distribusi"><i>Memuat data...</i></div></div></div>
-    <div id="page-kelola-mustahiq" class="page"><div class="card"><h2>Kelola Master Mustahiq</h2><button class="btn-submit btn-secondary" style="margin-bottom:15px; padding: 10px;" onclick="pindahHalaman('dashboard')">Kembali</button><button class="btn-submit" style="background:var(--success); margin-bottom: 20px;" onclick="openModalMustahiq('NEW')">+ Tambah Mustahiq Baru</button><div class="form-group"><input type="text" id="search-kelola" placeholder="Cari Nama / Dusun..." onkeyup="filterKelola()"></div><div id="list-kelola"><i>Memuat data...</i></div></div></div>
-    <div id="page-ajukan-mustahiq" class="page"><div class="card"><h2>Ajukan Mustahiq</h2><div class="form-group"><label>Tipe Pengajuan</label><select id="aju-tipe" onchange="toggleAjuMode()"><option value="BARU">Usulan Warga Baru</option><option value="EDIT">Perubahan Data Lama</option></select></div><div id="box-cari-mustahiq" class="form-group" style="display:none;"><label>Pilih Nama Mustahiq Lama</label><select id="aju-pilih-nama" onchange="isiDataOtomatis()"></select></div><div class="flex-gap"><div class="form-group"><label>Dusun</label><input type="text" id="aju-dusun" readonly style="background:#f1f5f9;"></div><div class="form-group"><label>Amil Pengaju</label><input type="text" id="aju-amil" readonly style="background:#f1f5f9;"></div></div><div class="flex-gap"><div class="form-group"><label>RW</label><select id="aju-rw"><option value="RW 1">RW 1</option><option value="RW 2">RW 2</option><option value="RW 3">RW 3</option><option value="RW 4">RW 4</option><option value="RW 5">RW 5</option><option value="RW 6">RW 6</option></select></div><div class="form-group"><label>RT</label><input type="text" id="aju-rt" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></div></div><div class="form-group"><label>Kategori</label><select id="aju-kat"><option value="Fakir">Fakir</option><option value="Miskin">Miskin</option><option value="Sabilillah">Sabilillah</option><option value="Yatim">Yatim</option><option value="Ghorim">Ghorim</option><option value="Ibnu Sabil">Ibnu Sabil</option><option value="Muallaf">Muallaf</option><option value="Riqab">Riqab</option></select></div><div class="form-group"><label>Nama Penerima</label><input type="text" id="aju-nama"></div><button class="btn-submit" onclick="ajukanMustahiq()">Kirim Pengajuan</button><button class="btn-submit btn-secondary" onclick="pindahHalaman('dashboard')">Kembali</button></div></div>
-    <div id="page-kelola-pengajuan" class="page"><div class="card"><h2>Konfirmasi Pengajuan</h2><button class="btn-submit btn-secondary" style="margin-bottom:15px; padding: 10px;" onclick="pindahHalaman('dashboard')">Kembali</button><div id="list-pengajuan"><i>Memuat data...</i></div></div></div>
-    <div id="page-masalah" class="page"><div class="card"><h2>Laporan Masalah</h2><button class="btn-submit btn-secondary" style="margin-bottom:15px; padding: 10px;" onclick="pindahHalaman('dashboard')">Kembali</button><div id="list-masalah"><i>Memuat data...</i></div></div></div>
-    <div id="page-kelola-akun" class="page"><div class="card"><h2>Kelola Akun</h2><button class="btn-submit btn-secondary" style="margin-bottom:15px; padding: 10px;" onclick="pindahHalaman('dashboard')">Kembali</button><div class="form-group"><input type="text" id="search-akun" placeholder="Cari Nama / Dusun / Nickname..." onkeyup="filterKelolaAkun()"></div><div id="list-kelola-akun"><i>Memuat data...</i></div></div></div>
+    <div id="page-muzakki" class="page"><div class="card"><h3>Input Zakat Mal</h3><div class="flex-gap"><div class="form-group"><label>Dusun</label><input type="text" id="muz-dusun" readonly></div><div class="form-group"><label>Nama Amil</label><input type="text" id="muz-amil" readonly></div></div><div class="flex-gap"><div class="form-group"><label>RW</label><select id="muz-rw"><option value="RW 1">RW 1</option><option value="RW 2">RW 2</option><option value="RW 3">RW 3</option><option value="RW 4">RW 4</option><option value="RW 5">RW 5</option><option value="RW 6">RW 6</option></select></div><div class="form-group"><label>RT</label><input type="text" id="muz-rt" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></div></div><div class="form-group"><label>Nama Muzakki</label><input type="text" id="muz-nama"></div><div class="form-group"><label>Nominal</label><input type="text" id="muz-nom" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></div><button class="btn-submit" onclick="saveMuz()">Simpan Zakat Mal</button><button class="btn-submit btn-secondary" onclick="pindahHalaman('dashboard')">Kembali</button></div></div>
+    <div id="page-laporan" class="page"><div class="card"><h2>Data Muzakki</h2><button class="btn-submit btn-secondary" style="margin-bottom:20px;" onclick="pindahHalaman('dashboard')">Kembali</button><div class="form-group"><input type="text" id="search-laporan" placeholder="Cari Nama / Dusun..." onkeyup="filterLaporan()"></div><div id="list-laporan"><i>Memuat data...</i></div></div></div>
+    <div id="page-progress" class="page"><div class="card"><h2>Progress Zakat Mal</h2><button class="btn-submit btn-secondary" style="margin-bottom:20px;" onclick="pindahHalaman('dashboard')">Kembali</button><div id="list-progress"><i>Memuat progress...</i></div></div></div>
+    <div id="page-distribusi" class="page"><div class="card"><h3>Input Distribusi</h3><div class="flex-gap"><div class="form-group"><label>Dusun</label><input type="text" id="dist-dusun" readonly></div><div class="form-group"><label>Nama Petugas</label><input type="text" id="dist-amil" readonly></div></div><div class="flex-gap"><div class="form-group"><label>RW</label><select id="dist-rw"><option value="RW 1">RW 1</option><option value="RW 2">RW 2</option><option value="RW 3">RW 3</option><option value="RW 4">RW 4</option><option value="RW 5">RW 5</option><option value="RW 6">RW 6</option></select></div><div class="form-group"><label>RT</label><input type="text" id="dist-rt" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></div></div><div class="form-group"><label>Kategori Mustahiq</label><select id="dist-kategori"><option value="Fakir">Fakir</option><option value="Miskin">Miskin</option><option value="Sabilillah">Sabilillah</option><option value="Yatim">Yatim</option><option value="Ghorim">Ghorim</option><option value="Ibnu Sabil">Ibnu Sabil</option><option value="Muallaf">Muallaf</option><option value="Riqab">Riqab</option></select></div><div class="form-group"><label>Nama Penerima</label><input type="text" id="dist-nama"></div><div class="form-group"><label>Foto Bukti</label><input type="file" id="dist-foto" accept="image/*"></div><button class="btn-submit" onclick="saveDistribusi()">Simpan Penyaluran</button><button class="btn-submit btn-secondary" onclick="pindahHalaman('dashboard')">Kembali</button></div></div>
+    <div id="page-laporan-distribusi" class="page"><div class="card"><h2>Laporan Distribusi</h2><button class="btn-submit btn-secondary" style="margin-bottom:20px;" onclick="pindahHalaman('dashboard')">Kembali</button><div id="progress-dist-container" style="margin-bottom: 25px;"><i>Memuat progress...</i></div><hr style="border:none; border-top:2px dashed var(--shadow-dark); margin: 25px 0;"><h3 style="margin-top:20px;">Daftar Mustahiq</h3><div class="filter-grid"><div class="form-group"><select id="f-dusun" onchange="filterDistribusi()"><option value="ALL">Semua Dusun</option><option value="KEMAMBANG">Kemambang</option><option value="SUMOTUWO">Sumotuwo</option><option value="LUWUNG">Luwung</option><option value="WATESROWO">WATESROWO</option><option value="WONOKITRI WETAN">WONOKITRI WETAN</option><option value="WONOKITRI KULON">WONOKITRI KULON</option></select></div><div class="form-group"><select id="f-status" onchange="filterDistribusi()"><option value="ALL">Semua Status</option><option value="Tersalurkan">Tersalurkan</option><option value="Belum">Belum Salur</option></select></div><div class="form-group"><select id="f-kat" onchange="filterDistribusi()"><option value="ALL">Semua Kategori</option><option value="Fakir">Fakir</option><option value="Miskin">Miskin</option><option value="Sabilillah">Sabilillah</option><option value="Yatim">Yatim</option></select></div></div><div class="form-group"><input type="text" id="f-search" placeholder="Cari Nama Penerima..." onkeyup="filterDistribusi()"></div><div id="list-distribusi"><i>Memuat data...</i></div></div></div>
+    <div id="page-kelola-mustahiq" class="page"><div class="card"><h2>Kelola Master Mustahiq</h2><button class="btn-submit btn-secondary" style="margin-bottom:20px;" onclick="pindahHalaman('dashboard')">Kembali</button><button class="btn-submit" style="margin-bottom: 25px;" onclick="openModalMustahiq('NEW')">+ Tambah Mustahiq Baru</button><div class="form-group"><input type="text" id="search-kelola" placeholder="Cari Nama / Dusun..." onkeyup="filterKelola()"></div><div id="list-kelola"><i>Memuat data...</i></div></div></div>
+    <div id="page-ajukan-mustahiq" class="page"><div class="card"><h2>Ajukan Mustahiq</h2><div class="form-group"><label>Tipe Pengajuan</label><select id="aju-tipe" onchange="toggleAjuMode()"><option value="BARU">Usulan Warga Baru</option><option value="EDIT">Perubahan Data Lama</option></select></div><div id="box-cari-mustahiq" class="form-group" style="display:none;"><label>Pilih Nama Mustahiq Lama</label><select id="aju-pilih-nama" onchange="isiDataOtomatis()"></select></div><div class="flex-gap"><div class="form-group"><label>Dusun</label><input type="text" id="aju-dusun" readonly></div><div class="form-group"><label>Amil Pengaju</label><input type="text" id="aju-amil" readonly></div></div><div class="flex-gap"><div class="form-group"><label>RW</label><select id="aju-rw"><option value="RW 1">RW 1</option><option value="RW 2">RW 2</option><option value="RW 3">RW 3</option><option value="RW 4">RW 4</option><option value="RW 5">RW 5</option><option value="RW 6">RW 6</option></select></div><div class="form-group"><label>RT</label><input type="text" id="aju-rt" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></div></div><div class="form-group"><label>Kategori</label><select id="aju-kat"><option value="Fakir">Fakir</option><option value="Miskin">Miskin</option><option value="Sabilillah">Sabilillah</option><option value="Yatim">Yatim</option><option value="Ghorim">Ghorim</option><option value="Ibnu Sabil">Ibnu Sabil</option><option value="Muallaf">Muallaf</option><option value="Riqab">Riqab</option></select></div><div class="form-group"><label>Nama Penerima</label><input type="text" id="aju-nama"></div><button class="btn-submit" onclick="ajukanMustahiq()">Kirim Pengajuan</button><button class="btn-submit btn-secondary" onclick="pindahHalaman('dashboard')">Kembali</button></div></div>
+    <div id="page-kelola-pengajuan" class="page"><div class="card"><h2>Konfirmasi Pengajuan</h2><button class="btn-submit btn-secondary" style="margin-bottom:20px;" onclick="pindahHalaman('dashboard')">Kembali</button><div id="list-pengajuan"><i>Memuat data...</i></div></div></div>
+    <div id="page-masalah" class="page"><div class="card"><h2>Laporan Masalah</h2><button class="btn-submit btn-secondary" style="margin-bottom:20px;" onclick="pindahHalaman('dashboard')">Kembali</button><div id="list-masalah"><i>Memuat data...</i></div></div></div>
+    <div id="page-kelola-akun" class="page"><div class="card"><h2>Kelola Akun</h2><button class="btn-submit btn-secondary" style="margin-bottom:20px;" onclick="pindahHalaman('dashboard')">Kembali</button><div class="form-group"><input type="text" id="search-akun" placeholder="Cari Nama / Dusun / Nickname..." onkeyup="filterKelolaAkun()"></div><div id="list-kelola-akun"><i>Memuat data...</i></div></div></div>
   </div>
 
-  <div id="customModal" class="modal-overlay" style="z-index:99999;"><div class="modal-box" style="text-align:center;"><p id="modalMsg" style="white-space: pre-wrap; margin-bottom: 20px; font-size: 1.1rem; font-weight:bold;"></p><button class="btn-submit" id="btn-modal-ok" onclick="closeModal()">Selesai</button></div></div>
-  <div id="crudModal" class="modal-overlay"><div class="modal-box"><h3 id="crud-title">Mustahiq</h3><input type="hidden" id="crud-id"><div class="form-group"><label>Dusun</label><select id="crud-dusun"><option value="KEMAMBANG">KEMAMBANG</option><option value="SUMOTUWO">SUMOTUWO</option><option value="LUWUNG">LUWUNG</option><option value="WATESROWO">WATESROWO</option><option value="WONOKITRI WETAN">WONOKITRI WETAN</option><option value="WONOKITRI KULON">WONOKITRI KULON</option></select></div><div class="flex-gap"><div class="form-group"><label>RW</label><select id="crud-rw"><option value="RW 1">RW 1</option><option value="RW 2">RW 2</option><option value="RW 3">RW 3</option><option value="RW 4">RW 4</option><option value="RW 5">RW 5</option><option value="RW 6">RW 6</option></select></div><div class="form-group"><label>RT</label><input type="text" id="crud-rt"></div></div><div class="form-group"><label>Kategori</label><select id="crud-kategori"><option value="Fakir">Fakir</option><option value="Miskin">Miskin</option><option value="Sabilillah">Sabilillah</option><option value="Yatim">Yatim</option></select></div><div class="form-group"><label>Nama</label><input type="text" id="crud-nama"></div><button class="btn-submit" style="background:var(--success);" onclick="saveCrudMustahiq()">Simpan Data</button><button class="btn-submit btn-danger" id="btn-crud-delete" style="display:none;" onclick="deleteCrudMustahiq()">Hapus Data</button><button class="btn-submit btn-secondary" onclick="document.getElementById('crudModal').style.display='none'">Batal</button></div></div>
-  <div id="crudModalMuzakki" class="modal-overlay"><div class="modal-box"><h3>Edit Data Muzakki</h3><input type="hidden" id="muz-edit-id"><div class="form-group"><label>Dusun</label><select id="muz-edit-dusun"><option value="KEMAMBANG">KEMAMBANG</option><option value="SUMOTUWO">SUMOTUWO</option><option value="LUWUNG">LUWUNG</option><option value="WATESROWO">WATESROWO</option><option value="WONOKITRI WETAN">WONOKITRI WETAN</option><option value="WONOKITRI KULON">WONOKITRI KULON</option></select></div><div class="flex-gap"><div class="form-group"><label>RW</label><select id="muz-edit-rw"><option value="RW 1">RW 1</option><option value="RW 2">RW 2</option><option value="RW 3">RW 3</option><option value="RW 4">RW 4</option><option value="RW 5">RW 5</option><option value="RW 6">RW 6</option></select></div><div class="form-group"><label>RT</label><input type="text" id="muz-edit-rt"></div></div><div class="form-group"><label>Nama Muzakki</label><input type="text" id="muz-edit-nama"></div><div class="form-group"><label>Nominal</label><input type="text" id="muz-edit-nom"></div><button class="btn-submit" style="background:var(--success);" onclick="saveCrudMuzakki()">Update Data</button><button class="btn-submit btn-secondary" onclick="document.getElementById('crudModalMuzakki').style.display='none'">Batal</button></div></div>
-  <div id="crudModalAkun" class="modal-overlay"><div class="modal-box"><h3>Edit Akun</h3><input type="hidden" id="akun-id"><div class="form-group"><label>Nama</label><input type="text" id="akun-nama"></div><div class="flex-gap"><div class="form-group"><label>Nickname</label><input type="text" id="akun-nick"></div><div class="form-group"><label>Dusun</label><select id="akun-dusun"><option value="KEMAMBANG">KEMAMBANG</option><option value="SUMOTUWO">SUMOTUWO</option><option value="LUWUNG">LUWUNG</option><option value="WATESROWO">WATESROWO</option><option value="WONOKITRI WETAN">WONOKITRI WETAN</option><option value="WONOKITRI KULON">WONOKITRI KULON</option></select></div></div><div class="flex-gap"><div class="form-group"><label>Jenis Akun</label><select id="akun-jenis"><option value="Amil">Amil</option><option value="Pengurus">Pengurus</option></select></div><div class="form-group"><label>Status</label><select id="akun-status"><option value="Active">Active</option><option value="Pending">Pending</option></select></div></div><div class="form-group"><label>Password Baru</label><input type="text" id="akun-pass"></div><button class="btn-submit" style="background:var(--success);" onclick="saveCrudAkun()">Update Akun</button><button class="btn-submit btn-danger" onclick="deleteCrudAkun()">Hapus Akun</button><button class="btn-submit btn-secondary" onclick="document.getElementById('crudModalAkun').style.display='none'">Batal</button></div></div>
-  <div id="modalPengumuman" class="modal-overlay"><div class="modal-box"><h3>Buat Pengumuman</h3><div class="form-group"><label>Pesan Singkat (Running Text)</label><input type="text" id="input-pengumuman" maxlength="150" placeholder="Ketik pengumuman di sini..."></div><div class="form-group"><label>Batas Waktu</label><input type="datetime-local" id="input-batas-waktu"></div><button class="btn-submit" style="background:var(--warning);" onclick="kirimPengumuman()">Sebarkan</button><button class="btn-submit btn-secondary" onclick="document.getElementById('modalPengumuman').style.display='none'">Batal</button></div></div>
+  <div id="customModal" class="modal-overlay"><div class="modal-box" style="text-align:center;"><p id="modalMsg" style="white-space: pre-wrap; margin-bottom: 25px; font-size: 1.15rem; font-weight:800;"></p><button class="btn-submit" id="btn-modal-ok" onclick="closeModal()">Selesai</button></div></div>
+  <div id="crudModal" class="modal-overlay"><div class="modal-box"><h3 id="crud-title">Mustahiq</h3><input type="hidden" id="crud-id"><div class="form-group"><label>Dusun</label><select id="crud-dusun"><option value="KEMAMBANG">KEMAMBANG</option><option value="SUMOTUWO">SUMOTUWO</option><option value="LUWUNG">LUWUNG</option><option value="WATESROWO">WATESROWO</option><option value="WONOKITRI WETAN">WONOKITRI WETAN</option><option value="WONOKITRI KULON">WONOKITRI KULON</option></select></div><div class="flex-gap"><div class="form-group"><label>RW</label><select id="crud-rw"><option value="RW 1">RW 1</option><option value="RW 2">RW 2</option><option value="RW 3">RW 3</option><option value="RW 4">RW 4</option><option value="RW 5">RW 5</option><option value="RW 6">RW 6</option></select></div><div class="form-group"><label>RT</label><input type="text" id="crud-rt"></div></div><div class="form-group"><label>Kategori</label><select id="crud-kategori"><option value="Fakir">Fakir</option><option value="Miskin">Miskin</option><option value="Sabilillah">Sabilillah</option><option value="Yatim">Yatim</option></select></div><div class="form-group"><label>Nama</label><input type="text" id="crud-nama"></div><button class="btn-submit" onclick="saveCrudMustahiq()">Simpan Data</button><button class="btn-submit btn-danger" id="btn-crud-delete" style="display:none;" onclick="deleteCrudMustahiq()">Hapus Data</button><button class="btn-submit btn-secondary" onclick="document.getElementById('crudModal').style.display='none'">Batal</button></div></div>
+  <div id="crudModalMuzakki" class="modal-overlay"><div class="modal-box"><h3>Edit Data Muzakki</h3><input type="hidden" id="muz-edit-id"><div class="form-group"><label>Dusun</label><select id="muz-edit-dusun"><option value="KEMAMBANG">KEMAMBANG</option><option value="SUMOTUWO">SUMOTUWO</option><option value="LUWUNG">LUWUNG</option><option value="WATESROWO">WATESROWO</option><option value="WONOKITRI WETAN">WONOKITRI WETAN</option><option value="WONOKITRI KULON">WONOKITRI KULON</option></select></div><div class="flex-gap"><div class="form-group"><label>RW</label><select id="muz-edit-rw"><option value="RW 1">RW 1</option><option value="RW 2">RW 2</option><option value="RW 3">RW 3</option><option value="RW 4">RW 4</option><option value="RW 5">RW 5</option><option value="RW 6">RW 6</option></select></div><div class="form-group"><label>RT</label><input type="text" id="muz-edit-rt"></div></div><div class="form-group"><label>Nama Muzakki</label><input type="text" id="muz-edit-nama"></div><div class="form-group"><label>Nominal</label><input type="text" id="muz-edit-nom"></div><button class="btn-submit" onclick="saveCrudMuzakki()">Update Data</button><button class="btn-submit btn-secondary" onclick="document.getElementById('crudModalMuzakki').style.display='none'">Batal</button></div></div>
+  <div id="crudModalAkun" class="modal-overlay"><div class="modal-box"><h3>Edit Akun</h3><input type="hidden" id="akun-id"><div class="form-group"><label>Nama</label><input type="text" id="akun-nama"></div><div class="flex-gap"><div class="form-group"><label>Nickname</label><input type="text" id="akun-nick"></div><div class="form-group"><label>Dusun</label><select id="akun-dusun"><option value="KEMAMBANG">KEMAMBANG</option><option value="SUMOTUWO">SUMOTUWO</option><option value="LUWUNG">LUWUNG</option><option value="WATESROWO">WATESROWO</option><option value="WONOKITRI WETAN">WONOKITRI WETAN</option><option value="WONOKITRI KULON">WONOKITRI KULON</option></select></div></div><div class="flex-gap"><div class="form-group"><label>Jenis Akun</label><select id="akun-jenis"><option value="Amil">Amil</option><option value="Pengurus">Pengurus</option></select></div><div class="form-group"><label>Status</label><select id="akun-status"><option value="Active">Active</option><option value="Pending">Pending</option></select></div></div><div class="form-group"><label>Password Baru</label><input type="text" id="akun-pass"></div><button class="btn-submit" onclick="saveCrudAkun()">Update Akun</button><button class="btn-submit btn-danger" onclick="deleteCrudAkun()">Hapus Akun</button><button class="btn-submit btn-secondary" onclick="document.getElementById('crudModalAkun').style.display='none'">Batal</button></div></div>
+  <div id="modalPengumuman" class="modal-overlay"><div class="modal-box"><h3>Buat Pengumuman</h3><div class="form-group"><label>Pesan Singkat (Running Text)</label><input type="text" id="input-pengumuman" maxlength="150" placeholder="Ketik pengumuman di sini..."></div><div class="form-group"><label>Batas Waktu</label><input type="datetime-local" id="input-batas-waktu"></div><button class="btn-submit" onclick="kirimPengumuman()">Sebarkan</button><button class="btn-submit btn-secondary" onclick="document.getElementById('modalPengumuman').style.display='none'">Batal</button></div></div>
 
   <script>
     const API_URL = "https://script.google.com/macros/s/AKfycbxJMDKRdttXGU-a7XoXSRPoTSkU3Htpnx8goOAF7IpGvxMm7msaVj3XSzJjLq1JWLhb/exec";
@@ -271,20 +374,17 @@
     let currentUser = null; let dataLaporan = []; let masterMustahiqData = []; let masterAkunData = [];
     let pollingInterval = null; let sessionInterval = null;
 
-    // Data Penampung Public
     let pubMuzakki = []; let pubMustahiq = []; let pubAmil = [];
 
     function getCleanName(name) { return (name || '').replace(/\(Baris:\s*\d+\)/gi, '').trim(); }
     function getCatBadge(kat) {
       let k = (kat || '').toLowerCase();
-      if(k.includes('fakir')) return `<span class="badge badge-danger">${kat}</span>`;
-      if(k.includes('miskin')) return `<span class="badge badge-warning">${kat}</span>`;
-      if(k.includes('sabilillah')) return `<span class="badge badge-success">${kat}</span>`;
-      if(k.includes('yatim')) return `<span class="badge badge-info">${kat}</span>`;
-      return `<span class="badge" style="background:#e2e8f0; color:#475569;">${kat}</span>`;
+      if(k.includes('fakir') || k.includes('miskin') || k.includes('sabilillah') || k.includes('yatim')) {
+          return `<span class="badge">${kat}</span>`;
+      }
+      return `<span class="badge">${kat}</span>`;
     }
 
-    // --- NAVIGASI PUBLIC SCROLL ---
     function navigasiKe(target) {
       if (!document.getElementById('page-home').classList.contains('active')) {
         pindahHalaman('home');
@@ -310,9 +410,6 @@
       }
     });
 
-    // ===============================================
-    // FITUR PUBLIC DATA (READ-ONLY) + PENCARIAN
-    // ===============================================
     async function fetchPublicData() {
       let resMuz = await kirimAPI({ action: "getLaporan" });
       if(resMuz.sukses) { pubMuzakki = resMuz.data.filter(d => d.status !== 'Error'); renderPublicMuzakki(pubMuzakki); }
@@ -335,7 +432,7 @@
       document.getElementById(`tab-${tab}`).classList.add('active');
       document.getElementById(`public-list-${tab}`).style.display = 'block';
       
-      document.getElementById('search-public').value = ""; // Reset pencarian saat pindah tab
+      document.getElementById('search-public').value = ""; 
       filterPublicData();
     }
 
@@ -352,38 +449,36 @@
       }
     }
 
-    // REVISI VISUAL: Card Muzakki (Kiri Nama/Nominal - Kanan Dusun/RTRW)
     function renderPublicMuzakki(data) {
       let html = ""; 
       data.forEach(d => {
         let formatRp = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(parseFloat(d.nominal) || 0);
-        html += `<div class="list-item" style="border-left: 6px solid var(--dark); display: flex; justify-content: space-between; align-items: center;">
+        html += `<div class="list-item" style="display: flex; justify-content: space-between; align-items: center;">
                   <div>
-                    <div style="font-weight: 800; font-size: 1.15rem; color: var(--dark); margin-bottom: 4px;">${d.nama}</div>
-                    <div style="font-weight: 800; font-size: 1.1rem; color: #d97706;">${formatRp}</div>
+                    <div style="font-weight: 800; font-size: 1.15rem; margin-bottom: 6px;">${d.nama}</div>
+                    <div style="font-weight: 800; font-size: 1.1rem;">${formatRp}</div>
                   </div>
                   <div style="text-align: right;">
-                    <div style="background: #e2e8f0; color: #334155; padding: 4px 10px; border-radius: 6px; font-weight: 800; font-size: 0.8rem; margin-bottom: 4px; display: inline-block;">DUSUN ${d.dusun.toUpperCase()}</div>
-                    <div style="font-size: 0.85rem; color: #64748b; font-weight: 600;">${d.rw} / RT ${d.rt}</div>
+                    <div class="badge" style="margin-bottom: 6px;">DUSUN ${d.dusun.toUpperCase()}</div>
+                    <div style="font-size: 0.85rem; font-weight: 600;">${d.rw} / RT ${d.rt}</div>
                   </div>
                  </div>`;
       }); 
       document.getElementById('public-list-muzakki').innerHTML = html || "<i>Belum ada data.</i>";
     }
 
-    // REVISI VISUAL: Card Mustahiq (Ditambah Dusun & Label SUDAH/BELUM)
     function renderPublicMustahiq(data) {
       let html = ""; data.forEach(d => { 
         let isDone = (d.status.toLowerCase() === 'tersalurkan'); 
         let cName = getCleanName(d.nama); 
-        let badgeSalur = isDone ? '<span class="badge badge-success" style="font-size:0.8rem;">SUDAH</span>' : '<span class="badge" style="background:#e2e8f0; color:#ef4444; font-size:0.8rem;">BELUM</span>';
+        let badgeSalur = isDone ? '<span class="badge">SUDAH</span>' : '<span class="badge" style="opacity:0.6;">BELUM</span>';
         
-        html += `<div class="list-item" style="border-left: 6px solid ${isDone ? 'var(--success)' : '#cbd5e1'};">
+        html += `<div class="list-item">
                   <div style="display:flex; justify-content:space-between; align-items:flex-start;">
                     <div>
-                      <div style="font-weight:800; font-size:1.15rem; margin-bottom: 4px;">${cName}</div>
-                      <div style="margin-bottom: 6px;">${getCatBadge(d.kategori)}</div>
-                      <div style="font-size:0.85rem; color:#64748b; font-weight:700;">Dusun ${d.dusun}</div>
+                      <div style="font-weight:800; font-size:1.15rem; margin-bottom: 6px;">${cName}</div>
+                      <div style="margin-bottom: 8px;">${getCatBadge(d.kategori)}</div>
+                      <div style="font-size:0.85rem; font-weight:700;">Dusun ${d.dusun}</div>
                     </div>
                     <div>${badgeSalur}</div>
                   </div>
@@ -394,18 +489,15 @@
 
     function renderPublicAmil(data) {
       let html = ""; data.forEach(d => {
-        html += `<div class="list-item" style="border-left: 6px solid #0284c7;">
-                  <div style="font-weight: 800; font-size: 1.15rem; color: var(--dark); margin-bottom: 4px;">${d.nama}</div>
-                  <div style="font-size: 0.85rem; color: #64748b; font-weight:700;">Dusun ${d.dusun}</div>
-                  <div style="margin-top:6px;"><span class="badge badge-info">${d.jenis}</span></div>
+        html += `<div class="list-item">
+                  <div style="font-weight: 800; font-size: 1.15rem; margin-bottom: 6px;">${d.nama}</div>
+                  <div style="font-size: 0.85rem; font-weight:700;">Dusun ${d.dusun}</div>
+                  <div style="margin-top:8px;"><span class="badge">${d.jenis}</span></div>
                  </div>`;
       });
       document.getElementById('public-list-amil').innerHTML = html || "<i>Belum ada data.</i>";
     }
 
-    // ===============================================
-    // AUTH & REGISTER
-    // ===============================================
     function toggleAuthMode(mode) {
       if(mode === 'register') {
         document.getElementById('form-login-sec').style.display = 'none';
@@ -437,10 +529,6 @@
       }
     }
 
-
-    // ===============================================
-    // DASHBOARD CORE SYSTEM (TIDAK DISENTUH)
-    // ===============================================
     function checkSession() {
       let session = localStorage.getItem('lazisnuSession'); if (!session) return false;
       let parsed = JSON.parse(session); if ((new Date().getTime() - parsed.timestamp) > (24*60*60*1000)) { localStorage.removeItem('lazisnuSession'); return false; }
@@ -516,11 +604,11 @@
 
     function renderDashboard() {
       let menu = document.getElementById('menu-container');
-      let html = `<div class="menu-box" onclick="pindahHalaman('muzakki')">📝 Input Muzakki</div><div class="menu-box" onclick="pindahHalaman('distribusi')">🤝 Input Distribusi</div><div class="menu-box" onclick="pindahHalaman('progress')">📊 Progress Zakat Mal</div><div class="menu-box" style="border-color:#059669; color:#059669;" onclick="pindahHalaman('laporan-distribusi')">📦 Laporan Distribusi</div>`;
+      let html = `<div class="menu-box" onclick="pindahHalaman('muzakki')">📝 Input Muzakki</div><div class="menu-box" onclick="pindahHalaman('distribusi')">🤝 Input Distribusi</div><div class="menu-box" onclick="pindahHalaman('progress')">📊 Progress Zakat Mal</div><div class="menu-box" onclick="pindahHalaman('laporan-distribusi')">📦 Laporan Distribusi</div>`;
       if(currentUser.role === 'Pengurus') {
-        html += `<div class="menu-box" style="border-color:#eab308; color:#eab308;" onclick="document.getElementById('modalPengumuman').style.display='flex'">📢 Buat Pengumuman</div><div class="menu-box" style="border-color:#ea580c; color:#ea580c;" onclick="pindahHalaman('laporan')">⚙️ Kelola Muzakki</div><div class="menu-box" style="border-color:#7c3aed; color:#7c3aed;" onclick="pindahHalaman('kelola-mustahiq')">⚙️ Kelola Mustahiq</div><div class="menu-box" style="border-color:#d97706; color:#d97706;" onclick="pindahHalaman('kelola-pengajuan')">📩 Konfirmasi Pengajuan</div><div class="menu-box" style="border-color:var(--danger); color:var(--danger);" onclick="pindahHalaman('masalah')">⚠️ Laporan Masalah</div><div class="menu-box" style="border-color:#0284c7; color:#0284c7;" onclick="pindahHalaman('kelola-akun')">👥 Kelola Akun</div>`;
+        html += `<div class="menu-box" onclick="document.getElementById('modalPengumuman').style.display='flex'">📢 Buat Pengumuman</div><div class="menu-box" onclick="pindahHalaman('laporan')">⚙️ Kelola Muzakki</div><div class="menu-box" onclick="pindahHalaman('kelola-mustahiq')">⚙️ Kelola Mustahiq</div><div class="menu-box" onclick="pindahHalaman('kelola-pengajuan')">📩 Konfirmasi Pengajuan</div><div class="menu-box" onclick="pindahHalaman('masalah')">⚠️ Laporan Masalah</div><div class="menu-box" onclick="pindahHalaman('kelola-akun')">👥 Kelola Akun</div>`;
       } else {
-        html += `<div class="menu-box" onclick="pindahHalaman('laporan')">📋 Data Muzakki</div><div class="menu-box" style="border-color:#d97706; color:#d97706;" onclick="pindahHalaman('ajukan-mustahiq')">🆕 Ajukan Mustahiq Baru</div><div class="menu-box" style="border-color:var(--danger); color:var(--danger);" onclick="pindahHalaman('masalah')">⚠️ Laporan Masalah</div>`;
+        html += `<div class="menu-box" onclick="pindahHalaman('laporan')">📋 Data Muzakki</div><div class="menu-box" onclick="pindahHalaman('ajukan-mustahiq')">🆕 Ajukan Mustahiq Baru</div><div class="menu-box" onclick="pindahHalaman('masalah')">⚠️ Laporan Masalah</div>`;
       }
       menu.innerHTML = html;
     }
@@ -541,15 +629,25 @@
       sorted.forEach(d => {
         let isErr = (d.status === 'Error'); let formatRp = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(parseFloat(d.nominal) || 0);
         let actionBtn = "";
-        if (currentUser.role === 'Pengurus') { actionBtn = `<div style="margin-top:10px;"><button class="btn-submit" style="width:auto; padding:6px 14px; margin-right:8px; background:#0284c7; font-size:0.85rem;" onclick='openModalMuzakki(${d.id})'>Edit Data</button><button class="btn-submit btn-danger" style="width:auto; padding:6px 14px; font-size:0.85rem;" onclick="deleteMuzakki(${d.id}, '${d.nama}')">Hapus</button></div>`; } else { if (isErr) { actionBtn = `<div style="margin-top:10px; padding:10px; background:#fee2e2; border:1px solid #fca5a5; border-radius:6px; font-size:0.85rem; color:#b91c1c;"><b>Pesan:</b> ${d.pesan}</div>`; } else { actionBtn = `<button style="margin-top: 10px; padding: 5px 10px; background: #f8f9fa; border: 1px solid #94a3b8; border-radius: 4px; font-family: 'Plus Jakarta Sans'; cursor: pointer; color: #0f172a; font-size: 0.85rem;" onclick="kirimLaporanSalah(${d.id}, '${d.nama}')">Lapor Salah Input</button>`; } }
-        html += `<div class="list-item" style="border-left: 6px solid ${isErr ? 'var(--danger)' : 'var(--dark)'}; background: ${isErr ? '#fef2f2' : 'var(--bg-card)'};"><div style="font-weight: 700; font-size: 1.15rem; color: ${isErr ? 'var(--danger)' : 'var(--dark)'}; margin-bottom: 4px;">${d.nama} ${isErr ? '<span style="font-size:0.8rem;">⚠️ Perbaikan</span>' : ''}</div><div style="font-weight: 700; font-size: 1.05rem; color: #d97706; margin-bottom: 5px;">${formatRp}</div><div style="font-size: 0.85rem; color: #64748b; margin-bottom: 5px;">Dusun ${d.dusun} | ${d.rw}/RT ${d.rt} | Amil: ${d.amil}</div>${actionBtn}</div>`;
+        if (currentUser.role === 'Pengurus') { 
+            actionBtn = `<div style="margin-top:15px; display:flex; gap:10px;"><button class="btn-submit" style="margin-top:0; padding:10px;" onclick='openModalMuzakki(${d.id})'>Edit Data</button><button class="btn-submit btn-danger" style="margin-top:0; padding:10px;" onclick="deleteMuzakki(${d.id}, '${d.nama}')">Hapus</button></div>`; 
+        } else { 
+            if (isErr) { actionBtn = `<div style="margin-top:15px; padding:15px; border-radius:12px; font-size:0.9rem; font-weight:700;"><b>Pesan Perbaikan:</b> ${d.pesan}</div>`; } 
+            else { actionBtn = `<button class="btn-submit btn-secondary" style="margin-top: 15px; padding: 10px;" onclick="kirimLaporanSalah(${d.id}, '${d.nama}')">Lapor Salah Input</button>`; } 
+        }
+        html += `<div class="list-item">
+            <div style="font-weight: 800; font-size: 1.15rem; margin-bottom: 6px;">${d.nama} ${isErr ? '<span class="badge">⚠️ Perbaikan</span>' : ''}</div>
+            <div style="font-weight: 800; font-size: 1.1rem; margin-bottom: 8px;">${formatRp}</div>
+            <div style="font-size: 0.9rem; font-weight:600;">Dusun ${d.dusun} | ${d.rw}/RT ${d.rt} | Amil: ${d.amil}</div>
+            ${actionBtn}
+        </div>`;
       }); 
       document.getElementById('list-laporan').innerHTML = html || "<i>Belum ada data Muzakki.</i>";
     }
     function filterLaporan() { let s = document.getElementById('search-laporan').value.toLowerCase(); renderLaporan(dataLaporan.filter(d => d.nama.toLowerCase().includes(s) || d.dusun.toLowerCase().includes(s))); }
     
     async function kirimLaporanSalah(id, nama) { let msg = prompt(`Detail kesalahan untuk: ${nama}`); if (!msg) return; showModal("⏳ Mengupdate...", true); let res = await kirimAPI({ action: "laporSalah", obj: { rowId: id, namaMuzakki: nama, dusun: currentUser.dusun, amil: currentUser.nama, pesan: msg } }); if (res.sukses) { showModal("✅ Dilaporkan.", false); fetchLaporan(); } }
-    async function fetchMasalah(isSilent = false) { if(!isSilent) document.getElementById('list-masalah').innerHTML = "<i>Memuat...</i>"; let res = await kirimAPI({ action: "getLaporanMasalah" }); if(res.sukses) { let html = ""; res.data.forEach(d => { let badge = d.status === 'Selesai' ? `<span class="badge badge-success">✓ Selesai oleh ${d.penyelesai}</span>` : `<span class="badge badge-danger">! Pending</span>`; let btn = (d.status !== 'Selesai' && currentUser.role === 'Pengurus') ? `<button class="btn-submit" style="background:#16a34a; padding:6px 14px; width:auto; font-size:0.85rem; margin-top:10px;" onclick="selesaikanMasalah(${d.id})">Tandai Selesai</button>` : ''; html += `<div class="list-item" style="border-left: 6px solid ${d.status==='Selesai'?'#16a34a':'var(--danger)'};"><div style="display:flex; justify-content:space-between; font-weight:700; font-size:1.1rem; margin-bottom:4px;"><span>${d.muzakki}</span> ${badge}</div><div style="font-size:0.85rem; color:#64748b; margin-bottom:8px;">Amil: ${d.amil} (${d.dusun}) | Waktu: ${d.tanggal}</div><div style="padding:10px; background:#f1f5f9; border-radius:6px; font-size:0.9rem; color:#0f172a;"><b>Pesan:</b> ${d.pesan}</div>${btn}</div>`; }); document.getElementById('list-masalah').innerHTML = html || "<i>Aman, tidak ada masalah.</i>"; } }
+    async function fetchMasalah(isSilent = false) { if(!isSilent) document.getElementById('list-masalah').innerHTML = "<i>Memuat...</i>"; let res = await kirimAPI({ action: "getLaporanMasalah" }); if(res.sukses) { let html = ""; res.data.forEach(d => { let badge = d.status === 'Selesai' ? `<span class="badge">✓ Selesai</span>` : `<span class="badge">! Pending</span>`; let btn = (d.status !== 'Selesai' && currentUser.role === 'Pengurus') ? `<button class="btn-submit" style="margin-top:15px; padding:10px;" onclick="selesaikanMasalah(${d.id})">Tandai Selesai</button>` : ''; html += `<div class="list-item"><div style="display:flex; justify-content:space-between; font-weight:800; font-size:1.15rem; margin-bottom:6px;"><span>${d.muzakki}</span> ${badge}</div><div style="font-size:0.9rem; font-weight:600; margin-bottom:10px;">Amil: ${d.amil} (${d.dusun}) | Waktu: ${d.tanggal}</div><div style="padding:15px; border-radius:12px; font-size:0.95rem; font-weight:700; box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);"><b>Pesan:</b> ${d.pesan}</div>${btn}</div>`; }); document.getElementById('list-masalah').innerHTML = html || "<i>Aman, tidak ada masalah.</i>"; } }
     async function selesaikanMasalah(id) { showModal("⏳ Proses...", true); let res = await kirimAPI({ action: "selesaikanMasalah", obj: {id: id, pengurus: currentUser.nama} }); if(res.sukses){ showModal("✅ Selesai", false); fetchMasalah(); } }
 
     function openModalMuzakki(id) { let d = dataLaporan.find(x => x.id === id); if(!d) return; document.getElementById('muz-edit-id').value = d.id; document.getElementById('muz-edit-dusun').value = d.dusun.toUpperCase(); document.getElementById('muz-edit-rw').value = d.rw; document.getElementById('muz-edit-rt').value = d.rt; document.getElementById('muz-edit-nama').value = d.nama; document.getElementById('muz-edit-nom').value = d.nominal; document.getElementById('crudModalMuzakki').style.display = "flex"; }
@@ -558,7 +656,7 @@
 
     async function fetchProgress(isSilent = false) {
       if(!isSilent) document.getElementById('list-progress').innerHTML = "<i>Memuat progress...</i>"; let res = await kirimAPI({ action: "getProgress" });
-      if(res.sukses) { let html = ""; let sortedData = [...res.data].sort((a, b) => (b.dusun.toUpperCase().includes("TOTAL")) - (a.dusun.toUpperCase().includes("TOTAL"))); sortedData.forEach(d => { let formatRp = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(parseFloat(d.totalNominal) || 0); let title = d.dusun.toUpperCase().includes("TOTAL") ? "TOTAL DESA SUMOKEMBANGSRI" : `Dusun ${d.dusun}`; let w = d.progress.toString().replace(',', '.'); html += `<div class="list-item" style="border-left:6px solid ${d.dusun.toUpperCase().includes("TOTAL")?'var(--dark)':'var(--accent)'};"><div style="font-weight:700; font-size:1.1rem;">${title}</div><div style="display:flex; justify-content:space-between; margin-top:5px; font-size:0.9rem;"><span>Total: <b>${d.muzakki} Orang</b></span><span style="font-weight:700;">${formatRp}</span></div><div class="prog-bar-bg"><div class="prog-bar-fill" style="width:${w};"></div></div><div style="display:flex; justify-content:space-between; margin-top:5px; font-size:0.8rem; color:#64748b;"><span>Progress: ${d.progress}</span><span style="background:var(--accent); color:var(--dark); padding:2px 6px; border-radius:4px; font-weight:600;">Growth: ${d.growth}</span></div></div>`; }); document.getElementById('list-progress').innerHTML = html; }
+      if(res.sukses) { let html = ""; let sortedData = [...res.data].sort((a, b) => (b.dusun.toUpperCase().includes("TOTAL")) - (a.dusun.toUpperCase().includes("TOTAL"))); sortedData.forEach(d => { let formatRp = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(parseFloat(d.totalNominal) || 0); let title = d.dusun.toUpperCase().includes("TOTAL") ? "TOTAL DESA SUMOKEMBANGSRI" : `Dusun ${d.dusun}`; let w = d.progress.toString().replace(',', '.'); html += `<div class="list-item"><div style="font-weight:800; font-size:1.2rem;">${title}</div><div style="display:flex; justify-content:space-between; margin-top:8px; font-size:1rem;"><span>Total: <b>${d.muzakki} Orang</b></span><span style="font-weight:800;">${formatRp}</span></div><div class="prog-bar-bg"><div class="prog-bar-fill" style="width:${w};"></div></div><div style="display:flex; justify-content:space-between; margin-top:10px; font-size:0.9rem; font-weight:700;"><span>Progress: ${d.progress}</span><span class="badge">Growth: ${d.growth}</span></div></div>`; }); document.getElementById('list-progress').innerHTML = html; }
     }
 
     async function kompresFoto(f) { return new Promise((r) => { let reader = new FileReader(); reader.readAsDataURL(f); reader.onload = function(e) { let img = new Image(); img.src = e.target.result; img.onload = function() { let canvas = document.createElement('canvas'); let scale = Math.min(1000/img.width, 1); canvas.width = img.width*scale; canvas.height = img.height*scale; let ctx = canvas.getContext('2d'); ctx.drawImage(img, 0, 0, canvas.width, canvas.height); r({ base64: canvas.toDataURL('image/jpeg',0.7).split(',')[1], mime: 'image/jpeg', name: f.name }); } } }); }
@@ -567,15 +665,15 @@
     async function fetchLaporanDistribusi(isSilent = false) {
       if(!isSilent) { document.getElementById('progress-dist-container').innerHTML = "<i>Memuat...</i>"; document.getElementById('list-distribusi').innerHTML = "<i>Memuat...</i>"; }
       let resP = await kirimAPI({ action: "getDistribusiProgress" });
-      if(resP.sukses) { let htmlP = ""; [...resP.data].sort((a,b)=>(b.dusun.toUpperCase().includes("TOTAL"))-(a.dusun.toUpperCase().includes("TOTAL"))).forEach(d => { htmlP += `<div class="list-item" style="border-left:6px solid ${d.dusun.toUpperCase().includes("TOTAL")?'#059669':'var(--accent)'};"><div style="font-weight:700;">${d.dusun.toUpperCase().includes("TOTAL")?"TOTAL DESA":'Dusun '+d.dusun}</div><div style="display:flex; justify-content:space-between; margin-top:5px; font-size:0.9rem;"><span>Target: <b>${d.target}</b></span><span style="color:#059669; font-weight:700;">Selesai: ${d.tersalurkan}</span></div><div class="prog-bar-bg"><div class="prog-bar-fill" style="width:${d.progress.toString().replace(',','.')}; background:${d.dusun.toUpperCase().includes("TOTAL")?'#059669':'var(--accent)'};"></div></div><div style="text-align:right; margin-top:5px; font-size:0.8rem;"><span class="badge badge-success">Persentase: ${d.progress}</span></div></div>`; }); document.getElementById('progress-dist-container').innerHTML = htmlP; }
+      if(resP.sukses) { let htmlP = ""; [...resP.data].sort((a,b)=>(b.dusun.toUpperCase().includes("TOTAL"))-(a.dusun.toUpperCase().includes("TOTAL"))).forEach(d => { htmlP += `<div class="list-item"><div style="font-weight:800; font-size:1.15rem;">${d.dusun.toUpperCase().includes("TOTAL")?"TOTAL DESA":'Dusun '+d.dusun}</div><div style="display:flex; justify-content:space-between; margin-top:8px; font-size:0.95rem;"><span>Target: <b>${d.target}</b></span><span style="font-weight:800;">Selesai: ${d.tersalurkan}</span></div><div class="prog-bar-bg"><div class="prog-bar-fill" style="width:${d.progress.toString().replace(',','.')};"></div></div><div style="text-align:right; margin-top:10px;"><span class="badge">Persentase: ${d.progress}</span></div></div>`; }); document.getElementById('progress-dist-container').innerHTML = htmlP; }
       let resD = await kirimAPI({ action: "getMasterMustahiq" }); if(resD.sukses) { masterMustahiqData = resD.data; filterDistribusi(); }
     }
     
-    function renderLaporanDistribusi(data) { let html = ""; data.forEach(d => { let isDone = (d.status.toLowerCase() === 'tersalurkan'); let cName = getCleanName(d.nama); let labelNew = d.label === 'NEW' ? `<span class="badge-new">NEW !</span>` : ""; let histori = d.histori ? `<span class="histori-text">Riwayat: ${d.histori}</span>` : ""; html += `<div class="list-item" style="border-left: 6px solid ${isDone ? 'var(--success)' : '#cbd5e1'};"><div style="display:flex; justify-content:space-between; align-items:flex-start;"><div><div style="font-weight:700; font-size:1.15rem; margin-bottom: 4px;">${labelNew}${cName}</div><div>${getCatBadge(d.kategori)}</div></div>${isDone ? '<span class="badge badge-success">✓ Tersalurkan</span>' : '<span class="badge badge-danger">✗ Belum</span>'}</div><div style="font-size:0.85rem; color:#64748b; margin-top:8px;">Dusun ${d.dusun} | ${d.rw} / RT ${d.rt}</div>${histori}${isDone ? `<div style="font-size:0.8rem; color:#94a3b8; margin-top:6px;">Oleh: ${d.amil} | ${d.timestamp}</div><a href="${d.foto}" target="_blank" style="display:inline-block; margin-top:8px; font-size:0.8rem; color:#0284c7; font-weight:bold; text-decoration:none;">Lihat Bukti Foto</a>` : ''}</div>`; }); document.getElementById('list-distribusi').innerHTML = html || "<i>Tidak ada data.</i>"; }
+    function renderLaporanDistribusi(data) { let html = ""; data.forEach(d => { let isDone = (d.status.toLowerCase() === 'tersalurkan'); let cName = getCleanName(d.nama); let labelNew = d.label === 'NEW' ? `<span class="badge-new">NEW !</span>` : ""; let histori = d.histori ? `<span class="histori-text">Riwayat: ${d.histori}</span>` : ""; html += `<div class="list-item"><div style="display:flex; justify-content:space-between; align-items:flex-start;"><div><div style="font-weight:800; font-size:1.15rem; margin-bottom: 6px;">${labelNew}${cName}</div><div style="margin-bottom:8px;">${getCatBadge(d.kategori)}</div></div>${isDone ? '<span class="badge">✓ Tersalurkan</span>' : '<span class="badge" style="opacity:0.6;">✗ Belum</span>'}</div><div style="font-size:0.9rem; font-weight:700;">Dusun ${d.dusun} | ${d.rw} / RT ${d.rt}</div>${histori}${isDone ? `<div style="font-size:0.85rem; margin-top:10px; font-weight:600;">Oleh: ${d.amil} | ${d.timestamp}</div><a href="${d.foto}" target="_blank" style="display:inline-block; margin-top:10px; font-size:0.9rem; font-weight:800; text-decoration:underline;">Lihat Bukti Foto</a>` : ''}</div>`; }); document.getElementById('list-distribusi').innerHTML = html || "<i>Tidak ada data.</i>"; }
     function filterDistribusi() { let fD = document.getElementById('f-dusun').value, fS = document.getElementById('f-status').value, fK = document.getElementById('f-kat').value, fSrc = document.getElementById('f-search').value.toLowerCase(); renderLaporanDistribusi(masterMustahiqData.filter(d => (fD==='ALL'||d.dusun.toUpperCase()===fD) && (fS==='ALL'||d.status===fS) && (fK==='ALL'||d.kategori===fK) && (d.nama.toLowerCase().includes(fSrc)||d.amil.toLowerCase().includes(fSrc)))); }
 
     async function fetchKelolaMustahiq(isSilent = false) { if(!isSilent) document.getElementById('list-kelola').innerHTML = "<i>Memuat...</i>"; let res = await kirimAPI({ action: "getMasterMustahiq" }); if(res.sukses) { masterMustahiqData = res.data; filterKelola(); } }
-    function renderKelolaMustahiq(data) { let html = ""; data.forEach(d => { let cName = getCleanName(d.nama); html += `<div class="list-item" style="cursor:pointer; border-left: 6px solid #7c3aed;" onclick='openModalMustahiq(${d.id})'><div style="font-weight: 700; font-size: 1.15rem; color: var(--dark); margin-bottom: 4px;">${d.label==='NEW'?`<span class="badge-new">NEW !</span>`:''}${cName}</div><div style="font-size: 0.85rem; color: #64748b;">${d.dusun} | ${d.rw} / RT ${d.rt} | ${getCatBadge(d.kategori)}</div></div>`; }); document.getElementById('list-kelola').innerHTML = html || "<i>Kosong.</i>"; }
+    function renderKelolaMustahiq(data) { let html = ""; data.forEach(d => { let cName = getCleanName(d.nama); html += `<div class="list-item" style="cursor:pointer;" onclick='openModalMustahiq(${d.id})'><div style="font-weight: 800; font-size: 1.15rem; margin-bottom: 6px;">${d.label==='NEW'?`<span class="badge-new">NEW !</span>`:''}${cName}</div><div style="font-size: 0.9rem; font-weight: 600;">${d.dusun} | ${d.rw} / RT ${d.rt}</div><div style="margin-top:8px;">${getCatBadge(d.kategori)}</div></div>`; }); document.getElementById('list-kelola').innerHTML = html || "<i>Kosong.</i>"; }
     function filterKelola() { let s = document.getElementById('search-kelola').value.toLowerCase(); renderKelolaMustahiq(masterMustahiqData.filter(d => d.nama.toLowerCase().includes(s) || d.dusun.toLowerCase().includes(s))); }
 
     function openModalMustahiq(id) { if(id === 'NEW') { document.getElementById('crud-title').innerText = "Tambah Mustahiq Baru"; document.getElementById('crud-id').value = ""; document.getElementById('crud-rt').value = ""; document.getElementById('crud-nama').value = ""; document.getElementById('btn-crud-delete').style.display = "none"; } else { let d = masterMustahiqData.find(x=>x.id===id); document.getElementById('crud-title').innerText = "Edit Mustahiq"; document.getElementById('crud-id').value = d.id; document.getElementById('crud-dusun').value = d.dusun.toUpperCase(); document.getElementById('crud-rw').value = d.rw; document.getElementById('crud-rt').value = d.rt; document.getElementById('crud-kategori').value = d.kategori; document.getElementById('crud-nama').value = getCleanName(d.nama); document.getElementById('btn-crud-delete').style.display = "block"; } document.getElementById('crudModal').style.display = "flex"; }
@@ -597,11 +695,11 @@
       if(res.sukses) { showModal("✅ Berhasil Diajukan!", false); document.getElementById('aju-rt').value = ''; document.getElementById('aju-nama').value = ''; } else { showModal("❌ Gagal.", false); }
     }
     
-    async function fetchPengajuan(isSilent = false) { if(!isSilent) document.getElementById('list-pengajuan').innerHTML = "<i>Memuat...</i>"; let res = await kirimAPI({ action: "getPengajuan" }); if(res.sukses) { let html = ""; res.data.forEach(d => { html += `<div class="list-item" style="border-left:6px solid #d97706;"><div style="font-weight:700; font-size:1.1rem; margin-bottom:4px;">[${d.tipe}] ${d.nama} ${getCatBadge(d.kategori)}</div><div style="font-size:0.85rem; color:#64748b; margin-bottom:8px;">Dusun ${d.dusun} | ${d.rw} / RT ${d.rt}<br>Oleh: ${d.amil} (${d.timestamp})</div><button class="btn-submit" style="width:auto; padding:6px 14px; background:var(--success); margin-right:8px;" onclick="accPengajuan(${d.id}, 'ACC')">Terima (ACC)</button><button class="btn-submit btn-danger" style="width:auto; padding:6px 14px;" onclick="accPengajuan(${d.id}, 'Tolak')">Tolak</button></div>`; }); document.getElementById('list-pengajuan').innerHTML = html || "<i>Tidak ada pengajuan.</i>"; } }
+    async function fetchPengajuan(isSilent = false) { if(!isSilent) document.getElementById('list-pengajuan').innerHTML = "<i>Memuat...</i>"; let res = await kirimAPI({ action: "getPengajuan" }); if(res.sukses) { let html = ""; res.data.forEach(d => { html += `<div class="list-item"><div style="font-weight:800; font-size:1.15rem; margin-bottom:6px;">[${d.tipe}] ${d.nama}</div><div style="margin-bottom:8px;">${getCatBadge(d.kategori)}</div><div style="font-size:0.9rem; font-weight:600; margin-bottom:12px;">Dusun ${d.dusun} | ${d.rw} / RT ${d.rt}<br>Oleh: ${d.amil} (${d.timestamp})</div><div style="display:flex; gap:10px;"><button class="btn-submit" style="margin-top:0; padding:10px;" onclick="accPengajuan(${d.id}, 'ACC')">Terima (ACC)</button><button class="btn-submit btn-danger" style="margin-top:0; padding:10px;" onclick="accPengajuan(${d.id}, 'Tolak')">Tolak</button></div></div>`; }); document.getElementById('list-pengajuan').innerHTML = html || "<i>Tidak ada pengajuan.</i>"; } }
     async function accPengajuan(id, action) { if(!confirm(`Yakin ingin ${action} pengajuan ini?`)) return; showModal(`⏳ Sedang ${action}...`, true); let res = await kirimAPI({ action: "prosesPengajuan", obj: {id: id, action: action} }); if(res.sukses) { showModal("✅ Selesai!", false); fetchPengajuan(); } }
 
     async function fetchKelolaAkun(isSilent = false) { if(!isSilent) document.getElementById('list-kelola-akun').innerHTML = "<i>Memuat...</i>"; let res = await kirimAPI({ action: "getSemuaAkun" }); if(res.sukses) { masterAkunData = res.data; filterKelolaAkun(); } }
-    function renderKelolaAkun(data) { let html = ""; data.forEach(d => { let b = d.status==='Active'?`<span class="badge badge-success">Active</span>`:`<span class="badge badge-danger">Pending</span>`; let sOnline = d.isOnline ? `<span style="color:#16a34a; font-weight:bold; font-size:0.8rem; margin-left:10px;">🟢 Online</span>` : `<span style="color:#94a3b8; font-size:0.8rem; margin-left:10px;">⚫ Offline</span>`; let btnPaksa = d.isOnline ? `<button class="btn-submit btn-danger" style="width:auto; padding:6px 12px; margin-top:8px; font-size:0.8rem;" onclick="paksaLogoutUser(${d.id}, '${d.nama}')">Force Logout</button>` : ''; html += `<div class="list-item" style="border-left:6px solid #0284c7; display:flex; justify-content:space-between; align-items:flex-start;"><div><div style="font-weight:700; font-size: 1.1rem; margin-bottom: 4px;">${d.nama} (${d.jenis})</div><div style="font-size:0.85rem; color:#64748b;">${d.nickname} | ${d.dusun} <br><div style="margin-top:5px;">${b} ${sOnline}</div></div>${btnPaksa}</div><button class="btn-submit" style="width:auto; padding:6px 14px; background:#0284c7; margin:0;" onclick='openModalAkun(${d.id})'>Kelola</button></div>`; }); document.getElementById('list-kelola-akun').innerHTML = html || "<i>Kosong.</i>"; }
+    function renderKelolaAkun(data) { let html = ""; data.forEach(d => { let b = d.status==='Active'?`<span class="badge">Active</span>`:`<span class="badge" style="opacity:0.6;">Pending</span>`; let sOnline = d.isOnline ? `<span style="font-weight:800; font-size:0.85rem; margin-left:10px;">🟢 Online</span>` : `<span style="font-size:0.85rem; margin-left:10px;">⚫ Offline</span>`; let btnPaksa = d.isOnline ? `<button class="btn-submit btn-danger" style="padding:8px 15px; margin-top:10px; font-size:0.9rem;" onclick="paksaLogoutUser(${d.id}, '${d.nama}')">Force Logout</button>` : ''; html += `<div class="list-item" style="display:flex; justify-content:space-between; align-items:flex-start;"><div><div style="font-weight:800; font-size: 1.15rem; margin-bottom: 6px;">${d.nama} <span style="font-size:0.9rem; font-weight:600;">(${d.jenis})</span></div><div style="font-size:0.9rem; font-weight:600;">${d.nickname} | ${d.dusun} <br><div style="margin-top:8px;">${b} ${sOnline}</div></div>${btnPaksa}</div><button class="btn-submit" style="width:auto; padding:10px 20px; margin:0;" onclick='openModalAkun(${d.id})'>Kelola</button></div>`; }); document.getElementById('list-kelola-akun').innerHTML = html || "<i>Kosong.</i>"; }
     function filterKelolaAkun() { let s = document.getElementById('search-akun').value.toLowerCase(); renderKelolaAkun(masterAkunData.filter(d => d.nama.toLowerCase().includes(s) || d.dusun.toLowerCase().includes(s) || d.nickname.toLowerCase().includes(s))); }
     
     function openModalAkun(id) { let d = masterAkunData.find(x=>x.id===id); document.getElementById('akun-id').value = d.id; document.getElementById('akun-nama').value = d.nama; document.getElementById('akun-nick').value = d.nickname; document.getElementById('akun-dusun').value = d.dusun; document.getElementById('akun-jenis').value = d.jenis; document.getElementById('akun-status').value = d.status; document.getElementById('akun-pass').value = d.password; document.getElementById('crudModalAkun').style.display = "flex"; }
