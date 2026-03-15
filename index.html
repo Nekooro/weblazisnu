@@ -227,7 +227,43 @@
     <div id="page-muzakki" class="page"><div class="card"><h3>Input Zakat Mal</h3><div class="flex-gap"><div class="form-group"><label>Dusun</label><input type="text" id="muz-dusun" readonly></div><div class="form-group"><label>Nama Amil</label><input type="text" id="muz-amil" readonly></div></div><div class="flex-gap"><div class="form-group"><label>RW</label><select id="muz-rw"><option value="RW 1">RW 1</option><option value="RW 2">RW 2</option><option value="RW 3">RW 3</option><option value="RW 4">RW 4</option><option value="RW 5">RW 5</option><option value="RW 6">RW 6</option></select></div><div class="form-group"><label>RT</label><input type="text" id="muz-rt" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></div></div><div class="form-group"><label>Nama Muzakki</label><input type="text" id="muz-nama"></div><div class="form-group"><label>Nominal</label><input type="text" id="muz-nom" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></div><button class="btn-submit" onclick="saveMuz()">Simpan Zakat Mal</button><button class="btn-submit btn-secondary" onclick="pindahHalaman('dashboard')">Kembali</button></div></div>
     <div id="page-laporan" class="page"><div class="card"><h2>Data Muzakki</h2><button class="btn-submit btn-secondary" style="margin-bottom:20px;" onclick="pindahHalaman('dashboard')">Kembali</button><div class="form-group"><input type="text" id="search-laporan" placeholder="Cari Nama / Dusun..." onkeyup="filterLaporan()"></div><div id="list-laporan"><i>Memuat data...</i></div></div></div>
     <div id="page-progress" class="page"><div class="card"><h2>Progress Zakat Mal</h2><button class="btn-submit btn-secondary" style="margin-bottom:20px;" onclick="pindahHalaman('dashboard')">Kembali</button><div id="list-progress"><i>Memuat progress...</i></div></div></div>
-    <div id="page-distribusi" class="page"><div class="card"><h3>Input Distribusi</h3><div class="flex-gap"><div class="form-group"><label>Dusun</label><input type="text" id="dist-dusun" readonly></div><div class="form-group"><label>Nama Petugas</label><input type="text" id="dist-amil" readonly></div></div><div class="flex-gap"><div class="form-group"><label>RW</label><select id="dist-rw"><option value="RW 1">RW 1</option><option value="RW 2">RW 2</option><option value="RW 3">RW 3</option><option value="RW 4">RW 4</option><option value="RW 5">RW 5</option><option value="RW 6">RW 6</option></select></div><div class="form-group"><label>RT</label><input type="text" id="dist-rt" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></div></div><div class="form-group"><label>Kategori Mustahiq</label><select id="dist-kategori"><option value="Fakir">Fakir</option><option value="Miskin">Miskin</option><option value="Sabilillah">Sabilillah</option><option value="Yatim">Yatim</option><option value="Ghorim">Ghorim</option><option value="Ibnu Sabil">Ibnu Sabil</option><option value="Muallaf">Muallaf</option><option value="Riqab">Riqab</option></select></div><div class="form-group"><label>Nama Penerima</label><input type="text" id="dist-nama"></div><div class="form-group"><label>Foto Bukti</label><input type="file" id="dist-foto" accept="image/*"></div><button class="btn-submit" onclick="saveDistribusi()">Simpan Penyaluran</button><button class="btn-submit btn-secondary" onclick="pindahHalaman('dashboard')">Kembali</button></div></div>
+    
+    <div id="page-distribusi" class="page">
+      <div class="card">
+        <h3>Input Distribusi</h3>
+        <div class="flex-gap">
+          <div class="form-group"><label>Dusun</label><input type="text" id="dist-dusun" readonly></div>
+          <div class="form-group"><label>Nama Petugas</label><input type="text" id="dist-amil" readonly></div>
+        </div>
+        <div class="form-group">
+          <label>Kategori Mustahiq</label>
+          <select id="dist-kategori" onchange="populateNamaDistribusi()">
+            <option value="Fakir">Fakir</option>
+            <option value="Miskin">Miskin</option>
+            <option value="Sabilillah">Sabilillah</option>
+            <option value="Yatim">Yatim</option>
+            <option value="Ghorim">Ghorim</option>
+            <option value="Ibnu Sabil">Ibnu Sabil</option>
+            <option value="Muallaf">Muallaf</option>
+            <option value="Riqab">Riqab</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Nama Penerima (Otomatis sesuai Dusun & Kategori)</label>
+          <select id="dist-nama" onchange="autoFillDistribusi()">
+            <option value="">-- Memuat data... --</option>
+          </select>
+        </div>
+        <div class="flex-gap">
+          <div class="form-group"><label>RW</label><input type="text" id="dist-rw" readonly style="background:var(--bg-color); opacity:0.8;"></div>
+          <div class="form-group"><label>RT</label><input type="text" id="dist-rt" readonly style="background:var(--bg-color); opacity:0.8;"></div>
+        </div>
+        <div class="form-group"><label>Foto Bukti</label><input type="file" id="dist-foto" accept="image/*"></div>
+        <button class="btn-submit" onclick="saveDistribusi()">Simpan Penyaluran</button>
+        <button class="btn-submit btn-secondary" onclick="pindahHalaman('dashboard')">Kembali</button>
+      </div>
+    </div>
+    
     <div id="page-laporan-distribusi" class="page"><div class="card"><h2>Laporan Distribusi</h2><button class="btn-submit btn-secondary" style="margin-bottom:20px;" onclick="pindahHalaman('dashboard')">Kembali</button><div id="progress-dist-container" style="margin-bottom: 25px;"><i>Memuat progress...</i></div><hr style="border:none; border-top:2px dashed var(--shadow-dark); margin: 25px 0;"><h3 style="margin-top:20px;">Daftar Mustahiq</h3><div class="filter-grid"><div class="form-group"><select id="f-dusun" onchange="filterDistribusi()"><option value="ALL">Semua Dusun</option><option value="KEMAMBANG">Kemambang</option><option value="SUMOTUWO">Sumotuwo</option><option value="LUWUNG">Luwung</option><option value="WATESROWO">WATESROWO</option><option value="WONOKITRI WETAN">WONOKITRI WETAN</option><option value="WONOKITRI KULON">WONOKITRI KULON</option></select></div><div class="form-group"><select id="f-status" onchange="filterDistribusi()"><option value="ALL">Semua Status</option><option value="Tersalurkan">Tersalurkan</option><option value="Belum">Belum Salur</option></select></div><div class="form-group"><select id="f-kat" onchange="filterDistribusi()"><option value="ALL">Semua Kategori</option><option value="Fakir">Fakir</option><option value="Miskin">Miskin</option><option value="Sabilillah">Sabilillah</option><option value="Yatim">Yatim</option></select></div></div><div class="form-group"><input type="text" id="f-search" placeholder="Cari Nama Penerima..." onkeyup="filterDistribusi()"></div><div id="list-distribusi"><i>Memuat data...</i></div></div></div>
     <div id="page-kelola-mustahiq" class="page"><div class="card"><h2>Kelola Master Mustahiq</h2><button class="btn-submit btn-secondary" style="margin-bottom:20px;" onclick="pindahHalaman('dashboard')">Kembali</button><button class="btn-submit" style="margin-bottom: 25px;" onclick="openModalMustahiq('NEW')">+ Tambah Mustahiq Baru</button><div class="form-group"><input type="text" id="search-kelola" placeholder="Cari Nama / Dusun..." onkeyup="filterKelola()"></div><div id="list-kelola"><i>Memuat data...</i></div></div></div>
     <div id="page-ajukan-mustahiq" class="page"><div class="card"><h2>Ajukan Mustahiq</h2><div class="form-group"><label>Tipe Pengajuan</label><select id="aju-tipe" onchange="toggleAjuMode()"><option value="BARU">Usulan Warga Baru</option><option value="EDIT">Perubahan Data Lama</option></select></div><div id="box-cari-mustahiq" class="form-group" style="display:none;"><label>Pilih Nama Mustahiq Lama</label><select id="aju-pilih-nama" onchange="isiDataOtomatis()"></select></div><div class="flex-gap"><div class="form-group"><label>Dusun</label><input type="text" id="aju-dusun" readonly></div><div class="form-group"><label>Amil Pengaju</label><input type="text" id="aju-amil" readonly></div></div><div class="flex-gap"><div class="form-group"><label>RW</label><select id="aju-rw"><option value="RW 1">RW 1</option><option value="RW 2">RW 2</option><option value="RW 3">RW 3</option><option value="RW 4">RW 4</option><option value="RW 5">RW 5</option><option value="RW 6">RW 6</option></select></div><div class="form-group"><label>RT</label><input type="text" id="aju-rt" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></div></div><div class="form-group"><label>Kategori</label><select id="aju-kat"><option value="Fakir">Fakir</option><option value="Miskin">Miskin</option><option value="Sabilillah">Sabilillah</option><option value="Yatim">Yatim</option><option value="Ghorim">Ghorim</option><option value="Ibnu Sabil">Ibnu Sabil</option><option value="Muallaf">Muallaf</option><option value="Riqab">Riqab</option></select></div><div class="form-group"><label>Nama Penerima</label><input type="text" id="aju-nama"></div><button class="btn-submit" onclick="ajukanMustahiq()">Kirim Pengajuan</button><button class="btn-submit btn-secondary" onclick="pindahHalaman('dashboard')">Kembali</button></div></div>
@@ -247,108 +283,62 @@
     
     let currentUser = null; let dataLaporan = []; let masterMustahiqData = []; let masterAkunData = [];
     let pollingInterval = null; let sessionInterval = null;
-
     let pubMuzakki = []; let pubMustahiq = []; let pubAmil = [];
 
+    // FUNGSI PELINDUNG ANTI-CRASH
+    function safeUpper(str) { return String(str || '').toUpperCase(); }
     function getCleanName(name) { return (name || '').replace(/\(Baris:\s*\d+\)/gi, '').trim(); }
-    function getCatBadge(kat) {
-      let k = (kat || '').toLowerCase();
-      return `<span class="badge">${kat}</span>`;
-    }
+    function getCatBadge(kat) { let k = String(kat || '').toLowerCase(); return `<span class="badge">${kat}</span>`; }
 
     function navigasiKe(target) {
       if (!document.getElementById('page-home').classList.contains('active')) {
         pindahHalaman('home');
-        setTimeout(() => {
-          let el = document.getElementById(target);
-          if(el) window.scrollTo({ top: el.offsetTop - 70, behavior: 'smooth' });
-        }, 100);
+        setTimeout(() => { let el = document.getElementById(target); if(el) window.scrollTo({ top: el.offsetTop - 70, behavior: 'smooth' }); }, 100);
       } else {
-        let el = document.getElementById(target);
-        if(el) window.scrollTo({ top: el.offsetTop - 70, behavior: 'smooth' });
+        let el = document.getElementById(target); if(el) window.scrollTo({ top: el.offsetTop - 70, behavior: 'smooth' });
       }
-      const navMenu = document.getElementById('nav-menu');
-      const menuToggle = document.getElementById('menu-toggle');
-      if(navMenu.classList.contains('active')) {
-        navMenu.classList.remove('active'); menuToggle.classList.remove('active');
-      }
+      const navMenu = document.getElementById('nav-menu'); const menuToggle = document.getElementById('menu-toggle');
+      if(navMenu.classList.contains('active')) { navMenu.classList.remove('active'); menuToggle.classList.remove('active'); }
     }
 
     document.addEventListener('DOMContentLoaded', () => {
       const menuToggle = document.getElementById('menu-toggle'); const navMenu = document.getElementById('nav-menu');
-      if(menuToggle && navMenu) {
-        menuToggle.addEventListener('click', () => { menuToggle.classList.toggle('active'); navMenu.classList.toggle('active'); });
-      }
+      if(menuToggle && navMenu) { menuToggle.addEventListener('click', () => { menuToggle.classList.toggle('active'); navMenu.classList.toggle('active'); }); }
     });
 
     async function fetchPublicData() {
-      let resMuz = await kirimAPI({ action: "getLaporan" });
-      if(resMuz.sukses) { pubMuzakki = resMuz.data.filter(d => d.status !== 'Error'); renderPublicMuzakki(pubMuzakki); }
-      
-      let resMus = await kirimAPI({ action: "getMasterMustahiq" });
-      if(resMus.sukses) { pubMustahiq = resMus.data; renderPublicMustahiq(pubMustahiq); }
-      
-      let resAmil = await kirimAPI({ action: "getPublicAkun" });
-      if(resAmil.sukses) { pubAmil = resAmil.data; renderPublicAmil(pubAmil); }
+      let resMuz = await kirimAPI({ action: "getLaporan" }); if(resMuz.sukses) { pubMuzakki = resMuz.data.filter(d => d.status !== 'Error'); renderPublicMuzakki(pubMuzakki); }
+      let resMus = await kirimAPI({ action: "getMasterMustahiq" }); if(resMus.sukses) { pubMustahiq = resMus.data; renderPublicMustahiq(pubMustahiq); }
+      let resAmil = await kirimAPI({ action: "getPublicAkun" }); if(resAmil.sukses) { pubAmil = resAmil.data; renderPublicAmil(pubAmil); }
     }
 
     function switchPublicTab(tab) {
-      document.getElementById('tab-muzakki').classList.remove('active');
-      document.getElementById('tab-mustahiq').classList.remove('active');
-      document.getElementById('tab-amil').classList.remove('active');
-      document.getElementById('public-list-muzakki').style.display = 'none';
-      document.getElementById('public-list-mustahiq').style.display = 'none';
-      document.getElementById('public-list-amil').style.display = 'none';
-      
-      document.getElementById(`tab-${tab}`).classList.add('active');
-      document.getElementById(`public-list-${tab}`).style.display = 'block';
-      
-      document.getElementById('search-public').value = ""; 
-      filterPublicData();
+      document.getElementById('tab-muzakki').classList.remove('active'); document.getElementById('tab-mustahiq').classList.remove('active'); document.getElementById('tab-amil').classList.remove('active');
+      document.getElementById('public-list-muzakki').style.display = 'none'; document.getElementById('public-list-mustahiq').style.display = 'none'; document.getElementById('public-list-amil').style.display = 'none';
+      document.getElementById(`tab-${tab}`).classList.add('active'); document.getElementById(`public-list-${tab}`).style.display = 'block';
+      document.getElementById('search-public').value = ""; filterPublicData();
     }
 
     function filterPublicData() {
-      let s = document.getElementById('search-public').value.toLowerCase();
-      let activeTab = document.querySelector('.tab-btn.active').id;
-      
-      if (activeTab === 'tab-muzakki') {
-        renderPublicMuzakki(pubMuzakki.filter(d => d.nama.toLowerCase().includes(s) || d.dusun.toLowerCase().includes(s)));
-      } else if (activeTab === 'tab-mustahiq') {
-        renderPublicMustahiq(pubMustahiq.filter(d => d.nama.toLowerCase().includes(s) || d.dusun.toLowerCase().includes(s)));
-      } else if (activeTab === 'tab-amil') {
-        renderPublicAmil(pubAmil.filter(d => d.nama.toLowerCase().includes(s) || d.dusun.toLowerCase().includes(s)));
-      }
+      let s = document.getElementById('search-public').value.toLowerCase(); let activeTab = document.querySelector('.tab-btn.active').id;
+      if (activeTab === 'tab-muzakki') { renderPublicMuzakki(pubMuzakki.filter(d => (d.nama||'').toLowerCase().includes(s) || (d.dusun||'').toLowerCase().includes(s))); } 
+      else if (activeTab === 'tab-mustahiq') { renderPublicMustahiq(pubMustahiq.filter(d => (d.nama||'').toLowerCase().includes(s) || (d.dusun||'').toLowerCase().includes(s))); } 
+      else if (activeTab === 'tab-amil') { renderPublicAmil(pubAmil.filter(d => (d.nama||'').toLowerCase().includes(s) || (d.dusun||'').toLowerCase().includes(s))); }
     }
 
     function toggleAuthMode(mode) {
-      if(mode === 'register') {
-        document.getElementById('form-login-sec').style.display = 'none';
-        document.getElementById('form-register-sec').style.display = 'block';
-        document.getElementById('auth-title').innerText = 'Daftar Amil Baru';
-      } else {
-        document.getElementById('form-login-sec').style.display = 'block';
-        document.getElementById('form-register-sec').style.display = 'none';
-        document.getElementById('auth-title').innerText = 'Login Amil';
-      }
+      if(mode === 'register') { document.getElementById('form-login-sec').style.display = 'none'; document.getElementById('form-register-sec').style.display = 'block'; document.getElementById('auth-title').innerText = 'Daftar Amil Baru'; } 
+      else { document.getElementById('form-login-sec').style.display = 'block'; document.getElementById('form-register-sec').style.display = 'none'; document.getElementById('auth-title').innerText = 'Login Amil'; }
     }
 
     async function prosesDaftarWeb() {
-      let n = document.getElementById('r-nama').value;
-      let nick = document.getElementById('r-nick').value;
-      let d = document.getElementById('r-dusun').value;
-      let p = document.getElementById('r-pass').value;
+      let n = document.getElementById('r-nama').value; let nick = document.getElementById('r-nick').value; let d = document.getElementById('r-dusun').value; let p = document.getElementById('r-pass').value;
       if(!n || !nick || !p) return showModal("⚠️ Lengkapi semua form pendaftaran!");
-      
       showModal("⏳ Mengirim pendaftaran...", true);
       let form = { nama: n, nickname: nick, dusun: d, jenisAkun: 'Amil', password: p };
       let res = await kirimAPI({ action: "register", form: form });
-      if(res.sukses) {
-        showModal("✅ Pendaftaran berhasil! Silakan hubungi Pengurus untuk aktivasi akun.", false);
-        document.getElementById('r-nama').value = ""; document.getElementById('r-nick').value = ""; document.getElementById('r-pass').value = "";
-        toggleAuthMode('login');
-      } else {
-        showModal("❌ Gagal: " + res.pesan);
-      }
+      if(res.sukses) { showModal("✅ Pendaftaran berhasil! Silakan hubungi Pengurus untuk aktivasi akun.", false); document.getElementById('r-nama').value = ""; document.getElementById('r-nick').value = ""; document.getElementById('r-pass').value = ""; toggleAuthMode('login'); } 
+      else { showModal("❌ Gagal: " + res.pesan); }
     }
 
     function checkSession() {
@@ -361,8 +351,7 @@
     function mulaiCekSesiRealtime() {
       if(sessionInterval) clearInterval(sessionInterval);
       sessionInterval = setInterval(async () => {
-        if(!currentUser) return;
-        let res = await kirimAPI({action: "cekSesi", nickname: currentUser.nickname, token: currentUser.token});
+        if(!currentUser) return; let res = await kirimAPI({action: "cekSesi", nickname: currentUser.nickname, token: currentUser.token});
         if(res.sukses && res.valid === false) { clearInterval(sessionInterval); localStorage.removeItem('lazisnuSession'); alert("Logout Paksa oleh Pengurus."); location.reload(); }
       }, 30000);
     }
@@ -370,22 +359,15 @@
     window.addEventListener('hashchange', handleHashChange);
     function handleHashChange() {
       let hash = window.location.hash.replace('#', '') || 'home';
-
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-      let targetPage = document.getElementById('page-' + hash);
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active')); let targetPage = document.getElementById('page-' + hash);
+      
       if(targetPage) {
         targetPage.classList.add('active');
-        
-        if(hash === 'home' || hash === 'public-data') {
-          document.querySelectorAll('.nav-public').forEach(el => el.style.display = 'inline-block');
-        } else {
-          document.querySelectorAll('.nav-public').forEach(el => el.style.display = 'none');
-        }
-
+        if(hash === 'home' || hash === 'public-data') { document.querySelectorAll('.nav-public').forEach(el => el.style.display = 'inline-block'); } 
+        else { document.querySelectorAll('.nav-public').forEach(el => el.style.display = 'none'); }
         if(pollingInterval) clearInterval(pollingInterval);
         
         if(hash === 'public-data') { fetchPublicData(); }
-        
         if(hash === 'laporan') { fetchLaporan(); pollingInterval = setInterval(()=>fetchLaporan(true), 15000); }
         if(hash === 'progress') { fetchProgress(); pollingInterval = setInterval(()=>fetchProgress(true), 15000); }
         if(hash === 'masalah') { fetchMasalah(); pollingInterval = setInterval(()=>fetchMasalah(true), 15000); }
@@ -395,18 +377,24 @@
         if(hash === 'kelola-pengajuan' && currentUser?.role === 'Pengurus') { fetchPengajuan(); pollingInterval = setInterval(()=>fetchPengajuan(true), 15000); }
         
         if(hash === 'muzakki' && currentUser) { document.getElementById('muz-dusun').value = currentUser.dusun; document.getElementById('muz-amil').value = currentUser.nama; }
-        if(hash === 'distribusi' && currentUser) { document.getElementById('dist-dusun').value = currentUser.dusun; document.getElementById('dist-amil').value = currentUser.nama; }
         if(hash === 'ajukan-mustahiq' && currentUser) { document.getElementById('aju-dusun').value = currentUser.dusun; document.getElementById('aju-amil').value = currentUser.nama; fetchKelolaMustahiq(true); toggleAjuMode(); }
+        
+        // PENGATURAN AWAL FORM DISTRIBUSI BARU
+        if(hash === 'distribusi' && currentUser) { 
+            document.getElementById('dist-dusun').value = currentUser.dusun; 
+            document.getElementById('dist-amil').value = currentUser.nama; 
+            document.getElementById('dist-nama').innerHTML = '<option value="">-- Memuat data... --</option>';
+            kirimAPI({ action: "getMasterMustahiq" }).then(res => {
+                if(res.sukses) { masterMustahiqData = res.data; populateNamaDistribusi(); }
+            });
+        }
       } else { 
-        document.getElementById('page-home').classList.add('active'); 
-        document.querySelectorAll('.nav-public').forEach(el => el.style.display = 'inline-block');
-        if(pollingInterval) clearInterval(pollingInterval); 
+        document.getElementById('page-home').classList.add('active'); document.querySelectorAll('.nav-public').forEach(el => el.style.display = 'inline-block'); if(pollingInterval) clearInterval(pollingInterval); 
       }
       if(!window.location.hash.includes('sect-')) window.scrollTo(0,0);
     }
     
     function pindahHalaman(id) { window.location.hash = id; }
-
     async function kirimAPI(data) { try { let response = await fetch(API_URL, { method: 'POST', body: JSON.stringify(data) }); return await response.json(); } catch (e) { return { sukses: false, pesan: "Server sibuk." }; } }
     function showModal(msg, isLoading = false) { document.getElementById('modalMsg').innerText = msg; document.getElementById('btn-modal-ok').style.display = isLoading ? 'none' : 'block'; document.getElementById('customModal').style.display = 'flex'; }
     function closeModal() { document.getElementById('customModal').style.display = 'none'; }
@@ -425,13 +413,9 @@
     }
 
     function renderDashboard() {
-      let menu = document.getElementById('menu-container');
-      let html = `<div class="menu-box" onclick="pindahHalaman('muzakki')">📝 Input Muzakki</div><div class="menu-box" onclick="pindahHalaman('distribusi')">🤝 Input Distribusi</div><div class="menu-box" onclick="pindahHalaman('progress')">📊 Progress Zakat Mal</div><div class="menu-box" onclick="pindahHalaman('laporan-distribusi')">📦 Laporan Distribusi</div>`;
-      if(currentUser.role === 'Pengurus') {
-        html += `<div class="menu-box" onclick="document.getElementById('modalPengumuman').style.display='flex'">📢 Buat Pengumuman</div><div class="menu-box" onclick="pindahHalaman('laporan')">⚙️ Kelola Muzakki</div><div class="menu-box" onclick="pindahHalaman('kelola-mustahiq')">⚙️ Kelola Mustahiq</div><div class="menu-box" onclick="pindahHalaman('kelola-pengajuan')">📩 Konfirmasi Pengajuan</div><div class="menu-box" onclick="pindahHalaman('masalah')">⚠️ Laporan Masalah</div><div class="menu-box" onclick="pindahHalaman('kelola-akun')">👥 Kelola Akun</div>`;
-      } else {
-        html += `<div class="menu-box" onclick="pindahHalaman('laporan')">📋 Data Muzakki</div><div class="menu-box" onclick="pindahHalaman('ajukan-mustahiq')">🆕 Ajukan Mustahiq Baru</div><div class="menu-box" onclick="pindahHalaman('masalah')">⚠️ Laporan Masalah</div>`;
-      }
+      let menu = document.getElementById('menu-container'); let html = `<div class="menu-box" onclick="pindahHalaman('muzakki')">📝 Input Muzakki</div><div class="menu-box" onclick="pindahHalaman('distribusi')">🤝 Input Distribusi</div><div class="menu-box" onclick="pindahHalaman('progress')">📊 Progress Zakat Mal</div><div class="menu-box" onclick="pindahHalaman('laporan-distribusi')">📦 Laporan Distribusi</div>`;
+      if(currentUser.role === 'Pengurus') { html += `<div class="menu-box" onclick="document.getElementById('modalPengumuman').style.display='flex'">📢 Buat Pengumuman</div><div class="menu-box" onclick="pindahHalaman('laporan')">⚙️ Kelola Muzakki</div><div class="menu-box" onclick="pindahHalaman('kelola-mustahiq')">⚙️ Kelola Mustahiq</div><div class="menu-box" onclick="pindahHalaman('kelola-pengajuan')">📩 Konfirmasi Pengajuan</div><div class="menu-box" onclick="pindahHalaman('masalah')">⚠️ Laporan Masalah</div><div class="menu-box" onclick="pindahHalaman('kelola-akun')">👥 Kelola Akun</div>`; } 
+      else { html += `<div class="menu-box" onclick="pindahHalaman('laporan')">📋 Data Muzakki</div><div class="menu-box" onclick="pindahHalaman('ajukan-mustahiq')">🆕 Ajukan Mustahiq Baru</div><div class="menu-box" onclick="pindahHalaman('masalah')">⚠️ Laporan Masalah</div>`; }
       menu.innerHTML = html;
     }
 
@@ -441,7 +425,7 @@
       if(res.sukses) { showModal("✅ Data Berhasil Disimpan!", false); document.getElementById('muz-rt').value = ''; document.getElementById('muz-nama').value = ''; document.getElementById('muz-nom').value = ''; } else { showModal("❌ Gagal."); }
     }
 
-    // 1. RENDER MUZAKKI (DASHBOARD AMIL)
+    // RENDER MUZAKKI (AMAN DARI CRASH)
     function renderLaporan(data) {
       let html = ""; let sorted = [...data].sort((a,b) => (b.status === 'Error') - (a.status === 'Error'));
       sorted.forEach(d => {
@@ -463,7 +447,7 @@
                     <div style="font-size: 0.85rem; font-weight:700; color: var(--text-muted);">Amil: ${d.amil}</div>
                 </div>
                 <div style="text-align: right;">
-                    <div class="badge" style="margin-bottom: 8px;">DUSUN ${d.dusun.toUpperCase()}</div>
+                    <div class="badge" style="margin-bottom: 8px;">DUSUN ${safeUpper(d.dusun)}</div>
                     <div style="font-size: 0.85rem; font-weight: 800; color: var(--dark);">${d.rw} / RT ${d.rt}</div>
                 </div>
             </div>
@@ -472,22 +456,18 @@
       }); 
       document.getElementById('list-laporan').innerHTML = html || "<i>Belum ada data Muzakki.</i>";
     }
-    function filterLaporan() { let s = document.getElementById('search-laporan').value.toLowerCase(); renderLaporan(dataLaporan.filter(d => d.nama.toLowerCase().includes(s) || d.dusun.toLowerCase().includes(s))); }
+    function filterLaporan() { let s = document.getElementById('search-laporan').value.toLowerCase(); renderLaporan(dataLaporan.filter(d => (d.nama||'').toLowerCase().includes(s) || (d.dusun||'').toLowerCase().includes(s))); }
     
     async function kirimLaporanSalah(id, nama) { let msg = prompt(`Detail kesalahan untuk: ${nama}`); if (!msg) return; showModal("⏳ Mengupdate...", true); let res = await kirimAPI({ action: "laporSalah", obj: { rowId: id, namaMuzakki: nama, dusun: currentUser.dusun, amil: currentUser.nama, pesan: msg } }); if (res.sukses) { showModal("✅ Dilaporkan.", false); fetchLaporan(); } }
     
-    // PERBAIKAN FITUR LAPORAN MASALAH (DISELESAIKAN OLEH)
     async function fetchMasalah(isSilent = false) { 
       if(!isSilent) document.getElementById('list-masalah').innerHTML = "<i>Memuat...</i>"; 
       let res = await kirimAPI({ action: "getLaporanMasalah" }); 
       if(res.sukses) { 
-        let html = ""; 
-        res.data.forEach(d => { 
+        let html = ""; res.data.forEach(d => { 
           let badge = d.status === 'Selesai' ? `<span class="badge">✓ Selesai</span>` : `<span class="badge" style="opacity:0.6;">! Pending</span>`; 
           let btn = (d.status !== 'Selesai' && currentUser.role === 'Pengurus') ? `<button class="btn-submit" style="margin-top:15px; padding:10px;" onclick="selesaikanMasalah(${d.id})">Tandai Selesai</button>` : ''; 
-          
-          // Ini baris penting yang kemaren Joko lupa masukin:
-          let penyelesai = (d.status === 'Selesai' && d.penyelesai) ? `<div style="margin-top:12px; font-size:0.85rem; font-weight:700; color: var(--text-muted); border-top: 1px dashed var(--shadow-dark); padding-top: 10px;">✓ Diselesaikan oleh: ${d.penyelesai}</div>` : '';
+          let penyelesai = (d.status === 'Selesai' && d.penyelesai && d.penyelesai !== '-') ? `<div style="margin-top:12px; font-size:0.85rem; font-weight:700; color: var(--text-muted); border-top: 1px dashed var(--shadow-dark); padding-top: 10px;">✓ Diselesaikan oleh: ${d.penyelesai}</div>` : '';
           
           html += `<div class="list-item">
             <div style="display:flex; justify-content:space-between; align-items:flex-start;">
@@ -499,33 +479,73 @@
             ${penyelesai}
             ${btn}
           </div>`; 
-        }); 
-        document.getElementById('list-masalah').innerHTML = html || "<i>Aman, tidak ada masalah.</i>"; 
+        }); document.getElementById('list-masalah').innerHTML = html || "<i>Aman, tidak ada masalah.</i>"; 
       } 
     }
-    
     async function selesaikanMasalah(id) { showModal("⏳ Proses...", true); let res = await kirimAPI({ action: "selesaikanMasalah", obj: {id: id, pengurus: currentUser.nama} }); if(res.sukses){ showModal("✅ Selesai", false); fetchMasalah(); } }
 
-    function openModalMuzakki(id) { let d = dataLaporan.find(x => x.id === id); if(!d) return; document.getElementById('muz-edit-id').value = d.id; document.getElementById('muz-edit-dusun').value = d.dusun.toUpperCase(); document.getElementById('muz-edit-rw').value = d.rw; document.getElementById('muz-edit-rt').value = d.rt; document.getElementById('muz-edit-nama').value = d.nama; document.getElementById('muz-edit-nom').value = d.nominal; document.getElementById('crudModalMuzakki').style.display = "flex"; }
+    function openModalMuzakki(id) { let d = dataLaporan.find(x => x.id === id); if(!d) return; document.getElementById('muz-edit-id').value = d.id; document.getElementById('muz-edit-dusun').value = safeUpper(d.dusun); document.getElementById('muz-edit-rw').value = d.rw; document.getElementById('muz-edit-rt').value = d.rt; document.getElementById('muz-edit-nama').value = d.nama; document.getElementById('muz-edit-nom').value = d.nominal; document.getElementById('crudModalMuzakki').style.display = "flex"; }
     async function saveCrudMuzakki() { let obj = { id: document.getElementById('muz-edit-id').value, dusun: document.getElementById('muz-edit-dusun').value, rw: document.getElementById('muz-edit-rw').value, rt: document.getElementById('muz-edit-rt').value, nama: document.getElementById('muz-edit-nama').value, nominal: document.getElementById('muz-edit-nom').value }; document.getElementById('crudModalMuzakki').style.display = "none"; showModal("⏳ Update data...", true); let res = await kirimAPI({ action: "editMuzakki", obj: obj }); if(res.sukses) { showModal("✅ Data Update!", false); fetchLaporan(); } }
     async function deleteMuzakki(id, nama) { if(!confirm(`Hapus permanen Zakat dari: ${nama}?`)) return; showModal("⏳ Menghapus...", true); let res = await kirimAPI({ action: "hapusMuzakki", id: id }); if(res.sukses) { showModal("✅ Dihapus!", false); fetchLaporan(); } }
 
     async function fetchProgress(isSilent = false) {
       if(!isSilent) document.getElementById('list-progress').innerHTML = "<i>Memuat progress...</i>"; let res = await kirimAPI({ action: "getProgress" });
-      if(res.sukses) { let html = ""; let sortedData = [...res.data].sort((a, b) => (b.dusun.toUpperCase().includes("TOTAL")) - (a.dusun.toUpperCase().includes("TOTAL"))); sortedData.forEach(d => { let formatRp = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(parseFloat(d.totalNominal) || 0); let title = d.dusun.toUpperCase().includes("TOTAL") ? "TOTAL DESA SUMOKEMBANGSRI" : `Dusun ${d.dusun}`; let w = d.progress.toString().replace(',', '.'); html += `<div class="list-item"><div style="font-weight:800; font-size:1.2rem;">${title}</div><div style="display:flex; justify-content:space-between; margin-top:8px; font-size:1rem;"><span>Total: <b>${d.muzakki} Orang</b></span><span style="font-weight:800;">${formatRp}</span></div><div class="prog-bar-bg"><div class="prog-bar-fill" style="width:${w};"></div></div><div style="display:flex; justify-content:space-between; margin-top:10px; font-size:0.9rem; font-weight:700;"><span>Progress: ${d.progress}</span><span class="badge">Growth: ${d.growth}</span></div></div>`; }); document.getElementById('list-progress').innerHTML = html; }
+      if(res.sukses) { let html = ""; let sortedData = [...res.data].sort((a, b) => (safeUpper(b.dusun).includes("TOTAL")) - (safeUpper(a.dusun).includes("TOTAL"))); sortedData.forEach(d => { let formatRp = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(parseFloat(d.totalNominal) || 0); let title = safeUpper(d.dusun).includes("TOTAL") ? "TOTAL DESA SUMOKEMBANGSRI" : `Dusun ${d.dusun}`; let w = d.progress.toString().replace(',', '.'); html += `<div class="list-item"><div style="font-weight:800; font-size:1.2rem;">${title}</div><div style="display:flex; justify-content:space-between; margin-top:8px; font-size:1rem;"><span>Total: <b>${d.muzakki} Orang</b></span><span style="font-weight:800;">${formatRp}</span></div><div class="prog-bar-bg"><div class="prog-bar-fill" style="width:${w};"></div></div><div style="display:flex; justify-content:space-between; margin-top:10px; font-size:0.9rem; font-weight:700;"><span>Progress: ${d.progress}</span><span class="badge">Growth: ${d.growth}</span></div></div>`; }); document.getElementById('list-progress').innerHTML = html; }
+    }
+
+    // FUNGSI BARU: FILTER NAMA OTOMATIS DI FORM DISTRIBUSI
+    function populateNamaDistribusi() {
+      let dusunUser = safeUpper(currentUser.dusun);
+      let kategoriTerpilih = document.getElementById('dist-kategori').value;
+      let elemenSelectNama = document.getElementById('dist-nama');
+      
+      elemenSelectNama.innerHTML = '<option value="">-- Pilih Nama Mustahiq --</option>';
+      let dataFilter = masterMustahiqData.filter(d => safeUpper(d.dusun) === dusunUser && d.kategori === kategoriTerpilih);
+      
+      dataFilter.forEach(d => {
+        let cleanName = getCleanName(d.nama);
+        let statusSalur = (d.status.toLowerCase() === 'tersalurkan') ? ' (✓ Sudah Salur)' : '';
+        elemenSelectNama.innerHTML += `<option value="${cleanName}">${cleanName}${statusSalur} - RT ${d.rt}</option>`;
+      });
+      
+      document.getElementById('dist-rw').value = '';
+      document.getElementById('dist-rt').value = '';
+    }
+
+    function autoFillDistribusi() {
+      let namaDipilih = document.getElementById('dist-nama').value;
+      if(!namaDipilih) { document.getElementById('dist-rw').value = ''; document.getElementById('dist-rt').value = ''; return; }
+      
+      let dusunUser = safeUpper(currentUser.dusun);
+      let kategoriTerpilih = document.getElementById('dist-kategori').value;
+      let d = masterMustahiqData.find(x => getCleanName(x.nama) === namaDipilih && safeUpper(x.dusun) === dusunUser && x.kategori === kategoriTerpilih);
+      
+      if(d) {
+        document.getElementById('dist-rw').value = d.rw;
+        document.getElementById('dist-rt').value = d.rt;
+      }
     }
 
     async function kompresFoto(f) { return new Promise((r) => { let reader = new FileReader(); reader.readAsDataURL(f); reader.onload = function(e) { let img = new Image(); img.src = e.target.result; img.onload = function() { let canvas = document.createElement('canvas'); let scale = Math.min(1000/img.width, 1); canvas.width = img.width*scale; canvas.height = img.height*scale; let ctx = canvas.getContext('2d'); ctx.drawImage(img, 0, 0, canvas.width, canvas.height); r({ base64: canvas.toDataURL('image/jpeg',0.7).split(',')[1], mime: 'image/jpeg', name: f.name }); } } }); }
-    async function saveDistribusi() { let d = { dusun: document.getElementById('dist-dusun').value, amil: document.getElementById('dist-amil').value, rw: document.getElementById('dist-rw').value, rt: document.getElementById('dist-rt').value, kategori: document.getElementById('dist-kategori').value, nama: document.getElementById('dist-nama').value }; let fi = document.getElementById('dist-foto'); if(!d.rt || !d.nama || fi.files.length === 0) return showModal("⚠️ Lengkapi RT, Nama, & Foto!"); showModal("⏳ Upload & Simpan...", true); let c = await kompresFoto(fi.files[0]); d.fotoBase64 = c.base64; d.fotoMime = c.mime; d.fotoName = c.name; let res = await kirimAPI({ action: "simpanDistribusi", obj: d }); if(res.sukses) { showModal("✅ Tersalurkan!", false); document.getElementById('dist-rt').value = ''; document.getElementById('dist-nama').value = ''; document.getElementById('dist-foto').value = ''; } else { showModal("❌ Gagal."); } }
+    
+    async function saveDistribusi() { 
+      let d = { dusun: document.getElementById('dist-dusun').value, amil: document.getElementById('dist-amil').value, rw: document.getElementById('dist-rw').value, rt: document.getElementById('dist-rt').value, kategori: document.getElementById('dist-kategori').value, nama: document.getElementById('dist-nama').value }; 
+      let fi = document.getElementById('dist-foto'); 
+      if(!d.rt || !d.nama || fi.files.length === 0) return showModal("⚠️ Lengkapi Nama, RT (Pilih dari list), & Foto!"); 
+      showModal("⏳ Upload & Simpan...", true); 
+      let c = await kompresFoto(fi.files[0]); d.fotoBase64 = c.base64; d.fotoMime = c.mime; d.fotoName = c.name; 
+      let res = await kirimAPI({ action: "simpanDistribusi", obj: d }); 
+      if(res.sukses) { showModal("✅ Tersalurkan!", false); document.getElementById('dist-rt').value = ''; document.getElementById('dist-nama').value = ''; document.getElementById('dist-foto').value = ''; populateNamaDistribusi(); } 
+      else { showModal("❌ Gagal."); } 
+    }
 
     async function fetchLaporanDistribusi(isSilent = false) {
       if(!isSilent) { document.getElementById('progress-dist-container').innerHTML = "<i>Memuat...</i>"; document.getElementById('list-distribusi').innerHTML = "<i>Memuat...</i>"; }
       let resP = await kirimAPI({ action: "getDistribusiProgress" });
-      if(resP.sukses) { let htmlP = ""; [...resP.data].sort((a,b)=>(b.dusun.toUpperCase().includes("TOTAL"))-(a.dusun.toUpperCase().includes("TOTAL"))).forEach(d => { htmlP += `<div class="list-item"><div style="font-weight:800; font-size:1.15rem;">${d.dusun.toUpperCase().includes("TOTAL")?"TOTAL DESA":'Dusun '+d.dusun}</div><div style="display:flex; justify-content:space-between; margin-top:8px; font-size:0.95rem;"><span>Target: <b>${d.target}</b></span><span style="font-weight:800;">Selesai: ${d.tersalurkan}</span></div><div class="prog-bar-bg"><div class="prog-bar-fill" style="width:${d.progress.toString().replace(',','.')};"></div></div><div style="text-align:right; margin-top:10px;"><span class="badge">Persentase: ${d.progress}</span></div></div>`; }); document.getElementById('progress-dist-container').innerHTML = htmlP; }
+      if(resP.sukses) { let htmlP = ""; [...resP.data].sort((a,b)=>(safeUpper(b.dusun).includes("TOTAL"))-(safeUpper(a.dusun).includes("TOTAL"))).forEach(d => { htmlP += `<div class="list-item"><div style="font-weight:800; font-size:1.15rem;">${safeUpper(d.dusun).includes("TOTAL")?"TOTAL DESA":'Dusun '+d.dusun}</div><div style="display:flex; justify-content:space-between; margin-top:8px; font-size:0.95rem;"><span>Target: <b>${d.target}</b></span><span style="font-weight:800;">Selesai: ${d.tersalurkan}</span></div><div class="prog-bar-bg"><div class="prog-bar-fill" style="width:${d.progress.toString().replace(',','.')};"></div></div><div style="text-align:right; margin-top:10px;"><span class="badge">Persentase: ${d.progress}</span></div></div>`; }); document.getElementById('progress-dist-container').innerHTML = htmlP; }
       let resD = await kirimAPI({ action: "getMasterMustahiq" }); if(resD.sukses) { masterMustahiqData = resD.data; filterDistribusi(); }
     }
     
-    // 2. RENDER MUSTAHIQ (DASHBOARD AMIL)
     function renderLaporanDistribusi(data) { 
       let html = ""; data.forEach(d => { 
         let isDone = (d.status.toLowerCase() === 'tersalurkan'); 
@@ -557,13 +577,13 @@
       }); 
       document.getElementById('list-distribusi').innerHTML = html || "<i>Tidak ada data.</i>"; 
     }
-    function filterDistribusi() { let fD = document.getElementById('f-dusun').value, fS = document.getElementById('f-status').value, fK = document.getElementById('f-kat').value, fSrc = document.getElementById('f-search').value.toLowerCase(); renderLaporanDistribusi(masterMustahiqData.filter(d => (fD==='ALL'||d.dusun.toUpperCase()===fD) && (fS==='ALL'||d.status===fS) && (fK==='ALL'||d.kategori===fK) && (d.nama.toLowerCase().includes(fSrc)||d.amil.toLowerCase().includes(fSrc)))); }
+    function filterDistribusi() { let fD = document.getElementById('f-dusun').value, fS = document.getElementById('f-status').value, fK = document.getElementById('f-kat').value, fSrc = document.getElementById('f-search').value.toLowerCase(); renderLaporanDistribusi(masterMustahiqData.filter(d => (fD==='ALL'||safeUpper(d.dusun)===fD) && (fS==='ALL'||d.status===fS) && (fK==='ALL'||d.kategori===fK) && ((d.nama||'').toLowerCase().includes(fSrc)||(d.amil||'').toLowerCase().includes(fSrc)))); }
 
     async function fetchKelolaMustahiq(isSilent = false) { if(!isSilent) document.getElementById('list-kelola').innerHTML = "<i>Memuat...</i>"; let res = await kirimAPI({ action: "getMasterMustahiq" }); if(res.sukses) { masterMustahiqData = res.data; filterKelola(); } }
     function renderKelolaMustahiq(data) { let html = ""; data.forEach(d => { let cName = getCleanName(d.nama); html += `<div class="list-item" style="cursor:pointer;" onclick='openModalMustahiq(${d.id})'><div style="font-weight: 800; font-size: 1.15rem; margin-bottom: 6px;">${d.label==='NEW'?`<span class="badge-new">NEW !</span>`:''}${cName}</div><div style="font-size: 0.9rem; font-weight: 600;">${d.dusun} | ${d.rw} / RT ${d.rt}</div><div style="margin-top:8px;">${getCatBadge(d.kategori)}</div></div>`; }); document.getElementById('list-kelola').innerHTML = html || "<i>Kosong.</i>"; }
-    function filterKelola() { let s = document.getElementById('search-kelola').value.toLowerCase(); renderKelolaMustahiq(masterMustahiqData.filter(d => d.nama.toLowerCase().includes(s) || d.dusun.toLowerCase().includes(s))); }
+    function filterKelola() { let s = document.getElementById('search-kelola').value.toLowerCase(); renderKelolaMustahiq(masterMustahiqData.filter(d => (d.nama||'').toLowerCase().includes(s) || (d.dusun||'').toLowerCase().includes(s))); }
 
-    function openModalMustahiq(id) { if(id === 'NEW') { document.getElementById('crud-title').innerText = "Tambah Mustahiq Baru"; document.getElementById('crud-id').value = ""; document.getElementById('crud-rt').value = ""; document.getElementById('crud-nama').value = ""; document.getElementById('btn-crud-delete').style.display = "none"; } else { let d = masterMustahiqData.find(x=>x.id===id); document.getElementById('crud-title').innerText = "Edit Mustahiq"; document.getElementById('crud-id').value = d.id; document.getElementById('crud-dusun').value = d.dusun.toUpperCase(); document.getElementById('crud-rw').value = d.rw; document.getElementById('crud-rt').value = d.rt; document.getElementById('crud-kategori').value = d.kategori; document.getElementById('crud-nama').value = getCleanName(d.nama); document.getElementById('btn-crud-delete').style.display = "block"; } document.getElementById('crudModal').style.display = "flex"; }
+    function openModalMustahiq(id) { if(id === 'NEW') { document.getElementById('crud-title').innerText = "Tambah Mustahiq Baru"; document.getElementById('crud-id').value = ""; document.getElementById('crud-rt').value = ""; document.getElementById('crud-nama').value = ""; document.getElementById('btn-crud-delete').style.display = "none"; } else { let d = masterMustahiqData.find(x=>x.id===id); document.getElementById('crud-title').innerText = "Edit Mustahiq"; document.getElementById('crud-id').value = d.id; document.getElementById('crud-dusun').value = safeUpper(d.dusun); document.getElementById('crud-rw').value = d.rw; document.getElementById('crud-rt').value = d.rt; document.getElementById('crud-kategori').value = d.kategori; document.getElementById('crud-nama').value = getCleanName(d.nama); document.getElementById('btn-crud-delete').style.display = "block"; } document.getElementById('crudModal').style.display = "flex"; }
     async function saveCrudMustahiq() { let o = { id: document.getElementById('crud-id').value, dusun: document.getElementById('crud-dusun').value, rw: document.getElementById('crud-rw').value, rt: document.getElementById('crud-rt').value, kategori: document.getElementById('crud-kategori').value, nama: document.getElementById('crud-nama').value }; if(!o.rt || !o.nama) return alert("Isi RT & Nama!"); document.getElementById('crudModal').style.display = "none"; showModal("⏳ Simpan...", true); let res = await kirimAPI({ action: o.id?"editMustahiq":"tambahMustahiq", obj: o }); if(res.sukses) { showModal("✅ Sukses!", false); fetchKelolaMustahiq(); } }
     async function deleteCrudMustahiq() { if(!confirm("HAPUS data ini permanen?")) return; document.getElementById('crudModal').style.display = "none"; showModal("⏳ Menghapus...", true); let res = await kirimAPI({ action: "hapusMustahiq", id: document.getElementById('crud-id').value }); if(res.sukses) { showModal("✅ Dihapus!", false); fetchKelolaMustahiq(); } }
 
@@ -571,7 +591,7 @@
       let tipe = document.getElementById('aju-tipe').value; let box = document.getElementById('box-cari-mustahiq');
       if(tipe === 'EDIT') {
         box.style.display = 'block'; let opt = '<option value="">-- Pilih Nama Lama --</option>';
-        masterMustahiqData.filter(d=>d.dusun.toUpperCase() === currentUser.dusun.toUpperCase()).forEach(m => opt += `<option value="${m.id}">${getCleanName(m.nama)} (RT ${m.rt} - ${m.kategori})</option>`);
+        masterMustahiqData.filter(d=>safeUpper(d.dusun) === safeUpper(currentUser.dusun)).forEach(m => opt += `<option value="${m.id}">${getCleanName(m.nama)} (RT ${m.rt} - ${m.kategori})</option>`);
         document.getElementById('aju-pilih-nama').innerHTML = opt;
       } else { box.style.display = 'none'; document.getElementById('aju-nama').value = ""; document.getElementById('aju-rt').value = ""; }
     }
@@ -587,7 +607,7 @@
 
     async function fetchKelolaAkun(isSilent = false) { if(!isSilent) document.getElementById('list-kelola-akun').innerHTML = "<i>Memuat...</i>"; let res = await kirimAPI({ action: "getSemuaAkun" }); if(res.sukses) { masterAkunData = res.data; filterKelolaAkun(); } }
     function renderKelolaAkun(data) { let html = ""; data.forEach(d => { let b = d.status==='Active'?`<span class="badge">Active</span>`:`<span class="badge" style="opacity:0.6;">Pending</span>`; let sOnline = d.isOnline ? `<span style="font-weight:800; font-size:0.85rem; margin-left:10px;">🟢 Online</span>` : `<span style="font-size:0.85rem; margin-left:10px;">⚫ Offline</span>`; let btnPaksa = d.isOnline ? `<button class="btn-submit btn-danger" style="padding:8px 15px; margin-top:10px; font-size:0.9rem;" onclick="paksaLogoutUser(${d.id}, '${d.nama}')">Force Logout</button>` : ''; html += `<div class="list-item" style="display:flex; justify-content:space-between; align-items:flex-start;"><div><div style="font-weight:800; font-size: 1.15rem; margin-bottom: 6px;">${d.nama} <span style="font-size:0.9rem; font-weight:600;">(${d.jenis})</span></div><div style="font-size:0.9rem; font-weight:600;">${d.nickname} | ${d.dusun} <br><div style="margin-top:8px;">${b} ${sOnline}</div></div>${btnPaksa}</div><button class="btn-submit" style="width:auto; padding:10px 20px; margin:0;" onclick='openModalAkun(${d.id})'>Kelola</button></div>`; }); document.getElementById('list-kelola-akun').innerHTML = html || "<i>Kosong.</i>"; }
-    function filterKelolaAkun() { let s = document.getElementById('search-akun').value.toLowerCase(); renderKelolaAkun(masterAkunData.filter(d => d.nama.toLowerCase().includes(s) || d.dusun.toLowerCase().includes(s) || d.nickname.toLowerCase().includes(s))); }
+    function filterKelolaAkun() { let s = document.getElementById('search-akun').value.toLowerCase(); renderKelolaAkun(masterAkunData.filter(d => (d.nama||'').toLowerCase().includes(s) || (d.dusun||'').toLowerCase().includes(s) || (d.nickname||'').toLowerCase().includes(s))); }
     
     function openModalAkun(id) { let d = masterAkunData.find(x=>x.id===id); document.getElementById('akun-id').value = d.id; document.getElementById('akun-nama').value = d.nama; document.getElementById('akun-nick').value = d.nickname; document.getElementById('akun-dusun').value = d.dusun; document.getElementById('akun-jenis').value = d.jenis; document.getElementById('akun-status').value = d.status; document.getElementById('akun-pass').value = d.password; document.getElementById('crudModalAkun').style.display = "flex"; }
     async function saveCrudAkun() { let o = { id: document.getElementById('akun-id').value, nama: document.getElementById('akun-nama').value, nickname: document.getElementById('akun-nick').value, dusun: document.getElementById('akun-dusun').value, jenis: document.getElementById('akun-jenis').value, status: document.getElementById('akun-status').value, password: document.getElementById('akun-pass').value }; document.getElementById('crudModalAkun').style.display = "none"; showModal("⏳ Simpan...", true); let res = await kirimAPI({ action: "editAkun", obj: o }); if(res.sukses) { showModal("✅ Sukses!", false); fetchKelolaAkun(); } }
@@ -605,7 +625,6 @@
       if(res.sukses) { showModal("✅ Disebar!", false); fetchPengumuman(); document.getElementById('input-pengumuman').value = ''; document.getElementById('input-batas-waktu').value = ''; }
     }
 
-    // 3. RENDER MUZAKKI (PUBLIC DATA)
     function renderPublicMuzakki(data) {
       let html = ""; 
       data.forEach(d => {
@@ -616,7 +635,7 @@
                     <div style="font-weight: 800; font-size: 1.15rem; color: var(--dark);">${formatRp}</div>
                   </div>
                   <div style="text-align: right;">
-                    <div class="badge" style="margin-bottom: 8px;">DUSUN ${d.dusun.toUpperCase()}</div>
+                    <div class="badge" style="margin-bottom: 8px;">DUSUN ${safeUpper(d.dusun)}</div>
                     <div style="font-size: 0.85rem; font-weight: 800; color: var(--dark);">${d.rw} / RT ${d.rt}</div>
                   </div>
                  </div>`;
@@ -624,7 +643,6 @@
       document.getElementById('public-list-muzakki').innerHTML = html || "<i>Belum ada data.</i>";
     }
 
-    // 4. RENDER MUSTAHIQ (PUBLIC DATA)
     function renderPublicMustahiq(data) {
       let html = ""; data.forEach(d => { 
         let isDone = (d.status.toLowerCase() === 'tersalurkan'); 
