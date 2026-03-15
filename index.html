@@ -285,7 +285,7 @@
     let pollingInterval = null; let sessionInterval = null;
     let pubMuzakki = []; let pubMustahiq = []; let pubAmil = [];
 
-    // FUNGSI PELINDUNG ANTI-CRASH
+    // FUNGSI PELINDUNG (YANG KEMAREN ILANG BIKIN CRASH SEKARANG ADA DI SINI)
     function safeUpper(str) { return String(str || '').toUpperCase(); }
     function getCleanName(name) { return (name || '').replace(/\(Baris:\s*\d+\)/gi, '').trim(); }
     function getCatBadge(kat) { let k = String(kat || '').toLowerCase(); return `<span class="badge">${kat}</span>`; }
@@ -376,10 +376,11 @@
         if(hash === 'kelola-akun' && currentUser?.role === 'Pengurus') { fetchKelolaAkun(); pollingInterval = setInterval(()=>fetchKelolaAkun(true), 15000); }
         if(hash === 'kelola-pengajuan' && currentUser?.role === 'Pengurus') { fetchPengajuan(); pollingInterval = setInterval(()=>fetchPengajuan(true), 15000); }
         
+        // PENGATURAN AWAL FORM DATA
         if(hash === 'muzakki' && currentUser) { document.getElementById('muz-dusun').value = currentUser.dusun; document.getElementById('muz-amil').value = currentUser.nama; }
         if(hash === 'ajukan-mustahiq' && currentUser) { document.getElementById('aju-dusun').value = currentUser.dusun; document.getElementById('aju-amil').value = currentUser.nama; fetchKelolaMustahiq(true); toggleAjuMode(); }
         
-        // PENGATURAN AWAL FORM DISTRIBUSI BARU
+        // PENGATURAN AWAL FORM DISTRIBUSI BARU (DROPDOWN)
         if(hash === 'distribusi' && currentUser) { 
             document.getElementById('dist-dusun').value = currentUser.dusun; 
             document.getElementById('dist-amil').value = currentUser.nama; 
@@ -425,7 +426,6 @@
       if(res.sukses) { showModal("✅ Data Berhasil Disimpan!", false); document.getElementById('muz-rt').value = ''; document.getElementById('muz-nama').value = ''; document.getElementById('muz-nom').value = ''; } else { showModal("❌ Gagal."); }
     }
 
-    // RENDER MUZAKKI (AMAN DARI CRASH)
     function renderLaporan(data) {
       let html = ""; let sorted = [...data].sort((a,b) => (b.status === 'Error') - (a.status === 'Error'));
       sorted.forEach(d => {
