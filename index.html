@@ -178,6 +178,32 @@
           <div class="tab-btn" id="tab-amil" onclick="switchPublicTab('amil')">Data Amil</div>
         </div>
 
+        <div id="public-summary-muzakki" style="display:block; margin-bottom: 25px;"></div>
+        <div id="public-summary-mustahiq" style="display:none; margin-bottom: 25px;"></div>
+
+        <div class="filter-grid" id="public-filters" style="margin-bottom: 15px;">
+            <div class="form-group">
+                <select id="pub-filter-dusun" onchange="filterPublicData()">
+                    <option value="ALL">-- Filter Semua Dusun --</option>
+                    <option value="KEMAMBANG">Dusun Kemambang</option>
+                    <option value="SUMOTUWO">Dusun Sumotuwo</option>
+                    <option value="LUWUNG">Dusun Luwung</option>
+                    <option value="WATESROWO">Dusun Watesrowo</option>
+                    <option value="WONOKITRI WETAN">Dusun Wonokitri Wetan</option>
+                    <option value="WONOKITRI KULON">Dusun Wonokitri Kulon</option>
+                </select>
+            </div>
+            <div class="form-group" id="pub-filter-kat-container" style="display:none;">
+                <select id="pub-filter-kat" onchange="filterPublicData()">
+                    <option value="ALL">-- Filter Semua Kategori --</option>
+                    <option value="Fakir">Fakir</option>
+                    <option value="Miskin">Miskin</option>
+                    <option value="Sabilillah">Sabilillah</option>
+                    <option value="Yatim">Yatim</option>
+                </select>
+            </div>
+        </div>
+
         <div class="form-group" style="margin-bottom: 25px;">
           <input type="text" id="search-public" placeholder="Pencarian Nama / Dusun..." onkeyup="filterPublicData()">
         </div>
@@ -238,14 +264,7 @@
         <div class="form-group">
           <label>Kategori Mustahiq</label>
           <select id="dist-kategori" onchange="populateNamaDistribusi()">
-            <option value="Fakir">Fakir</option>
-            <option value="Miskin">Miskin</option>
-            <option value="Sabilillah">Sabilillah</option>
-            <option value="Yatim">Yatim</option>
-            <option value="Ghorim">Ghorim</option>
-            <option value="Ibnu Sabil">Ibnu Sabil</option>
-            <option value="Muallaf">Muallaf</option>
-            <option value="Riqab">Riqab</option>
+            <option value="Fakir">Fakir</option><option value="Miskin">Miskin</option><option value="Sabilillah">Sabilillah</option><option value="Yatim">Yatim</option><option value="Ghorim">Ghorim</option><option value="Ibnu Sabil">Ibnu Sabil</option><option value="Muallaf">Muallaf</option><option value="Riqab">Riqab</option>
           </select>
         </div>
         <div class="form-group">
@@ -259,12 +278,15 @@
           <div class="form-group"><label>RT</label><input type="text" id="dist-rt" readonly style="background:var(--bg-color); opacity:0.8;"></div>
         </div>
         <div class="form-group"><label>Foto Bukti</label><input type="file" id="dist-foto" accept="image/*"></div>
-        <button class="btn-submit" onclick="saveDistribusi()">Simpan Penyaluran</button>
+        <div style="display:flex; gap:10px; margin-top:15px; flex-wrap: wrap;">
+            <button class="btn-submit" style="margin-top:0;" onclick="saveDistribusi()">Simpan Penyaluran</button>
+            <button class="btn-submit btn-danger" style="margin-top:0;" onclick="bukaModalGagalSalur()">TIDAK TERSALURKAN</button>
+        </div>
         <button class="btn-submit btn-secondary" onclick="pindahHalaman('dashboard')">Kembali</button>
       </div>
     </div>
     
-    <div id="page-laporan-distribusi" class="page"><div class="card"><h2>Laporan Distribusi</h2><button class="btn-submit btn-secondary" style="margin-bottom:20px;" onclick="pindahHalaman('dashboard')">Kembali</button><div id="progress-dist-container" style="margin-bottom: 25px;"><i>Memuat progress...</i></div><hr style="border:none; border-top:2px dashed var(--shadow-dark); margin: 25px 0;"><h3 style="margin-top:20px;">Daftar Mustahiq</h3><div class="filter-grid"><div class="form-group"><select id="f-dusun" onchange="filterDistribusi()"><option value="ALL">Semua Dusun</option><option value="KEMAMBANG">Kemambang</option><option value="SUMOTUWO">Sumotuwo</option><option value="LUWUNG">Luwung</option><option value="WATESROWO">WATESROWO</option><option value="WONOKITRI WETAN">WONOKITRI WETAN</option><option value="WONOKITRI KULON">WONOKITRI KULON</option></select></div><div class="form-group"><select id="f-status" onchange="filterDistribusi()"><option value="ALL">Semua Status</option><option value="Tersalurkan">Tersalurkan</option><option value="Belum">Belum Salur</option></select></div><div class="form-group"><select id="f-kat" onchange="filterDistribusi()"><option value="ALL">Semua Kategori</option><option value="Fakir">Fakir</option><option value="Miskin">Miskin</option><option value="Sabilillah">Sabilillah</option><option value="Yatim">Yatim</option></select></div></div><div class="form-group"><input type="text" id="f-search" placeholder="Cari Nama Penerima..." onkeyup="filterDistribusi()"></div><div id="list-distribusi"><i>Memuat data...</i></div></div></div>
+    <div id="page-laporan-distribusi" class="page"><div class="card"><h2>Laporan Distribusi</h2><button class="btn-submit btn-secondary" style="margin-bottom:20px;" onclick="pindahHalaman('dashboard')">Kembali</button><div id="progress-dist-container" style="margin-bottom: 25px;"><i>Memuat progress...</i></div><hr style="border:none; border-top:2px dashed var(--shadow-dark); margin: 25px 0;"><h3 style="margin-top:20px;">Daftar Mustahiq</h3><div class="filter-grid"><div class="form-group"><select id="f-dusun" onchange="filterDistribusi()"><option value="ALL">Semua Dusun</option><option value="KEMAMBANG">Kemambang</option><option value="SUMOTUWO">Sumotuwo</option><option value="LUWUNG">Luwung</option><option value="WATESROWO">WATESROWO</option><option value="WONOKITRI WETAN">WONOKITRI WETAN</option><option value="WONOKITRI KULON">WONOKITRI KULON</option></select></div><div class="form-group"><select id="f-status" onchange="filterDistribusi()"><option value="ALL">Semua Status</option><option value="Tersalurkan">Tersalurkan</option><option value="Belum">Belum Salur</option><option value="Tidak Tersalurkan">Tidak Tersalurkan</option></select></div><div class="form-group"><select id="f-kat" onchange="filterDistribusi()"><option value="ALL">Semua Kategori</option><option value="Fakir">Fakir</option><option value="Miskin">Miskin</option><option value="Sabilillah">Sabilillah</option><option value="Yatim">Yatim</option></select></div></div><div class="form-group"><input type="text" id="f-search" placeholder="Cari Nama Penerima..." onkeyup="filterDistribusi()"></div><div id="list-distribusi"><i>Memuat data...</i></div></div></div>
     <div id="page-kelola-mustahiq" class="page"><div class="card"><h2>Kelola Master Mustahiq</h2><button class="btn-submit btn-secondary" style="margin-bottom:20px;" onclick="pindahHalaman('dashboard')">Kembali</button><button class="btn-submit" style="margin-bottom: 25px;" onclick="openModalMustahiq('NEW')">+ Tambah Mustahiq Baru</button><div class="form-group"><input type="text" id="search-kelola" placeholder="Cari Nama / Dusun..." onkeyup="filterKelola()"></div><div id="list-kelola"><i>Memuat data...</i></div></div></div>
     <div id="page-ajukan-mustahiq" class="page"><div class="card"><h2>Ajukan Mustahiq</h2><div class="form-group"><label>Tipe Pengajuan</label><select id="aju-tipe" onchange="toggleAjuMode()"><option value="BARU">Usulan Warga Baru</option><option value="EDIT">Perubahan Data Lama</option></select></div><div id="box-cari-mustahiq" class="form-group" style="display:none;"><label>Pilih Nama Mustahiq Lama</label><select id="aju-pilih-nama" onchange="isiDataOtomatis()"></select></div><div class="flex-gap"><div class="form-group"><label>Dusun</label><input type="text" id="aju-dusun" readonly></div><div class="form-group"><label>Amil Pengaju</label><input type="text" id="aju-amil" readonly></div></div><div class="flex-gap"><div class="form-group"><label>RW</label><select id="aju-rw"><option value="RW 1">RW 1</option><option value="RW 2">RW 2</option><option value="RW 3">RW 3</option><option value="RW 4">RW 4</option><option value="RW 5">RW 5</option><option value="RW 6">RW 6</option></select></div><div class="form-group"><label>RT</label><input type="text" id="aju-rt" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></div></div><div class="form-group"><label>Kategori</label><select id="aju-kat"><option value="Fakir">Fakir</option><option value="Miskin">Miskin</option><option value="Sabilillah">Sabilillah</option><option value="Yatim">Yatim</option><option value="Ghorim">Ghorim</option><option value="Ibnu Sabil">Ibnu Sabil</option><option value="Muallaf">Muallaf</option><option value="Riqab">Riqab</option></select></div><div class="form-group"><label>Nama Penerima</label><input type="text" id="aju-nama"></div><button class="btn-submit" onclick="ajukanMustahiq()">Kirim Pengajuan</button><button class="btn-submit btn-secondary" onclick="pindahHalaman('dashboard')">Kembali</button></div></div>
     <div id="page-kelola-pengajuan" class="page"><div class="card"><h2>Konfirmasi Pengajuan</h2><button class="btn-submit btn-secondary" style="margin-bottom:20px;" onclick="pindahHalaman('dashboard')">Kembali</button><div id="list-pengajuan"><i>Memuat data...</i></div></div></div>
@@ -273,13 +295,15 @@
   </div>
 
   <div id="customModal" class="modal-overlay"><div class="modal-box" style="text-align:center;"><p id="modalMsg" style="white-space: pre-wrap; margin-bottom: 25px; font-size: 1.15rem; font-weight:800;"></p><button class="btn-submit" id="btn-modal-ok" onclick="closeModal()">Selesai</button></div></div>
+  
+  <div id="modalGagalSalur" class="modal-overlay"><div class="modal-box"><h3 style="color:#D32F2F;">Lapor Tidak Tersalurkan</h3><div class="form-group"><label>Alasan Gagal Salur</label><input type="text" id="input-alasan-gagal" placeholder="Misal: Meninggal Dunia, Pindah Domisili..."></div><button class="btn-submit btn-danger" onclick="simpanDistribusiGagal()">Kirim Laporan</button><button class="btn-submit btn-secondary" onclick="document.getElementById('modalGagalSalur').style.display='none'">Batal</button></div></div>
+  
   <div id="crudModal" class="modal-overlay"><div class="modal-box"><h3 id="crud-title">Mustahiq</h3><input type="hidden" id="crud-id"><div class="form-group"><label>Dusun</label><select id="crud-dusun"><option value="KEMAMBANG">KEMAMBANG</option><option value="SUMOTUWO">SUMOTUWO</option><option value="LUWUNG">LUWUNG</option><option value="WATESROWO">WATESROWO</option><option value="WONOKITRI WETAN">WONOKITRI WETAN</option><option value="WONOKITRI KULON">WONOKITRI KULON</option></select></div><div class="flex-gap"><div class="form-group"><label>RW</label><select id="crud-rw"><option value="RW 1">RW 1</option><option value="RW 2">RW 2</option><option value="RW 3">RW 3</option><option value="RW 4">RW 4</option><option value="RW 5">RW 5</option><option value="RW 6">RW 6</option></select></div><div class="form-group"><label>RT</label><input type="text" id="crud-rt"></div></div><div class="form-group"><label>Kategori</label><select id="crud-kategori"><option value="Fakir">Fakir</option><option value="Miskin">Miskin</option><option value="Sabilillah">Sabilillah</option><option value="Yatim">Yatim</option></select></div><div class="form-group"><label>Nama</label><input type="text" id="crud-nama"></div><button class="btn-submit" onclick="saveCrudMustahiq()">Simpan Data</button><button class="btn-submit btn-danger" id="btn-crud-delete" style="display:none;" onclick="deleteCrudMustahiq()">Hapus Data</button><button class="btn-submit btn-secondary" onclick="document.getElementById('crudModal').style.display='none'">Batal</button></div></div>
   <div id="crudModalMuzakki" class="modal-overlay"><div class="modal-box"><h3>Edit Data Muzakki</h3><input type="hidden" id="muz-edit-id"><div class="form-group"><label>Dusun</label><select id="muz-edit-dusun"><option value="KEMAMBANG">KEMAMBANG</option><option value="SUMOTUWO">SUMOTUWO</option><option value="LUWUNG">LUWUNG</option><option value="WATESROWO">WATESROWO</option><option value="WONOKITRI WETAN">WONOKITRI WETAN</option><option value="WONOKITRI KULON">WONOKITRI KULON</option></select></div><div class="flex-gap"><div class="form-group"><label>RW</label><select id="muz-edit-rw"><option value="RW 1">RW 1</option><option value="RW 2">RW 2</option><option value="RW 3">RW 3</option><option value="RW 4">RW 4</option><option value="RW 5">RW 5</option><option value="RW 6">RW 6</option></select></div><div class="form-group"><label>RT</label><input type="text" id="muz-edit-rt"></div></div><div class="form-group"><label>Nama Muzakki</label><input type="text" id="muz-edit-nama"></div><div class="form-group"><label>Nominal</label><input type="text" id="muz-edit-nom"></div><button class="btn-submit" onclick="saveCrudMuzakki()">Update Data</button><button class="btn-submit btn-secondary" onclick="document.getElementById('crudModalMuzakki').style.display='none'">Batal</button></div></div>
   <div id="crudModalAkun" class="modal-overlay"><div class="modal-box"><h3>Edit Akun</h3><input type="hidden" id="akun-id"><div class="form-group"><label>Nama</label><input type="text" id="akun-nama"></div><div class="flex-gap"><div class="form-group"><label>Nickname</label><input type="text" id="akun-nick"></div><div class="form-group"><label>Dusun</label><select id="akun-dusun"><option value="KEMAMBANG">KEMAMBANG</option><option value="SUMOTUWO">SUMOTUWO</option><option value="LUWUNG">LUWUNG</option><option value="WATESROWO">WATESROWO</option><option value="WONOKITRI WETAN">WONOKITRI WETAN</option><option value="WONOKITRI KULON">WONOKITRI KULON</option></select></div></div><div class="flex-gap"><div class="form-group"><label>Jenis Akun</label><select id="akun-jenis"><option value="Amil">Amil</option><option value="Pengurus">Pengurus</option></select></div><div class="form-group"><label>Status</label><select id="akun-status"><option value="Active">Active</option><option value="Pending">Pending</option></select></div></div><div class="form-group"><label>Password Baru</label><input type="text" id="akun-pass"></div><button class="btn-submit" onclick="saveCrudAkun()">Update Akun</button><button class="btn-submit btn-danger" onclick="deleteCrudAkun()">Hapus Akun</button><button class="btn-submit btn-secondary" onclick="document.getElementById('crudModalAkun').style.display='none'">Batal</button></div></div>
   <div id="modalPengumuman" class="modal-overlay"><div class="modal-box"><h3>Buat Pengumuman</h3><div class="form-group"><label>Pesan Singkat (Running Text)</label><input type="text" id="input-pengumuman" maxlength="150" placeholder="Ketik pengumuman di sini..."></div><div class="form-group"><label>Batas Waktu</label><input type="datetime-local" id="input-batas-waktu"></div><button class="btn-submit" onclick="kirimPengumuman()">Sebarkan</button><button class="btn-submit btn-secondary" onclick="document.getElementById('modalPengumuman').style.display='none'">Batal</button></div></div>
 
   <script>
-    // PERHATIAN PENTING: GANTI URL DI BAWAH JIKA URL GAS (KODE.GS) LU BERUBAH!
     const API_URL = "https://script.google.com/macros/s/AKfycbxJMDKRdttXGU-a7XoXSRPoTSkU3Htpnx8goOAF7IpGvxMm7msaVj3XSzJjLq1JWLhb/exec";
     
     let currentUser = null; let dataLaporan = []; let masterMustahiqData = []; let masterAkunData = [];
@@ -292,11 +316,8 @@
 
     function navigasiKe(target) {
       if (!document.getElementById('page-home').classList.contains('active')) {
-        pindahHalaman('home');
-        setTimeout(() => { let el = document.getElementById(target); if(el) window.scrollTo({ top: el.offsetTop - 70, behavior: 'smooth' }); }, 100);
-      } else {
-        let el = document.getElementById(target); if(el) window.scrollTo({ top: el.offsetTop - 70, behavior: 'smooth' });
-      }
+        pindahHalaman('home'); setTimeout(() => { let el = document.getElementById(target); if(el) window.scrollTo({ top: el.offsetTop - 70, behavior: 'smooth' }); }, 100);
+      } else { let el = document.getElementById(target); if(el) window.scrollTo({ top: el.offsetTop - 70, behavior: 'smooth' }); }
       const navMenu = document.getElementById('nav-menu'); const menuToggle = document.getElementById('menu-toggle');
       if(navMenu.classList.contains('active')) { navMenu.classList.remove('active'); menuToggle.classList.remove('active'); }
     }
@@ -307,23 +328,54 @@
     });
 
     async function fetchPublicData() {
+      // TAB MUZAKKI
       let resMuz = await kirimAPI({ action: "getLaporan" }); if(resMuz.sukses) { pubMuzakki = resMuz.data.filter(d => d.status !== 'Error'); renderPublicMuzakki(pubMuzakki); }
+      let resProgMuz = await kirimAPI({ action: "getProgress" }); if(resProgMuz.sukses) { renderSummaryPubMuzakki(resProgMuz.data); }
+      
+      // TAB MUSTAHIQ
       let resMus = await kirimAPI({ action: "getMasterMustahiq" }); if(resMus.sukses) { pubMustahiq = resMus.data; renderPublicMustahiq(pubMustahiq); }
+      let resProgMus = await kirimAPI({ action: "getDistribusiProgress" }); if(resProgMus.sukses) { renderSummaryPubMustahiq(resProgMus.data); }
+      
+      // TAB AMIL
       let resAmil = await kirimAPI({ action: "getPublicAkun" }); if(resAmil.sukses) { pubAmil = resAmil.data; renderPublicAmil(pubAmil); }
+    }
+
+    function renderSummaryPubMuzakki(progData) {
+       let total = progData.find(d => safeUpper(d.dusun).includes("TOTAL")); let dusuns = progData.filter(d => !safeUpper(d.dusun).includes("TOTAL")); let html = "";
+       if(total) { html += `<div class="card" style="margin-bottom:15px; padding:20px; text-align:center; border: 2px solid var(--dark) !important;"><h3 style="margin-top:0; color:var(--dark);">TOTAL DESA SUMOKEMBANGSRI</h3><div style="font-size:1.5rem; font-weight:800;">${new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(total.totalNominal)}</div><div style="font-weight:600; color:var(--text-muted);">${total.muzakki} Orang | Growth: ${total.growth}</div></div>`; }
+       html += `<div class="grid-menu" style="margin-top:0; grid-template-columns: repeat(2, 1fr);">`;
+       dusuns.forEach(d => { html += `<div class="menu-box" style="padding:15px;"><div style="font-weight:800; margin-bottom:5px;">${safeUpper(d.dusun)}</div><div style="font-size:1.1rem; font-weight:800; color:var(--dark);">${new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(d.totalNominal)}</div><div style="font-size:0.85rem; color:var(--text-muted);">${d.muzakki} Orang</div></div>`; });
+       html += `</div>`; document.getElementById('public-summary-muzakki').innerHTML = html;
+    }
+
+    function renderSummaryPubMustahiq(progData) {
+       let total = progData.find(d => safeUpper(d.dusun).includes("TOTAL")); let dusuns = progData.filter(d => !safeUpper(d.dusun).includes("TOTAL")); let html = "";
+       if(total) { html += `<div class="card" style="margin-bottom:15px; padding:20px; text-align:center; border: 2px solid var(--dark) !important;"><h3 style="margin-top:0; color:var(--dark);">TOTAL DISTRIBUSI DESA</h3><div style="font-size:1.5rem; font-weight:800;">${total.progress} Tersalurkan</div><div style="font-weight:600; color:var(--text-muted);">${total.tersalurkan} dari ${total.target} Orang</div></div>`; }
+       html += `<div class="grid-menu" style="margin-top:0; grid-template-columns: repeat(2, 1fr);">`;
+       dusuns.forEach(d => { html += `<div class="menu-box" style="padding:15px;"><div style="font-weight:800; margin-bottom:5px;">${safeUpper(d.dusun)}</div><div style="font-size:1.1rem; font-weight:800; color:var(--dark);">${d.progress}</div><div style="font-size:0.85rem; color:var(--text-muted);">${d.tersalurkan} / ${d.target} Orang</div></div>`; });
+       html += `</div>`; document.getElementById('public-summary-mustahiq').innerHTML = html;
     }
 
     function switchPublicTab(tab) {
       document.getElementById('tab-muzakki').classList.remove('active'); document.getElementById('tab-mustahiq').classList.remove('active'); document.getElementById('tab-amil').classList.remove('active');
       document.getElementById('public-list-muzakki').style.display = 'none'; document.getElementById('public-list-mustahiq').style.display = 'none'; document.getElementById('public-list-amil').style.display = 'none';
       document.getElementById(`tab-${tab}`).classList.add('active'); document.getElementById(`public-list-${tab}`).style.display = 'block';
-      document.getElementById('search-public').value = ""; filterPublicData();
+      
+      document.getElementById('public-summary-muzakki').style.display = (tab === 'muzakki') ? 'block' : 'none';
+      document.getElementById('public-summary-mustahiq').style.display = (tab === 'mustahiq') ? 'block' : 'none';
+      document.getElementById('pub-filter-kat-container').style.display = (tab === 'mustahiq') ? 'block' : 'none';
+      
+      filterPublicData();
     }
 
     function filterPublicData() {
-      let s = document.getElementById('search-public').value.toLowerCase(); let activeTab = document.querySelector('.tab-btn.active').id;
-      if (activeTab === 'tab-muzakki') { renderPublicMuzakki(pubMuzakki.filter(d => (d.nama||'').toLowerCase().includes(s) || (d.dusun||'').toLowerCase().includes(s))); } 
-      else if (activeTab === 'tab-mustahiq') { renderPublicMustahiq(pubMustahiq.filter(d => (d.nama||'').toLowerCase().includes(s) || (d.dusun||'').toLowerCase().includes(s))); } 
-      else if (activeTab === 'tab-amil') { renderPublicAmil(pubAmil.filter(d => (d.nama||'').toLowerCase().includes(s) || (d.dusun||'').toLowerCase().includes(s))); }
+      let s = document.getElementById('search-public').value.toLowerCase(); 
+      let fD = document.getElementById('pub-filter-dusun').value; let fK = document.getElementById('pub-filter-kat').value;
+      let activeTab = document.querySelector('.tab-btn.active').id;
+      
+      if (activeTab === 'tab-muzakki') { renderPublicMuzakki(pubMuzakki.filter(d => (fD==='ALL'||safeUpper(d.dusun)===fD) && ((d.nama||'').toLowerCase().includes(s) || (d.dusun||'').toLowerCase().includes(s)))); } 
+      else if (activeTab === 'tab-mustahiq') { renderPublicMustahiq(pubMustahiq.filter(d => (fD==='ALL'||safeUpper(d.dusun)===fD) && (fK==='ALL'||d.kategori===fK) && ((d.nama||'').toLowerCase().includes(s) || (d.dusun||'').toLowerCase().includes(s)))); } 
+      else if (activeTab === 'tab-amil') { renderPublicAmil(pubAmil.filter(d => (fD==='ALL'||safeUpper(d.dusun)===fD) && ((d.nama||'').toLowerCase().includes(s) || (d.dusun||'').toLowerCase().includes(s)))); }
     }
 
     function toggleAuthMode(mode) {
@@ -335,26 +387,17 @@
       let n = document.getElementById('r-nama').value; let nick = document.getElementById('r-nick').value; let d = document.getElementById('r-dusun').value; let p = document.getElementById('r-pass').value;
       if(!n || !nick || !p) return showModal("⚠️ Lengkapi semua form pendaftaran!");
       showModal("⏳ Mengirim pendaftaran...", true);
-      let form = { nama: n, nickname: nick, dusun: d, jenisAkun: 'Amil', password: p };
-      let res = await kirimAPI({ action: "register", form: form });
+      let form = { nama: n, nickname: nick, dusun: d, jenisAkun: 'Amil', password: p }; let res = await kirimAPI({ action: "register", form: form });
       if(res.sukses) { showModal("✅ Pendaftaran berhasil! Silakan hubungi Pengurus untuk aktivasi akun.", false); document.getElementById('r-nama').value = ""; document.getElementById('r-nick').value = ""; document.getElementById('r-pass').value = ""; toggleAuthMode('login'); } 
       else { showModal("❌ Gagal: " + res.pesan); }
     }
 
     function checkSession() {
-      let session = localStorage.getItem('lazisnuSession'); if (!session) return false;
-      let parsed = JSON.parse(session); if ((new Date().getTime() - parsed.timestamp) > (24*60*60*1000)) { localStorage.removeItem('lazisnuSession'); return false; }
+      let session = localStorage.getItem('lazisnuSession'); if (!session) return false; let parsed = JSON.parse(session); if ((new Date().getTime() - parsed.timestamp) > (24*60*60*1000)) { localStorage.removeItem('lazisnuSession'); return false; }
       currentUser = parsed.data; terapkanSesi(); mulaiCekSesiRealtime(); return true;
     }
     function setSession(data) { localStorage.setItem('lazisnuSession', JSON.stringify({ data: data, timestamp: new Date().getTime() })); }
-    
-    function mulaiCekSesiRealtime() {
-      if(sessionInterval) clearInterval(sessionInterval);
-      sessionInterval = setInterval(async () => {
-        if(!currentUser) return; let res = await kirimAPI({action: "cekSesi", nickname: currentUser.nickname, token: currentUser.token});
-        if(res.sukses && res.valid === false) { clearInterval(sessionInterval); localStorage.removeItem('lazisnuSession'); alert("Logout Paksa oleh Pengurus."); location.reload(); }
-      }, 30000);
-    }
+    function mulaiCekSesiRealtime() { if(sessionInterval) clearInterval(sessionInterval); sessionInterval = setInterval(async () => { if(!currentUser) return; let res = await kirimAPI({action: "cekSesi", nickname: currentUser.nickname, token: currentUser.token}); if(res.sukses && res.valid === false) { clearInterval(sessionInterval); localStorage.removeItem('lazisnuSession'); alert("Logout Paksa oleh Pengurus."); location.reload(); } }, 30000); }
 
     window.addEventListener('hashchange', handleHashChange);
     function handleHashChange() {
@@ -363,8 +406,7 @@
       
       if(targetPage) {
         targetPage.classList.add('active');
-        if(hash === 'home' || hash === 'public-data') { document.querySelectorAll('.nav-public').forEach(el => el.style.display = 'inline-block'); } 
-        else { document.querySelectorAll('.nav-public').forEach(el => el.style.display = 'none'); }
+        if(hash === 'home' || hash === 'public-data') { document.querySelectorAll('.nav-public').forEach(el => el.style.display = 'inline-block'); } else { document.querySelectorAll('.nav-public').forEach(el => el.style.display = 'none'); }
         if(pollingInterval) clearInterval(pollingInterval);
         
         if(hash === 'public-data') { fetchPublicData(); }
@@ -379,175 +421,77 @@
         if(hash === 'muzakki' && currentUser) { document.getElementById('muz-dusun').value = currentUser.dusun; document.getElementById('muz-amil').value = currentUser.nama; }
         if(hash === 'ajukan-mustahiq' && currentUser) { document.getElementById('aju-dusun').value = currentUser.dusun; document.getElementById('aju-amil').value = currentUser.nama; fetchKelolaMustahiq(true); toggleAjuMode(); }
         
-        if(hash === 'distribusi' && currentUser) { 
-            document.getElementById('dist-dusun').value = currentUser.dusun; 
-            document.getElementById('dist-amil').value = currentUser.nama; 
-            document.getElementById('dist-nama').innerHTML = '<option value="">-- Memuat data... --</option>';
-            kirimAPI({ action: "getMasterMustahiq" }).then(res => {
-                if(res.sukses) { masterMustahiqData = res.data; populateNamaDistribusi(); }
-            });
-        }
-      } else { 
-        document.getElementById('page-home').classList.add('active'); document.querySelectorAll('.nav-public').forEach(el => el.style.display = 'inline-block'); if(pollingInterval) clearInterval(pollingInterval); 
-      }
+        if(hash === 'distribusi' && currentUser) { document.getElementById('dist-dusun').value = currentUser.dusun; document.getElementById('dist-amil').value = currentUser.nama; document.getElementById('dist-nama').innerHTML = '<option value="">-- Memuat data... --</option>'; kirimAPI({ action: "getMasterMustahiq" }).then(res => { if(res.sukses) { masterMustahiqData = res.data; populateNamaDistribusi(); } }); }
+      } else { document.getElementById('page-home').classList.add('active'); document.querySelectorAll('.nav-public').forEach(el => el.style.display = 'inline-block'); if(pollingInterval) clearInterval(pollingInterval); }
       if(!window.location.hash.includes('sect-')) window.scrollTo(0,0);
     }
     
     function pindahHalaman(id) { window.location.hash = id; }
-    
-    async function kirimAPI(data) { 
-        try { 
-            let response = await fetch(API_URL, { method: 'POST', body: JSON.stringify(data) }); 
-            return await response.json(); 
-        } catch (e) { 
-            return { sukses: false, pesan: "Koneksi ke Database gagal/terputus." }; 
-        } 
-    }
-    
+    async function kirimAPI(data) { try { let response = await fetch(API_URL, { method: 'POST', body: JSON.stringify(data) }); return await response.json(); } catch (e) { return { sukses: false, pesan: "Koneksi ke Database gagal." }; } }
     function showModal(msg, isLoading = false) { document.getElementById('modalMsg').innerText = msg; document.getElementById('btn-modal-ok').style.display = isLoading ? 'none' : 'block'; document.getElementById('customModal').style.display = 'flex'; }
     function closeModal() { document.getElementById('customModal').style.display = 'none'; }
 
-    async function prosesLoginWeb() {
-      let n = document.getElementById('l-nick').value; let p = document.getElementById('l-pass').value; if(!n || !p) return showModal("Isi data login!");
-      showModal("⏳ Sedang login...", true); let res = await kirimAPI({ action: "login", nickname: n, password: p });
-      if(res.sukses) { setSession(res.data); currentUser = res.data; terapkanSesi(); mulaiCekSesiRealtime(); showModal("✅ Login Berhasil!", false); setTimeout(() => { closeModal(); pindahHalaman('dashboard'); }, 1000); } else { showModal("❌ " + res.pesan); }
-    }
+    async function prosesLoginWeb() { let n = document.getElementById('l-nick').value; let p = document.getElementById('l-pass').value; if(!n || !p) return showModal("Isi data login!"); showModal("⏳ Sedang login...", true); let res = await kirimAPI({ action: "login", nickname: n, password: p }); if(res.sukses) { setSession(res.data); currentUser = res.data; terapkanSesi(); mulaiCekSesiRealtime(); showModal("✅ Login Berhasil!", false); setTimeout(() => { closeModal(); pindahHalaman('dashboard'); }, 1000); } else { showModal("❌ " + res.pesan); } }
     async function logout() { showModal("⏳ Logout...", true); if(currentUser) await kirimAPI({action: "logout", nickname: currentUser.nickname}); localStorage.removeItem('lazisnuSession'); location.reload(); }
     
-    function terapkanSesi() {
-      document.getElementById('d-nama').innerText = currentUser.nama; document.getElementById('d-dusun').innerText = currentUser.dusun; document.getElementById('d-role').innerText = currentUser.role;
-      document.getElementById('nav-login').style.display = 'none'; document.getElementById('nav-dash').style.display = 'inline-block'; document.getElementById('nav-logout').style.display = 'inline-block';
-      renderDashboard(); fetchPengumuman();
-    }
+    function terapkanSesi() { document.getElementById('d-nama').innerText = currentUser.nama; document.getElementById('d-dusun').innerText = currentUser.dusun; document.getElementById('d-role').innerText = currentUser.role; document.getElementById('nav-login').style.display = 'none'; document.getElementById('nav-dash').style.display = 'inline-block'; document.getElementById('nav-logout').style.display = 'inline-block'; renderDashboard(); fetchPengumuman(); }
 
-    function renderDashboard() {
-      let menu = document.getElementById('menu-container'); let html = `<div class="menu-box" onclick="pindahHalaman('muzakki')">📝 Input Muzakki</div><div class="menu-box" onclick="pindahHalaman('distribusi')">🤝 Input Distribusi</div><div class="menu-box" onclick="pindahHalaman('progress')">📊 Progress Zakat Mal</div><div class="menu-box" onclick="pindahHalaman('laporan-distribusi')">📦 Laporan Distribusi</div>`;
-      if(currentUser.role === 'Pengurus') { html += `<div class="menu-box" onclick="document.getElementById('modalPengumuman').style.display='flex'">📢 Buat Pengumuman</div><div class="menu-box" onclick="pindahHalaman('laporan')">⚙️ Kelola Muzakki</div><div class="menu-box" onclick="pindahHalaman('kelola-mustahiq')">⚙️ Kelola Mustahiq</div><div class="menu-box" onclick="pindahHalaman('kelola-pengajuan')">📩 Konfirmasi Pengajuan</div><div class="menu-box" onclick="pindahHalaman('masalah')">⚠️ Laporan Masalah</div><div class="menu-box" onclick="pindahHalaman('kelola-akun')">👥 Kelola Akun</div>`; } 
-      else { html += `<div class="menu-box" onclick="pindahHalaman('laporan')">📋 Data Muzakki</div><div class="menu-box" onclick="pindahHalaman('ajukan-mustahiq')">🆕 Ajukan Mustahiq Baru</div><div class="menu-box" onclick="pindahHalaman('masalah')">⚠️ Laporan Masalah</div>`; }
-      menu.innerHTML = html;
-    }
+    function renderDashboard() { let menu = document.getElementById('menu-container'); let html = `<div class="menu-box" onclick="pindahHalaman('muzakki')">📝 Input Muzakki</div><div class="menu-box" onclick="pindahHalaman('distribusi')">🤝 Input Distribusi</div><div class="menu-box" onclick="pindahHalaman('progress')">📊 Progress Zakat Mal</div><div class="menu-box" onclick="pindahHalaman('laporan-distribusi')">📦 Laporan Distribusi</div>`; if(currentUser.role === 'Pengurus') { html += `<div class="menu-box" onclick="document.getElementById('modalPengumuman').style.display='flex'">📢 Buat Pengumuman</div><div class="menu-box" onclick="pindahHalaman('laporan')">⚙️ Kelola Muzakki</div><div class="menu-box" onclick="pindahHalaman('kelola-mustahiq')">⚙️ Kelola Mustahiq</div><div class="menu-box" onclick="pindahHalaman('kelola-pengajuan')">📩 Konfirmasi Pengajuan</div><div class="menu-box" onclick="pindahHalaman('masalah')">⚠️ Laporan Masalah</div><div class="menu-box" onclick="pindahHalaman('kelola-akun')">👥 Kelola Akun</div>`; } else { html += `<div class="menu-box" onclick="pindahHalaman('laporan')">📋 Data Muzakki</div><div class="menu-box" onclick="pindahHalaman('ajukan-mustahiq')">🆕 Ajukan Mustahiq Baru</div><div class="menu-box" onclick="pindahHalaman('masalah')">⚠️ Laporan Masalah</div>`; } menu.innerHTML = html; }
 
-    async function saveMuz() {
-      let data = { dusun: document.getElementById('muz-dusun').value, amil: document.getElementById('muz-amil').value, rw: document.getElementById('muz-rw').value, rt: document.getElementById('muz-rt').value, nama: document.getElementById('muz-nama').value, nominal: document.getElementById('muz-nom').value };
-      if(!data.nama || !data.rt || !data.nominal) return showModal("⚠️ Lengkapi RT, Nama, dan Nominal!"); showModal("⏳ Sedang Menyimpan...", true); let res = await kirimAPI({ action: "simpanMuzakki", obj: data });
-      if(res.sukses) { showModal("✅ Data Berhasil Disimpan!", false); document.getElementById('muz-rt').value = ''; document.getElementById('muz-nama').value = ''; document.getElementById('muz-nom').value = ''; } else { showModal("❌ Gagal."); }
-    }
+    async function saveMuz() { let data = { dusun: document.getElementById('muz-dusun').value, amil: document.getElementById('muz-amil').value, rw: document.getElementById('muz-rw').value, rt: document.getElementById('muz-rt').value, nama: document.getElementById('muz-nama').value, nominal: document.getElementById('muz-nom').value }; if(!data.nama || !data.rt || !data.nominal) return showModal("⚠️ Lengkapi RT, Nama, dan Nominal!"); showModal("⏳ Sedang Menyimpan...", true); let res = await kirimAPI({ action: "simpanMuzakki", obj: data }); if(res.sukses) { showModal("✅ Data Berhasil Disimpan!", false); document.getElementById('muz-rt').value = ''; document.getElementById('muz-nama').value = ''; document.getElementById('muz-nom').value = ''; } else { showModal("❌ Gagal."); } }
 
-    async function fetchLaporan(isSilent = false) {
-      if(!isSilent) document.getElementById('list-laporan').innerHTML = "<i>Memuat data...</i>"; 
-      let res = await kirimAPI({ action: "getLaporan" });
-      if(res.sukses) { dataLaporan = res.data; filterLaporan(); } 
-      else { document.getElementById('list-laporan').innerHTML = `<i style="color:#D32F2F; font-weight:bold;">⚠️ Error API: ${res.pesan || "Gagal menghubungkan ke Database."}</i>`; }
-    }
-
-    function renderLaporan(data) {
-      let html = ""; let sorted = [...data].sort((a,b) => (b.status === 'Error') - (a.status === 'Error'));
-      sorted.forEach(d => {
-        let isErr = (d.status === 'Error'); let formatRp = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(parseFloat(d.nominal) || 0);
-        let actionBtn = "";
-        
-        if (currentUser.role === 'Pengurus') { 
-            actionBtn = `<div style="margin-top:15px; display:flex; gap:10px; border-top: 1px dashed var(--shadow-dark); padding-top: 15px;"><button class="btn-submit" style="margin-top:0; padding:10px;" onclick='openModalMuzakki(${d.id})'>Edit Data</button><button class="btn-submit btn-danger" style="margin-top:0; padding:10px;" onclick="deleteMuzakki(${d.id}, '${d.nama}')">Hapus</button></div>`; 
-        } else { 
-            if (isErr) { actionBtn = `<div style="margin-top:15px; padding:15px; border-radius:12px; font-size:0.9rem; font-weight:700; box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);"><b>Pesan Perbaikan:</b> ${d.pesan}</div>`; } 
-            else { actionBtn = `<div style="border-top: 1px dashed var(--shadow-dark); padding-top: 15px; margin-top: 15px;"><button class="btn-submit btn-secondary" style="margin-top: 0; padding: 10px;" onclick="kirimLaporanSalah(${d.id}, '${d.nama}')">Lapor Salah Input</button></div>`; } 
-        }
-        
-        html += `<div class="list-item">
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-                <div style="flex: 1;">
-                    <div style="font-family: var(--font-judul); font-weight: 800; font-size: 1.3rem; margin-bottom: 4px;">${d.nama} ${isErr ? '<span class="badge">⚠️ Perbaikan</span>' : ''}</div>
-                    <div style="font-weight: 800; font-size: 1.15rem; margin-bottom: 6px; color: var(--dark);">${formatRp}</div>
-                    <div style="font-size: 0.85rem; font-weight:700; color: var(--text-muted);">Amil: ${d.amil}</div>
-                </div>
-                <div style="text-align: right;">
-                    <div class="badge" style="margin-bottom: 8px;">DUSUN ${safeUpper(d.dusun)}</div>
-                    <div style="font-size: 0.85rem; font-weight: 800; color: var(--dark);">${d.rw} / RT ${d.rt}</div>
-                </div>
-            </div>
-            ${actionBtn}
-        </div>`;
-      }); 
-      document.getElementById('list-laporan').innerHTML = html || "<i>Belum ada data Muzakki.</i>";
-    }
+    async function fetchLaporan(isSilent = false) { if(!isSilent) document.getElementById('list-laporan').innerHTML = "<i>Memuat data...</i>"; let res = await kirimAPI({ action: "getLaporan" }); if(res.sukses) { dataLaporan = res.data; filterLaporan(); } else { document.getElementById('list-laporan').innerHTML = `<i style="color:#D32F2F; font-weight:bold;">⚠️ Error API: ${res.pesan}</i>`; } }
+    function renderLaporan(data) { let html = ""; let sorted = [...data].sort((a,b) => (b.status === 'Error') - (a.status === 'Error')); sorted.forEach(d => { let isErr = (d.status === 'Error'); let formatRp = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(parseFloat(d.nominal) || 0); let actionBtn = ""; if (currentUser.role === 'Pengurus') { actionBtn = `<div style="margin-top:15px; display:flex; gap:10px; border-top: 1px dashed var(--shadow-dark); padding-top: 15px;"><button class="btn-submit" style="margin-top:0; padding:10px;" onclick='openModalMuzakki(${d.id})'>Edit Data</button><button class="btn-submit btn-danger" style="margin-top:0; padding:10px;" onclick="deleteMuzakki(${d.id}, '${d.nama}')">Hapus</button></div>`; } else { if (isErr) { actionBtn = `<div style="margin-top:15px; padding:15px; border-radius:12px; font-size:0.9rem; font-weight:700; box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);"><b>Pesan Perbaikan:</b> ${d.pesan}</div>`; } else { actionBtn = `<div style="border-top: 1px dashed var(--shadow-dark); padding-top: 15px; margin-top: 15px;"><button class="btn-submit btn-secondary" style="margin-top: 0; padding: 10px;" onclick="kirimLaporanSalah(${d.id}, '${d.nama}')">Lapor Salah Input</button></div>`; } } html += `<div class="list-item"><div style="display:flex; justify-content:space-between; align-items:center;"><div style="flex: 1;"><div style="font-family: var(--font-judul); font-weight: 800; font-size: 1.3rem; margin-bottom: 4px;">${d.nama} ${isErr ? '<span class="badge">⚠️ Perbaikan</span>' : ''}</div><div style="font-weight: 800; font-size: 1.15rem; margin-bottom: 6px; color: var(--dark);">${formatRp}</div><div style="font-size: 0.85rem; font-weight:700; color: var(--text-muted);">Amil: ${d.amil}</div></div><div style="text-align: right;"><div class="badge" style="margin-bottom: 8px;">DUSUN ${safeUpper(d.dusun)}</div><div style="font-size: 0.85rem; font-weight: 800; color: var(--dark);">${d.rw} / RT ${d.rt}</div></div></div>${actionBtn}</div>`; }); document.getElementById('list-laporan').innerHTML = html || "<i>Belum ada data Muzakki.</i>"; }
     function filterLaporan() { let s = document.getElementById('search-laporan').value.toLowerCase(); renderLaporan(dataLaporan.filter(d => (d.nama||'').toLowerCase().includes(s) || (d.dusun||'').toLowerCase().includes(s))); }
     
     async function kirimLaporanSalah(id, nama) { let msg = prompt(`Detail kesalahan untuk: ${nama}`); if (!msg) return; showModal("⏳ Mengupdate...", true); let res = await kirimAPI({ action: "laporSalah", obj: { rowId: id, namaMuzakki: nama, dusun: currentUser.dusun, amil: currentUser.nama, pesan: msg } }); if (res.sukses) { showModal("✅ Dilaporkan.", false); fetchLaporan(); } }
     
-    async function fetchMasalah(isSilent = false) { 
-      if(!isSilent) document.getElementById('list-masalah').innerHTML = "<i>Memuat...</i>"; 
-      let res = await kirimAPI({ action: "getLaporanMasalah" }); 
-      if(res.sukses) { 
-        let html = ""; res.data.forEach(d => { 
-          let badge = d.status === 'Selesai' ? `<span class="badge">✓ Selesai</span>` : `<span class="badge" style="opacity:0.6;">! Pending</span>`; 
-          let btn = (d.status !== 'Selesai' && currentUser.role === 'Pengurus') ? `<button class="btn-submit" style="margin-top:15px; padding:10px;" onclick="selesaikanMasalah(${d.id})">Tandai Selesai</button>` : ''; 
-          let penyelesai = (d.status === 'Selesai' && d.penyelesai && d.penyelesai !== '-') ? `<div style="margin-top:12px; font-size:0.85rem; font-weight:700; color: var(--text-muted); border-top: 1px dashed var(--shadow-dark); padding-top: 10px;">✓ Diselesaikan oleh: ${d.penyelesai}</div>` : '';
-          
-          html += `<div class="list-item">
-            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-              <div style="font-family: var(--font-judul); font-weight:800; font-size:1.15rem; margin-bottom:6px;">${d.muzakki}</div>
-              <div>${badge}</div>
-            </div>
-            <div style="font-size:0.9rem; font-weight:600; margin-bottom:12px; color: var(--text-muted);">Amil: ${d.amil} (${d.dusun}) | Waktu: ${d.tanggal}</div>
-            <div style="padding:15px; border-radius:12px; font-size:0.95rem; font-weight:700; background: var(--bg-color); box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light); color: var(--dark);"><b>Pesan:</b> ${d.pesan}</div>
-            ${penyelesai}
-            ${btn}
-          </div>`; 
-        }); document.getElementById('list-masalah').innerHTML = html || "<i>Aman, tidak ada masalah.</i>"; 
-      } else { document.getElementById('list-masalah').innerHTML = `<i style="color:#D32F2F; font-weight:bold;">⚠️ Error API: ${res.pesan}</i>`; }
-    }
+    async function fetchMasalah(isSilent = false) { if(!isSilent) document.getElementById('list-masalah').innerHTML = "<i>Memuat...</i>"; let res = await kirimAPI({ action: "getLaporanMasalah" }); if(res.sukses) { let html = ""; res.data.forEach(d => { let badge = d.status === 'Selesai' ? `<span class="badge">✓ Selesai</span>` : `<span class="badge" style="opacity:0.6;">! Pending</span>`; let btn = (d.status !== 'Selesai' && currentUser.role === 'Pengurus') ? `<button class="btn-submit" style="margin-top:15px; padding:10px;" onclick="selesaikanMasalah(${d.id})">Tandai Selesai</button>` : ''; let penyelesai = (d.status === 'Selesai' && d.penyelesai && d.penyelesai !== '-') ? `<div style="margin-top:12px; font-size:0.85rem; font-weight:700; color: var(--text-muted); border-top: 1px dashed var(--shadow-dark); padding-top: 10px;">✓ Diselesaikan oleh: ${d.penyelesai}</div>` : ''; html += `<div class="list-item"><div style="display:flex; justify-content:space-between; align-items:flex-start;"><div style="font-family: var(--font-judul); font-weight:800; font-size:1.15rem; margin-bottom:6px;">${d.muzakki}</div><div>${badge}</div></div><div style="font-size:0.9rem; font-weight:600; margin-bottom:12px; color: var(--text-muted);">Amil: ${d.amil} (${d.dusun}) | Waktu: ${d.tanggal}</div><div style="padding:15px; border-radius:12px; font-size:0.95rem; font-weight:700; background: var(--bg-color); box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light); color: var(--dark);"><b>Pesan:</b> ${d.pesan}</div>${penyelesai}${btn}</div>`; }); document.getElementById('list-masalah').innerHTML = html || "<i>Aman, tidak ada masalah.</i>"; } else { document.getElementById('list-masalah').innerHTML = `<i style="color:#D32F2F; font-weight:bold;">⚠️ Error API: ${res.pesan}</i>`; } }
     async function selesaikanMasalah(id) { showModal("⏳ Proses...", true); let res = await kirimAPI({ action: "selesaikanMasalah", obj: {id: id, pengurus: currentUser.nama} }); if(res.sukses){ showModal("✅ Selesai", false); fetchMasalah(); } }
 
     function openModalMuzakki(id) { let d = dataLaporan.find(x => x.id === id); if(!d) return; document.getElementById('muz-edit-id').value = d.id; document.getElementById('muz-edit-dusun').value = safeUpper(d.dusun); document.getElementById('muz-edit-rw').value = d.rw; document.getElementById('muz-edit-rt').value = d.rt; document.getElementById('muz-edit-nama').value = d.nama; document.getElementById('muz-edit-nom').value = d.nominal; document.getElementById('crudModalMuzakki').style.display = "flex"; }
     async function saveCrudMuzakki() { let obj = { id: document.getElementById('muz-edit-id').value, dusun: document.getElementById('muz-edit-dusun').value, rw: document.getElementById('muz-edit-rw').value, rt: document.getElementById('muz-edit-rt').value, nama: document.getElementById('muz-edit-nama').value, nominal: document.getElementById('muz-edit-nom').value }; document.getElementById('crudModalMuzakki').style.display = "none"; showModal("⏳ Update data...", true); let res = await kirimAPI({ action: "editMuzakki", obj: obj }); if(res.sukses) { showModal("✅ Data Update!", false); fetchLaporan(); } }
     async function deleteMuzakki(id, nama) { if(!confirm(`Hapus permanen Zakat dari: ${nama}?`)) return; showModal("⏳ Menghapus...", true); let res = await kirimAPI({ action: "hapusMuzakki", id: id }); if(res.sukses) { showModal("✅ Dihapus!", false); fetchLaporan(); } }
 
-    async function fetchProgress(isSilent = false) {
-      if(!isSilent) document.getElementById('list-progress').innerHTML = "<i>Memuat progress...</i>"; let res = await kirimAPI({ action: "getProgress" });
-      if(res.sukses) { let html = ""; let sortedData = [...res.data].sort((a, b) => (safeUpper(b.dusun).includes("TOTAL")) - (safeUpper(a.dusun).includes("TOTAL"))); sortedData.forEach(d => { let formatRp = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(parseFloat(d.totalNominal) || 0); let title = safeUpper(d.dusun).includes("TOTAL") ? "TOTAL DESA SUMOKEMBANGSRI" : `Dusun ${d.dusun}`; let w = d.progress.toString().replace(',', '.'); html += `<div class="list-item"><div style="font-weight:800; font-size:1.2rem;">${title}</div><div style="display:flex; justify-content:space-between; margin-top:8px; font-size:1rem;"><span>Total: <b>${d.muzakki} Orang</b></span><span style="font-weight:800;">${formatRp}</span></div><div class="prog-bar-bg"><div class="prog-bar-fill" style="width:${w};"></div></div><div style="display:flex; justify-content:space-between; margin-top:10px; font-size:0.9rem; font-weight:700;"><span>Progress: ${d.progress}</span><span class="badge">Growth: ${d.growth}</span></div></div>`; }); document.getElementById('list-progress').innerHTML = html; }
-      else { document.getElementById('list-progress').innerHTML = `<i style="color:#D32F2F; font-weight:bold;">⚠️ Error API: ${res.pesan}</i>`; }
-    }
+    async function fetchProgress(isSilent = false) { if(!isSilent) document.getElementById('list-progress').innerHTML = "<i>Memuat progress...</i>"; let res = await kirimAPI({ action: "getProgress" }); if(res.sukses) { let html = ""; let sortedData = [...res.data].sort((a, b) => (safeUpper(b.dusun).includes("TOTAL")) - (safeUpper(a.dusun).includes("TOTAL"))); sortedData.forEach(d => { let formatRp = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(parseFloat(d.totalNominal) || 0); let title = safeUpper(d.dusun).includes("TOTAL") ? "TOTAL DESA SUMOKEMBANGSRI" : `Dusun ${d.dusun}`; let w = d.progress.toString().replace(',', '.'); html += `<div class="list-item"><div style="font-weight:800; font-size:1.2rem;">${title}</div><div style="display:flex; justify-content:space-between; margin-top:8px; font-size:1rem;"><span>Total: <b>${d.muzakki} Orang</b></span><span style="font-weight:800;">${formatRp}</span></div><div class="prog-bar-bg"><div class="prog-bar-fill" style="width:${w};"></div></div><div style="display:flex; justify-content:space-between; margin-top:10px; font-size:0.9rem; font-weight:700;"><span>Progress: ${d.progress}</span><span class="badge">Growth: ${d.growth}</span></div></div>`; }); document.getElementById('list-progress').innerHTML = html; } else { document.getElementById('list-progress').innerHTML = `<i style="color:#D32F2F; font-weight:bold;">⚠️ Error API: ${res.pesan}</i>`; } }
 
-    function populateNamaDistribusi() {
-      let dusunUser = safeUpper(currentUser.dusun); let kategoriTerpilih = document.getElementById('dist-kategori').value; let elemenSelectNama = document.getElementById('dist-nama');
-      elemenSelectNama.innerHTML = '<option value="">-- Pilih Nama Mustahiq --</option>';
-      let dataFilter = masterMustahiqData.filter(d => safeUpper(d.dusun) === dusunUser && d.kategori === kategoriTerpilih);
-      dataFilter.forEach(d => { let cleanName = getCleanName(d.nama); let statusSalur = (d.status.toLowerCase() === 'tersalurkan') ? ' (✓ Sudah Salur)' : ''; elemenSelectNama.innerHTML += `<option value="${cleanName}">${cleanName}${statusSalur} - RT ${d.rt}</option>`; });
-      document.getElementById('dist-rw').value = ''; document.getElementById('dist-rt').value = '';
-    }
-
-    function autoFillDistribusi() {
-      let namaDipilih = document.getElementById('dist-nama').value; if(!namaDipilih) { document.getElementById('dist-rw').value = ''; document.getElementById('dist-rt').value = ''; return; }
-      let dusunUser = safeUpper(currentUser.dusun); let kategoriTerpilih = document.getElementById('dist-kategori').value; let d = masterMustahiqData.find(x => getCleanName(x.nama) === namaDipilih && safeUpper(x.dusun) === dusunUser && x.kategori === kategoriTerpilih);
-      if(d) { document.getElementById('dist-rw').value = d.rw; document.getElementById('dist-rt').value = d.rt; }
-    }
-
+    function populateNamaDistribusi() { let dusunUser = safeUpper(currentUser.dusun); let kategoriTerpilih = document.getElementById('dist-kategori').value; let elemenSelectNama = document.getElementById('dist-nama'); elemenSelectNama.innerHTML = '<option value="">-- Pilih Nama Mustahiq --</option>'; let dataFilter = masterMustahiqData.filter(d => safeUpper(d.dusun) === dusunUser && d.kategori === kategoriTerpilih); dataFilter.forEach(d => { let cleanName = getCleanName(d.nama); let statusSalur = (d.status.toLowerCase() === 'tersalurkan') ? ' (✓ Sudah Salur)' : (d.status.toLowerCase() === 'tidak tersalurkan' ? ' (✗ Gagal Salur)' : ''); elemenSelectNama.innerHTML += `<option value="${cleanName}">${cleanName}${statusSalur} - RT ${d.rt}</option>`; }); document.getElementById('dist-rw').value = ''; document.getElementById('dist-rt').value = ''; }
+    function autoFillDistribusi() { let namaDipilih = document.getElementById('dist-nama').value; if(!namaDipilih) { document.getElementById('dist-rw').value = ''; document.getElementById('dist-rt').value = ''; return; } let dusunUser = safeUpper(currentUser.dusun); let kategoriTerpilih = document.getElementById('dist-kategori').value; let d = masterMustahiqData.find(x => getCleanName(x.nama) === namaDipilih && safeUpper(x.dusun) === dusunUser && x.kategori === kategoriTerpilih); if(d) { document.getElementById('dist-rw').value = d.rw; document.getElementById('dist-rt').value = d.rt; } }
     async function kompresFoto(f) { return new Promise((r) => { let reader = new FileReader(); reader.readAsDataURL(f); reader.onload = function(e) { let img = new Image(); img.src = e.target.result; img.onload = function() { let canvas = document.createElement('canvas'); let scale = Math.min(1000/img.width, 1); canvas.width = img.width*scale; canvas.height = img.height*scale; let ctx = canvas.getContext('2d'); ctx.drawImage(img, 0, 0, canvas.width, canvas.height); r({ base64: canvas.toDataURL('image/jpeg',0.7).split(',')[1], mime: 'image/jpeg', name: f.name }); } } }); }
     
-    async function saveDistribusi() { 
-      let d = { dusun: document.getElementById('dist-dusun').value, amil: document.getElementById('dist-amil').value, rw: document.getElementById('dist-rw').value, rt: document.getElementById('dist-rt').value, kategori: document.getElementById('dist-kategori').value, nama: document.getElementById('dist-nama').value }; 
-      let fi = document.getElementById('dist-foto'); 
-      if(!d.rt || !d.nama || fi.files.length === 0) return showModal("⚠️ Lengkapi Nama, RT (Pilih dari list), & Foto!"); 
-      showModal("⏳ Upload & Simpan...", true); let c = await kompresFoto(fi.files[0]); d.fotoBase64 = c.base64; d.fotoMime = c.mime; d.fotoName = c.name; 
-      let res = await kirimAPI({ action: "simpanDistribusi", obj: d }); 
-      if(res.sukses) { showModal("✅ Tersalurkan!", false); document.getElementById('dist-rt').value = ''; document.getElementById('dist-nama').value = ''; document.getElementById('dist-foto').value = ''; populateNamaDistribusi(); } else { showModal("❌ Gagal."); } 
+    async function saveDistribusi() { let d = { dusun: document.getElementById('dist-dusun').value, amil: document.getElementById('dist-amil').value, rw: document.getElementById('dist-rw').value, rt: document.getElementById('dist-rt').value, kategori: document.getElementById('dist-kategori').value, nama: document.getElementById('dist-nama').value }; let fi = document.getElementById('dist-foto'); if(!d.rt || !d.nama || fi.files.length === 0) return showModal("⚠️ Lengkapi Nama, RT (Pilih dari list), & Foto!"); showModal("⏳ Upload & Simpan...", true); let c = await kompresFoto(fi.files[0]); d.fotoBase64 = c.base64; d.fotoMime = c.mime; d.fotoName = c.name; let res = await kirimAPI({ action: "simpanDistribusi", obj: d }); if(res.sukses) { showModal("✅ Tersalurkan!", false); document.getElementById('dist-rt').value = ''; document.getElementById('dist-nama').value = ''; document.getElementById('dist-foto').value = ''; kirimAPI({ action: "getMasterMustahiq" }).then(r=>{if(r.sukses){masterMustahiqData=r.data; populateNamaDistribusi();}}); } else { showModal("❌ Gagal."); } }
+    
+    // FITUR BARU: MODAL & SIMPAN GAGAL SALUR
+    function bukaModalGagalSalur() {
+        let nama = document.getElementById('dist-nama').value; let rt = document.getElementById('dist-rt').value;
+        if(!nama || !rt) return showModal("⚠️ Pilih Nama Mustahiq dulu dari daftar!");
+        document.getElementById('input-alasan-gagal').value = ""; document.getElementById('modalGagalSalur').style.display = "flex";
+    }
+    async function simpanDistribusiGagal() {
+        let d = { dusun: document.getElementById('dist-dusun').value, amil: document.getElementById('dist-amil').value, rw: document.getElementById('dist-rw').value, rt: document.getElementById('dist-rt').value, kategori: document.getElementById('dist-kategori').value, nama: document.getElementById('dist-nama').value, alasan: document.getElementById('input-alasan-gagal').value };
+        if(!d.alasan) return alert("Alasan tidak boleh kosong!");
+        document.getElementById('modalGagalSalur').style.display = "none"; showModal("⏳ Menyimpan Laporan Gagal...", true);
+        let res = await kirimAPI({ action: "simpanDistribusiGagal", obj: d });
+        if(res.sukses) { showModal("✅ Laporan Gagal Tersimpan!", false); document.getElementById('dist-rt').value = ''; document.getElementById('dist-nama').value = ''; kirimAPI({ action: "getMasterMustahiq" }).then(r=>{if(r.sukses){masterMustahiqData=r.data; populateNamaDistribusi();}}); } else { showModal("❌ Gagal."); }
     }
 
-    async function fetchLaporanDistribusi(isSilent = false) {
-      if(!isSilent) { document.getElementById('progress-dist-container').innerHTML = "<i>Memuat...</i>"; document.getElementById('list-distribusi').innerHTML = "<i>Memuat...</i>"; }
-      let resP = await kirimAPI({ action: "getDistribusiProgress" });
-      if(resP.sukses) { let htmlP = ""; [...resP.data].sort((a,b)=>(safeUpper(b.dusun).includes("TOTAL"))-(safeUpper(a.dusun).includes("TOTAL"))).forEach(d => { htmlP += `<div class="list-item"><div style="font-weight:800; font-size:1.15rem;">${safeUpper(d.dusun).includes("TOTAL")?"TOTAL DESA":'Dusun '+d.dusun}</div><div style="display:flex; justify-content:space-between; margin-top:8px; font-size:0.95rem;"><span>Target: <b>${d.target}</b></span><span style="font-weight:800;">Selesai: ${d.tersalurkan}</span></div><div class="prog-bar-bg"><div class="prog-bar-fill" style="width:${d.progress.toString().replace(',','.')};"></div></div><div style="text-align:right; margin-top:10px;"><span class="badge">Persentase: ${d.progress}</span></div></div>`; }); document.getElementById('progress-dist-container').innerHTML = htmlP; }
-      else { document.getElementById('progress-dist-container').innerHTML = `<i style="color:#D32F2F; font-weight:bold;">⚠️ Error API: ${resP.pesan}</i>`; }
-      let resD = await kirimAPI({ action: "getMasterMustahiq" }); if(resD.sukses) { masterMustahiqData = resD.data; filterDistribusi(); } else { document.getElementById('list-distribusi').innerHTML = `<i style="color:#D32F2F; font-weight:bold;">⚠️ Error API: ${resD.pesan}</i>`; }
-    }
+    async function fetchLaporanDistribusi(isSilent = false) { if(!isSilent) { document.getElementById('progress-dist-container').innerHTML = "<i>Memuat...</i>"; document.getElementById('list-distribusi').innerHTML = "<i>Memuat...</i>"; } let resP = await kirimAPI({ action: "getDistribusiProgress" }); if(resP.sukses) { let htmlP = ""; [...resP.data].sort((a,b)=>(safeUpper(b.dusun).includes("TOTAL"))-(safeUpper(a.dusun).includes("TOTAL"))).forEach(d => { htmlP += `<div class="list-item"><div style="font-weight:800; font-size:1.15rem;">${safeUpper(d.dusun).includes("TOTAL")?"TOTAL DESA":'Dusun '+d.dusun}</div><div style="display:flex; justify-content:space-between; margin-top:8px; font-size:0.95rem;"><span>Target: <b>${d.target}</b></span><span style="font-weight:800;">Selesai: ${d.tersalurkan}</span></div><div class="prog-bar-bg"><div class="prog-bar-fill" style="width:${d.progress.toString().replace(',','.')};"></div></div><div style="text-align:right; margin-top:10px;"><span class="badge">Persentase: ${d.progress}</span></div></div>`; }); document.getElementById('progress-dist-container').innerHTML = htmlP; } else { document.getElementById('progress-dist-container').innerHTML = `<i style="color:#D32F2F; font-weight:bold;">⚠️ Error API: ${resP.pesan}</i>`; } let resD = await kirimAPI({ action: "getMasterMustahiq" }); if(resD.sukses) { masterMustahiqData = resD.data; filterDistribusi(); } else { document.getElementById('list-distribusi').innerHTML = `<i style="color:#D32F2F; font-weight:bold;">⚠️ Error API: ${resD.pesan}</i>`; } }
     
     function renderLaporanDistribusi(data) { 
       let html = ""; data.forEach(d => { 
-        let isDone = (d.status.toLowerCase() === 'tersalurkan'); let cName = getCleanName(d.nama); let labelNew = d.label === 'NEW' ? `<span class="badge-new">NEW !</span>` : ""; let histori = d.histori ? `<div class="histori-text" style="margin-top:15px; border-top: 1px dashed var(--shadow-dark); padding-top: 10px;">Riwayat: ${d.histori}</div>` : ""; 
-        let statusBadge = isDone ? '<span class="badge">✓ Tersalurkan</span>' : '<span class="badge" style="opacity:0.6;">✗ Belum</span>';
+        let cName = getCleanName(d.nama); let labelNew = d.label === 'NEW' ? `<span class="badge-new">NEW !</span>` : ""; let histori = d.histori ? `<div class="histori-text" style="margin-top:15px; border-top: 1px dashed var(--shadow-dark); padding-top: 10px;">Riwayat: ${d.histori}</div>` : ""; 
+        let statusBadge = ''; let linkFoto = '';
         
-        // PENCEGAH FOTO 404
-        let linkFoto = (isDone && d.foto && d.foto.includes('http')) ? `<a href="${d.foto}" target="_blank" style="display:inline-block; margin-top:8px; font-size:0.85rem; font-weight:800; text-decoration:underline; color: var(--dark);">Lihat Bukti Foto</a>` : '';
+        // LOGIKA BARU UNTUK GAGAL SALUR
+        if (d.status.toLowerCase() === 'tersalurkan') {
+            statusBadge = '<span class="badge">✓ Tersalurkan</span>';
+            if(d.foto && d.foto.includes('http')) linkFoto = `<a href="${d.foto}" target="_blank" style="display:inline-block; margin-top:8px; font-size:0.85rem; font-weight:800; text-decoration:underline; color: var(--dark);">Lihat Bukti Foto</a>`;
+        } else if (d.status.toLowerCase() === 'tidak tersalurkan') {
+            statusBadge = '<span class="badge" style="background:#FFEbee; color:#D32F2F; border: 1px solid #D32F2F !important;">✗ Tidak Tersalurkan</span>';
+            linkFoto = `<div style="margin-top:8px; font-size:0.85rem; font-weight:800; color:#D32F2F;">Alasan: ${d.foto}</div>`;
+        } else {
+            statusBadge = '<span class="badge" style="opacity:0.6;">BELUM</span>';
+        }
 
         html += `<div class="list-item">
             <div style="display:flex; justify-content:space-between; align-items:flex-start;">
@@ -558,7 +502,7 @@
                 </div>
                 <div style="text-align: right;">
                     <div style="margin-bottom:8px;">${getCatBadge(d.kategori)}</div>
-                    ${isDone ? `<div style="font-size:0.8rem; font-weight:700; color: var(--text-muted);">Oleh: ${d.amil}<br>${(d.timestamp||'').split(' ')[0]}</div>` : ''}
+                    ${(d.status.toLowerCase() !== 'belum') ? `<div style="font-size:0.8rem; font-weight:700; color: var(--text-muted);">Oleh: ${d.amil}<br>${(d.timestamp||'').split(' ')[0]}</div>` : ''}
                 </div>
             </div>
             ${histori}
@@ -575,16 +519,9 @@
     async function saveCrudMustahiq() { let o = { id: document.getElementById('crud-id').value, dusun: document.getElementById('crud-dusun').value, rw: document.getElementById('crud-rw').value, rt: document.getElementById('crud-rt').value, kategori: document.getElementById('crud-kategori').value, nama: document.getElementById('crud-nama').value }; if(!o.rt || !o.nama) return alert("Isi RT & Nama!"); document.getElementById('crudModal').style.display = "none"; showModal("⏳ Simpan...", true); let res = await kirimAPI({ action: o.id?"editMustahiq":"tambahMustahiq", obj: o }); if(res.sukses) { showModal("✅ Sukses!", false); fetchKelolaMustahiq(); } }
     async function deleteCrudMustahiq() { if(!confirm("HAPUS data ini permanen?")) return; document.getElementById('crudModal').style.display = "none"; showModal("⏳ Menghapus...", true); let res = await kirimAPI({ action: "hapusMustahiq", id: document.getElementById('crud-id').value }); if(res.sukses) { showModal("✅ Dihapus!", false); fetchKelolaMustahiq(); } }
 
-    function toggleAjuMode() {
-      let tipe = document.getElementById('aju-tipe').value; let box = document.getElementById('box-cari-mustahiq');
-      if(tipe === 'EDIT') { box.style.display = 'block'; let opt = '<option value="">-- Pilih Nama Lama --</option>'; masterMustahiqData.filter(d=>safeUpper(d.dusun) === safeUpper(currentUser.dusun)).forEach(m => opt += `<option value="${m.id}">${getCleanName(m.nama)} (RT ${m.rt} - ${m.kategori})</option>`); document.getElementById('aju-pilih-nama').innerHTML = opt; } else { box.style.display = 'none'; document.getElementById('aju-nama').value = ""; document.getElementById('aju-rt').value = ""; }
-    }
+    function toggleAjuMode() { let tipe = document.getElementById('aju-tipe').value; let box = document.getElementById('box-cari-mustahiq'); if(tipe === 'EDIT') { box.style.display = 'block'; let opt = '<option value="">-- Pilih Nama Lama --</option>'; masterMustahiqData.filter(d=>safeUpper(d.dusun) === safeUpper(currentUser.dusun)).forEach(m => opt += `<option value="${m.id}">${getCleanName(m.nama)} (RT ${m.rt} - ${m.kategori})</option>`); document.getElementById('aju-pilih-nama').innerHTML = opt; } else { box.style.display = 'none'; document.getElementById('aju-nama').value = ""; document.getElementById('aju-rt').value = ""; } }
     function isiDataOtomatis() { let id = document.getElementById('aju-pilih-nama').value; let d = masterMustahiqData.find(x => x.id == id); if(d) { document.getElementById('aju-nama').value = getCleanName(d.nama); document.getElementById('aju-rw').value = d.rw; document.getElementById('aju-rt').value = d.rt; document.getElementById('aju-kat').value = d.kategori; } }
-    async function ajukanMustahiq() {
-      let o = { tipe: document.getElementById('aju-tipe').value, dusun: document.getElementById('aju-dusun').value, amil: document.getElementById('aju-amil').value, rw: document.getElementById('aju-rw').value, rt: document.getElementById('aju-rt').value, kategori: document.getElementById('aju-kat').value, nama: document.getElementById('aju-nama').value, idMaster: document.getElementById('aju-pilih-nama').value };
-      if(!o.rt || !o.nama) return showModal("⚠️ Isi RT & Nama!"); showModal("⏳ Kirim Pengajuan...", true); let res = await kirimAPI({ action: "ajukanMustahiq", obj: o });
-      if(res.sukses) { showModal("✅ Berhasil Diajukan!", false); document.getElementById('aju-rt').value = ''; document.getElementById('aju-nama').value = ''; } else { showModal("❌ Gagal.", false); }
-    }
+    async function ajukanMustahiq() { let o = { tipe: document.getElementById('aju-tipe').value, dusun: document.getElementById('aju-dusun').value, amil: document.getElementById('aju-amil').value, rw: document.getElementById('aju-rw').value, rt: document.getElementById('aju-rt').value, kategori: document.getElementById('aju-kat').value, nama: document.getElementById('aju-nama').value, idMaster: document.getElementById('aju-pilih-nama').value }; if(!o.rt || !o.nama) return showModal("⚠️ Isi RT & Nama!"); showModal("⏳ Kirim Pengajuan...", true); let res = await kirimAPI({ action: "ajukanMustahiq", obj: o }); if(res.sukses) { showModal("✅ Berhasil Diajukan!", false); document.getElementById('aju-rt').value = ''; document.getElementById('aju-nama').value = ''; } else { showModal("❌ Gagal.", false); } }
     
     async function fetchPengajuan(isSilent = false) { if(!isSilent) document.getElementById('list-pengajuan').innerHTML = "<i>Memuat...</i>"; let res = await kirimAPI({ action: "getPengajuan" }); if(res.sukses) { let html = ""; res.data.forEach(d => { html += `<div class="list-item"><div style="font-weight:800; font-size:1.15rem; margin-bottom:6px;">[${d.tipe}] ${d.nama}</div><div style="margin-bottom:8px;">${getCatBadge(d.kategori)}</div><div style="font-size:0.9rem; font-weight:600; margin-bottom:12px;">Dusun ${d.dusun} | ${d.rw} / RT ${d.rt}<br>Oleh: ${d.amil} (${d.timestamp})</div><div style="display:flex; gap:10px;"><button class="btn-submit" style="margin-top:0; padding:10px;" onclick="accPengajuan(${d.id}, 'ACC')">Terima (ACC)</button><button class="btn-submit btn-danger" style="margin-top:0; padding:10px;" onclick="accPengajuan(${d.id}, 'Tolak')">Tolak</button></div></div>`; }); document.getElementById('list-pengajuan').innerHTML = html || "<i>Tidak ada pengajuan.</i>"; } else { document.getElementById('list-pengajuan').innerHTML = `<i style="color:#D32F2F; font-weight:bold;">⚠️ Error API: ${res.pesan}</i>`; } }
     async function accPengajuan(id, action) { if(!confirm(`Yakin ingin ${action} pengajuan ini?`)) return; showModal(`⏳ Sedang ${action}...`, true); let res = await kirimAPI({ action: "prosesPengajuan", obj: {id: id, action: action} }); if(res.sukses) { showModal("✅ Selesai!", false); fetchPengajuan(); } }
@@ -598,16 +535,8 @@
     async function deleteCrudAkun() { if(!confirm("Yakin HAPUS Akun ini?")) return; document.getElementById('crudModalAkun').style.display = "none"; showModal("⏳ Menghapus...", true); let res = await kirimAPI({ action: "hapusAkun", id: document.getElementById('akun-id').value }); if(res.sukses) { showModal("✅ Dihapus!", false); fetchKelolaAkun(); } }
     async function paksaLogoutUser(id, nama) { if(!confirm(`Keluarkan ${nama} dari sistem?`)) return; showModal("⏳ Proses...", true); let res = await kirimAPI({action: "paksaLogout", id: id}); if(res.sukses) { showModal("✅ Dikeluarkan!", false); fetchKelolaAkun(); } }
 
-    async function fetchPengumuman() {
-      let res = await kirimAPI({ action: "getPengumuman" }); let banner = document.getElementById('banner-pengumuman');
-      if (res.sukses && res.data) { document.getElementById('teks-pengumuman').innerText = "📢 PENGUMUMAN: " + res.data; banner.style.display = "block"; } else { banner.style.display = "none"; }
-    }
-    async function kirimPengumuman() {
-      let p = document.getElementById('input-pengumuman').value; let b = document.getElementById('input-batas-waktu').value;
-      if(!p || !b) return alert("Pesan & batas waktu wajib!"); document.getElementById('modalPengumuman').style.display = 'none'; showModal("⏳ Menyebarkan...", true);
-      let res = await kirimAPI({ action: "simpanPengumuman", obj: {pesan: p, batasWaktu: b} });
-      if(res.sukses) { showModal("✅ Disebar!", false); fetchPengumuman(); document.getElementById('input-pengumuman').value = ''; document.getElementById('input-batas-waktu').value = ''; }
-    }
+    async function fetchPengumuman() { let res = await kirimAPI({ action: "getPengumuman" }); let banner = document.getElementById('banner-pengumuman'); if (res.sukses && res.data) { document.getElementById('teks-pengumuman').innerText = "📢 PENGUMUMAN: " + res.data; banner.style.display = "block"; } else { banner.style.display = "none"; } }
+    async function kirimPengumuman() { let p = document.getElementById('input-pengumuman').value; let b = document.getElementById('input-batas-waktu').value; if(!p || !b) return alert("Pesan & batas waktu wajib!"); document.getElementById('modalPengumuman').style.display = 'none'; showModal("⏳ Menyebarkan...", true); let res = await kirimAPI({ action: "simpanPengumuman", obj: {pesan: p, batasWaktu: b} }); if(res.sukses) { showModal("✅ Disebar!", false); fetchPengumuman(); document.getElementById('input-pengumuman').value = ''; document.getElementById('input-batas-waktu').value = ''; } }
 
     function renderPublicMuzakki(data) {
       let html = ""; 
@@ -629,16 +558,22 @@
 
     function renderPublicMustahiq(data) {
       let html = ""; data.forEach(d => { 
-        let isDone = (d.status.toLowerCase() === 'tersalurkan'); 
-        let cName = getCleanName(d.nama); 
-        let statusBadge = isDone ? '<span class="badge">SUDAH</span>' : '<span class="badge" style="opacity:0.6;">BELUM</span>';
+        let cName = getCleanName(d.nama); let statusBadge = ''; let linkFoto = '';
+        if (d.status.toLowerCase() === 'tersalurkan') {
+            statusBadge = '<span class="badge">SUDAH</span>';
+        } else if (d.status.toLowerCase() === 'tidak tersalurkan') {
+            statusBadge = '<span class="badge" style="background:#FFEbee; color:#D32F2F; border: 1px solid #D32F2F !important;">GAGAL SALUR</span>';
+            linkFoto = `<div style="margin-top:8px; font-size:0.85rem; font-weight:800; color:#D32F2F;">Alasan: ${d.foto}</div>`;
+        } else {
+            statusBadge = '<span class="badge" style="opacity:0.6;">BELUM</span>';
+        }
         
         html += `<div class="list-item">
                   <div style="display:flex; justify-content:space-between; align-items:flex-start;">
                     <div style="flex: 1;">
                       <div style="font-family: var(--font-judul); font-weight:800; font-size:1.25rem; margin-bottom: 4px;">${cName}</div>
                       <div style="font-size:0.9rem; font-weight:700; margin-bottom: 12px; color: var(--text-muted);">Dusun ${d.dusun}</div>
-                      <div>${statusBadge}</div>
+                      <div>${statusBadge}<br>${linkFoto}</div>
                     </div>
                     <div style="text-align: right;">
                         ${getCatBadge(d.kategori)}
